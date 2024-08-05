@@ -30,7 +30,8 @@ class Aplus_Content_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
+		// Not like register_uninstall_hook(), you do NOT have to use a static function.
+		ac_fs()->add_action('after_uninstall', 'ac_fs_uninstall_cleanup');
 	}
 
 }

@@ -38,6 +38,47 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'APLUS_CONTENT_VERSION', '1.0.0' );
 
+if ( ! function_exists( 'ac_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function ac_fs() {
+        global $ac_fs;
+
+        if ( ! isset( $ac_fs ) ) {
+            // Activate multisite network integration.
+            if ( ! defined( 'WP_FS__PRODUCT_16161_MULTISITE' ) ) {
+                define( 'WP_FS__PRODUCT_16161_MULTISITE', true );
+            }
+
+            // Include Freemius SDK.
+            require_once dirname(__FILE__) . '/freemius/start.php';
+
+            $ac_fs = fs_dynamic_init( array(
+                'id'                  => '16161',
+                'slug'                => 'aplus-content',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_c132c957ea71857acd3d4754feef5',
+                'is_premium'          => false,
+                'has_addons'          => false,
+                'has_paid_plans'      => false,
+                'is_org_compliant'    => false,
+                'menu'                => array(
+                    'first-path'     => 'plugins.php',
+                    'account'        => false,
+                    'contact'        => false,
+                    'support'        => false,
+                ),
+            ) );
+        }
+
+        return $ac_fs;
+    }
+
+    // Init Freemius.
+    ac_fs();
+    // Signal that SDK was initiated.
+    do_action( 'ac_fs_loaded' );
+}
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-aplus-content-activator.php
