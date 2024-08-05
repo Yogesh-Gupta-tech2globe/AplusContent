@@ -1,32 +1,269 @@
-(function( $ ) {
-	'use strict';
 
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
 
-})( jQuery );
+jQuery(document).ready(function($){
+
+
+
+    var clickCount = 0;
+
+    $(".module").click(function (e) { 
+
+        e.preventDefault();
+
+
+
+        clickCount++;
+
+
+
+        $('#myModal').modal('hide');
+
+        var moduleNumber = $(this).attr('moduleNumber');
+
+
+
+        switch (moduleNumber) {
+
+            case "1":
+
+                var content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image Header With Text</h6></div><div class="card-body"><input type="hidden" value="1.'+ clickCount +'" name="module_id[]"><input type="file" name="module1Image[]" class="form-control" multiple /><input type="text" name="heading[]" class="form-control my-2" placeholder="Enter Heading"><input type="text" name="paragraph[]" class="form-control my-2" placeholder="Enter Text"></div></div></div>';
+
+                break;
+
+            case "2":
+
+                var content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image</h6></div><div class="card-body"><input type="hidden" value="2.'+ clickCount +'" name="module_id[]"><input type="file" name="module2Image[]" class="form-control" multiple /></div></div></div>';
+
+                break;
+
+        }
+
+        
+
+        $('#moduleContent').append(content);
+
+        
+
+    });
+
+
+
+    $('#file-5').change(function(event) {
+
+        var file = event.target.files[0];
+
+        var reader = new FileReader();
+
+
+
+        reader.onload = function(e) {
+
+            var image = $('<img>').attr('src', e.target.result);
+
+
+
+            $(image).on('load', function() {
+
+                $('#imageContainer').empty().append(image);
+
+                $('#imageContainer').show();
+
+                $('#file-5').hide();
+
+            });
+
+        };
+
+
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+
+    $(".status-button").click(function (e) { 
+
+        e.preventDefault();
+
+        
+
+        var content_id = $(this).attr("content-id");
+
+        var status = $(this).attr("status");
+
+        
+
+        $.ajax({
+
+            type: "post",
+
+            url: ajaxurl,
+
+            data: {
+
+                action: 'my_ajax_status_action',
+
+                content_id: content_id,
+
+                status: status,
+
+            },
+
+            success: function (response) {
+
+                if(response = true){
+
+                    alert("Status Updated Successfully");
+
+                    location.reload();
+
+                }else{
+
+                    alert("Something went wrong");
+
+                } 
+
+            },
+
+            error: function(xhr, status, error) {
+
+                // Handle errors
+
+                console.log(xhr.responseText);
+
+            }
+
+        });
+
+    });
+
+
+
+    $(".delete-button").click(function (e) { 
+
+        e.preventDefault();
+
+
+
+        var content_id = $(this).attr("content-id");
+
+
+
+        Swal.fire({
+
+            title: "Are you sure?",
+
+            text: "You won't be able to revert this!",
+
+            icon: "warning",
+
+            showCancelButton: true,
+
+            confirmButtonColor: "#3085d6",
+
+            cancelButtonColor: "#d33",
+
+            confirmButtonText: "Yes, delete it!"
+
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+
+
+                $.ajax({
+
+                    type: "post",
+
+                    url: ajaxurl,
+
+                    data: {
+
+                        action: 'my_ajax_delete_action',
+
+                        content_id: content_id,
+
+                    },
+
+                    success: function (response) {
+
+                        if(response = true){
+
+                            Swal.fire({
+
+                                title: "Deleted!",
+
+                                text: "Your file has been deleted.",
+
+                                icon: "success"
+
+                              });
+
+                            location.reload();
+
+                        }else{
+
+                            Swal.fire({
+
+                                title: "Warning!",
+
+                                text: "Something went wrong",
+
+                                icon: "danger"
+
+                              });
+
+                        } 
+
+                    },
+
+                    error: function(xhr, status, error) {
+
+                        // Handle errors
+
+                        console.log(xhr.responseText);
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    });
+
+
+
+    var selectInteracted = false;
+
+
+
+    // Event listener for when the select element changes
+
+    $('#product-selection').change(function() {
+
+        selectInteracted = true;
+
+    });
+
+
+
+    // Event listener for beforeunload event
+
+    $(window).on('beforeunload', function() {
+
+        if (selectInteracted) {
+
+            alert('You have unsaved changes. Are you sure you want to leave?');
+
+        }
+
+    });
+
+
+
+
+
+});
