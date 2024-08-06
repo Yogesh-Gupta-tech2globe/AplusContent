@@ -1,40 +1,28 @@
-
-
 @import url('https://tympanus.net/Tutorials/CustomFileInputs/css/component.css');
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 @import url('https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css');
 
-.card {
+/* .card {
 
     position: relative;
-
     display: flex;
-
     flex-direction: column;
-
     min-width: 100%;
-
     word-wrap: break-word;
-
     background-color: #fff;
-
     background-clip: border-box;
-
-    border: 1px solid rgba(0,0,0,.125);
-
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
-
 }
 
 
 
-.card.module:hover{
-
+.card.module:hover {
     cursor: pointer;
+} */
 
-}
 
 
 
@@ -95,3 +83,226 @@
 <div class="box text-center border border-dark">
 
 <label for="file-5"><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>Choose a Image&hellip;</span></label></div> */
+
+/* Dashboard */
+header.card {
+    min-width: 100%;
+    padding: 10px 15px
+}
+
+.header-info img {
+    max-height: 50px
+}
+
+.header-support {
+    display: flex;
+    align-items: center;
+    gap: 15px
+}
+
+.header-support i {
+    color: #3c15b2
+}
+
+.header-nav {
+    gap: 15px
+}
+
+a {
+    text-decoration: none
+}
+
+a.active,
+a:hover {
+    font-weight: 600
+}
+
+a.active {
+    color: #3c15b2 !important;
+}
+
+.header-info {
+    gap: 10px
+}
+
+.header-info h1 {
+    font-weight: 800
+}
+
+.welcome-alert {
+    background-color: #f0f8ff;
+    border: 1px solid #b0c4de;
+    color: #333;
+    padding-block: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.welcome-alert strong {
+    color: #004080;
+}
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.icon i {
+    font-size: 1.8rem;
+}
+
+.icon-shape {
+    display: inline-flex;
+    padding: 12px;
+    text-align: center;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.activity-feed {
+    padding: 15px;
+    list-style: none;
+}
+
+.activity-feed .feed-item {
+    position: relative;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    border-left: 2px solid #e4e8eb;
+}
+
+.activity-feed .feed-item:last-child {
+    border-color: transparent;
+}
+
+.activity-feed .feed-item::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid #f37167;
+}
+
+.activity-feed .feed-item .date {
+    display: block;
+    position: relative;
+    top: -5px;
+    color: #8c96a3;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.activity-feed .feed-item .text {
+    position: relative;
+    top: -3px;
+}
+
+.grabbable {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.grabbable:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.wp-list-table thead th {
+    background-color: #f1f1f1;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+.wp-list-table thead th.sorted {
+    background-color: #e5e5e5;
+}
+
+
+.wp-list-table th.column-product_id {
+    width: 10%;
+}
+
+.wp-list-table th.column-product_name {
+    width: 40%;
+}
+
+.wp-list-table th.column-aplus_content_created {
+    width: 20%;
+}
+
+.wp-list-table th a {
+    color: #333;
+}
+
+/* Create Modal */
+.template-option {
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.template-option.selected {
+    border-color: #ffc107;
+}
+
+.screen {
+    display: block;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #b3b3b3;
+    border-radius: 5px;
+    margin: 0 auto;
+    transition: border 0.3s ease;
+}
+
+.screen img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transition: transform 4s ease;
+}
+
+.screen:hover img {
+    transform: translateY(calc(-100% + 350px));
+}
+
+.screen:not(:hover) img {
+    transform: translateY(0);
+}
+
+.custom-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 350px;
+    border: 2px solid #b3b3b3;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.custom-screen p {
+    border: 1px solid #b3b3b3;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+}

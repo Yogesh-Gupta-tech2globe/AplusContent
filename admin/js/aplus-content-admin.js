@@ -267,3 +267,19 @@ jQuery(document).ready(function($){
 
 
 });
+
+// Craete A+ Content Modal On Click select the option 
+document.addEventListener('DOMContentLoaded', function() {
+    const options = document.querySelectorAll('.template-option');
+    options.forEach(option => {
+        option.addEventListener('click', function() {
+            options.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+
+    // Set default selection
+    if (options.length > 0) {
+        options[0].classList.add('selected');
+    }
+});
