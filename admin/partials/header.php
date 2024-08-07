@@ -16,16 +16,16 @@
   </div>
   <hr>
   <!-- Navigation -->
+
+  <?php $page = $_GET['page'];?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <div class="navbar-nav">
-        <a class="nav-link active" href="#dashboard">Dashboard</a>
-        <a class="nav-link" href="#create"  data-bs-toggle="modal" data-bs-target="#exampleModal">Create A+</a>
+        <a class="nav-link <?php if($page == 'a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=a-plus-content") ?>">Dashboard</a>
+        <a class="nav-link <?php if($page == 'create-a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=create-a-plus-content") ?>">Create A+</a>
         <a class="nav-link" href="#settings">Settings</a>
         <a class="nav-link" href="#upgrade">Upgrade</a>
       </div>
     </div>
   </nav>
 </header>
-
-<?php include('create-modal.php');?>

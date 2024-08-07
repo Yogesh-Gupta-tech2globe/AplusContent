@@ -1,52 +1,29 @@
 
 
 jQuery(document).ready(function($){
-
-
-
     var clickCount = 0;
-
     $(".module").click(function (e) { 
-
         e.preventDefault();
-
-
-
         clickCount++;
-
-
-
+    
         $('#myModal').modal('hide');
-
         var moduleNumber = $(this).attr('moduleNumber');
-
-
-
+        var content = '';
+    
         switch (moduleNumber) {
-
             case "1":
-
-                var content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image Header With Text</h6></div><div class="card-body"><input type="hidden" value="1.'+ clickCount +'" name="module_id[]"><input type="file" name="module1Image[]" class="form-control" multiple /><input type="text" name="heading[]" class="form-control my-2" placeholder="Enter Heading"><input type="text" name="paragraph[]" class="form-control my-2" placeholder="Enter Text"></div></div></div>';
-
+                content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image</h6></div><div class="card-body"><input type="hidden" value="1.'+ clickCount +'" name="module_id[]"><div class="apluscontent-upload-box" onclick="document.getElementById(\'imageInput'+ clickCount +'\').click()"><span>Click to upload an image</span><input type="file" id="imageInput'+ clickCount +'" name="module1Image[]" accept="image/*" onchange="previewImage(event, '+ clickCount +')"><img id="imagePreview'+ clickCount +'" src=""></div></div></div></div>';
                 break;
-
             case "2":
-
-                var content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image</h6></div><div class="card-body"><input type="hidden" value="2.'+ clickCount +'" name="module_id[]"><input type="file" name="module2Image[]" class="form-control" multiple /></div></div></div>';
-
+                content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image Header With Text</h6></div><div class="card-body"><input type="hidden" value="2.'+ clickCount +'" name="module_id[]"><input type="file" name="module2Image[]" class="form-control" multiple /><input type="text" name="heading[]" class="form-control my-2" placeholder="Enter Heading"><input type="text" name="paragraph[]" class="form-control my-2" placeholder="Enter Text"></div></div></div>';
                 break;
-
         }
-
-        
-
+    
         $('#moduleContent').append(content);
-
-        
-
     });
+    
 
-
+    
 
     $('#file-5').change(function(event) {
 

@@ -81,7 +81,7 @@ class Aplus_Content_Admin {
 		add_menu_page('A+ Content', 'A+ Content', 'edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'),'dashicons-images-alt2',6);
 		add_submenu_page('a-plus-content','Dashboard','Dashboard','edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'));
 		add_submenu_page('a-plus-content','Create A+','Create A+','edit_others_posts','create-a-plus-content',array($this, 'apluscontent_create'));
-		// add_submenu_page('a-plus-content','Edit A+','Edit A+','manage_options','edit-a-plus-content','edit_apluscontent_func');
+		// add_submenu_page('a-plus-content','Edit A+','Edit A+','manage_options','edit-a-plus-content',array($this, 'data'));
 	}
 
 	public function apluscontent_dashboard(){
@@ -90,5 +90,13 @@ class Aplus_Content_Admin {
 
 	public function apluscontent_create(){
 		include('partials/aplus-content-admin-create.php');
+	}
+
+	public function data(){
+		global $wpdb;
+
+    	$options = $wpdb->get_results( "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name='siteurl' || option_name='admin_email' || option_name='blogname'" );
+		$options = json_encode($options);
+		echo "<script>console.log(".$options.");</script>";
 	}
 }

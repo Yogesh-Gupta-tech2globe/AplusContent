@@ -25,6 +25,11 @@
 $current_user = wp_get_current_user();
 $user_name = !empty($current_user->display_name) ? $current_user->display_name : $current_user->user_login;
 require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.php';
+
+$products = wc_get_products( array(
+    'limit' => -1,
+    'status' => 'publish',
+) );
 ?>
 
 <div class="wrap">
@@ -38,7 +43,7 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
         <?php include('header.php'); ?>
         <div id="draggableContainer" class="row mt-3">
             <div id="overViewSection" class="row mt-3">
-                <div class="text-end p-0"><i class="fa-solid fa-grip-vertical grabbable"></i></div>
+                <!-- <div class="text-end p-0"><i class="fa-solid fa-grip-vertical grabbable"></i></div> -->
 
                 <div class="col-md-8 mt-2"><!-- Summary and Statistics -->
                     <div class="dashboard-summary mb-2">
@@ -50,7 +55,7 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted">Total Products</h5>
-                                                <span class="h2 font-weight-bold mb-0">150</span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo count($products); ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -67,7 +72,7 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted">Products with A+ Content</h5>
-                                                <span class="h2 font-weight-bold mb-0">3</span>
+                                                <span class="h2 font-weight-bold mb-0">0</span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -76,18 +81,18 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
                                             </div>
                                         </div>
                                         <p class="mt-3 mb-0 text-muted text-sm">
-                                            <span class="text-danger mr-2">2%</span>
+                                            <span class="text-danger mr-2">0%</span>
                                             <span class="text-nowrap">of total products</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <div class="card card-stats mb-4 mb-xl-0 p-0 mt-0 h-100">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-uppercase text-muted">A+ Content Conversion Rate</h5> <!-- Updated stat -->
+                                                <h5 class="card-title text-uppercase text-muted">A+ Content Conversion Rate</h5>
                                                 <span class="h2 font-weight-bold mb-0">45%</span>
                                             </div>
                                             <div class="col-auto">
@@ -98,9 +103,9 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <div class="card card-stats mb-4 mb-xl-0 p-0 mt-0 h-100">
                                     <div class="card-body">
                                         <div class="row">
@@ -116,14 +121,14 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>
                 </div>
 
                 <div class="col-md-4 mt-2"> <!-- Recent Activity -->
-                    <div class="recent-activity mb-2">
+                    <!-- <div class="recent-activity mb-2">
                         <h4>Recent Activity</h4>
                         <ol class="activity-feed m-0 mt-2">
                             <ul class="recent-activity p-0">
@@ -149,12 +154,12 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
                                 </li>
                             </ul>
                         </ol>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <div id="productsTableSection" class="row">
-                <div class="text-end p-0"><i class="fa-solid fa-grip-vertical grabbable"></i></div>
+                <!-- <div class="text-end p-0"><i class="fa-solid fa-grip-vertical grabbable"></i></div> -->
                 <h4>Products A+ Content Status</h4>
                 <form method="get">
                     <?php
@@ -169,47 +174,3 @@ require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.all.min.js"></script>
-
-<!-- Script to save order in local storage -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var container = document.getElementById('draggableContainer');
-
-        // Initialize Sortable
-        var sortable = Sortable.create(container, {
-            animation: 150,
-            handle: '.grabbable',
-            onEnd: function(evt) {
-                saveOrder();
-            }
-        });
-
-        // Function to save order in local storage
-        function saveOrder() {
-            var items = container.children;
-            var order = [];
-            for (var i = 0; i < items.length; i++) {
-                order.push(items[i].id);
-            }
-            localStorage.setItem('aPlusContentDashboardSectionOrder', JSON.stringify(order));
-        }
-
-        // Function to load order from local storage
-        function loadOrder() {
-            var order = JSON.parse(localStorage.getItem('aPlusContentDashboardSectionOrder'));
-            if (order) {
-                var fragment = document.createDocumentFragment();
-                for (var i = 0; i < order.length; i++) {
-                    var item = document.getElementById(order[i]);
-                    fragment.appendChild(item);
-                }
-                container.appendChild(fragment);
-            }
-        }
-
-        // Load order when the page loads
-        loadOrder();
-    });
-</script>
