@@ -15,12 +15,6 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <?php
-// global $wpdb, $table_prefix;
-// global $product;
-// $query = "SELECT wp_apluscontent.*, wp_wc_product_meta_lookup.sku, wp_wc_product_meta_lookup.product_id FROM wp_apluscontent LEFT JOIN wp_wc_product_meta_lookup ON wp_apluscontent.product_id = wp_wc_product_meta_lookup.product_id  WHERE 1 ORDER BY wp_apluscontent.ID DESC";
-// $data = $wpdb->get_results($query);
-?>
-<?php
 // Get the current user object
 $current_user = wp_get_current_user();
 $user_name = !empty($current_user->display_name) ? $current_user->display_name : $current_user->user_login;
@@ -72,7 +66,7 @@ $products = wc_get_products( array(
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted">Products with A+ Content</h5>
-                                                <span class="h2 font-weight-bold mb-0">0</span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo count($data); ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -80,8 +74,13 @@ $products = wc_get_products( array(
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php
+                                        $totalProducts = count($products);
+                                        $aplusProducts = count($data);
+                                        $percentage = ($aplusProducts / $totalProducts)*100;
+                                        ?>
                                         <p class="mt-3 mb-0 text-muted text-sm">
-                                            <span class="text-danger mr-2">0%</span>
+                                            <span class="text-danger mr-2"><?php echo $percentage; ?>%</span>
                                             <span class="text-nowrap">of total products</span>
                                         </p>
                                     </div>
@@ -161,15 +160,52 @@ $products = wc_get_products( array(
             <div id="productsTableSection" class="row">
                 <!-- <div class="text-end p-0"><i class="fa-solid fa-grip-vertical grabbable"></i></div> -->
                 <h4>Products A+ Content Status</h4>
-                <form method="get">
-                    <?php
-                    // Render the search box
-                    $table = new A_PLUS_CONTENT_PRODUCTS_TABLE();
-                    $table->search_box('Search Products', 'search');
-                    $table->prepare_items();
-                    $table->display();
-                    ?>
-                </form>
+                <div class="responsive-table mt-3">
+                    <table id="aplusProductTable" class="table table-primary table-stripped" border="">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Product ID</th>
+                                <th class="text-center">Product Name</th>
+                                <th class="text-center">View</th>
+                                <th class="text-center">Created At</th>
+                                <th class="text-center">Updated At</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ( is_array( $data ) && ! empty( $data ) ) {
+                                foreach ( $data as $key => $row ) {
+                                    $product = wc_get_product($row['product_id']);
+                                    ?>
+                                    <tr>
+                                        <td class="text-center"><?php echo esc_html( $row['product_id'] ); ?></td>
+                                        <td class="text-center"><?php echo $product->get_name(); ?></td>
+                                        <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug(); ?>" target="_blank">View</a></td>
+                                        <td class="text-center"><?php echo date('Y-m-d',strtotime($row['created_at'])); ?></td>
+                                        <td class="text-center"><?php echo date('Y-m-d',strtotime($row['updated_at'])); ?></td>
+                                        <td class="text-center">
+                                            <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-danger'; } ?> status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>">
+                                                <i class="fa-solid <?php if($row['status'] == 1){ echo 'fa-toggle-on'; }else{ echo 'fa-toggle-off'; } ?>"></i>
+                                            </button>
+                                            <button class="btn btn-danger delete-button" content-id="<?php echo $row['id']; ?>">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                            <a href="<?= admin_url("admin.php?page=create-a-plus-content&action=edit&product_id=".$row['product_id']."") ?>" class="btn btn-primary">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo 'No data available or data is not an array.';
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

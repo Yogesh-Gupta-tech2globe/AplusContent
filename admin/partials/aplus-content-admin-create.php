@@ -16,6 +16,14 @@ if(isset($_GET['template'])){
 }else{
     $templateId = '';
 }
+
+if(isset($_GET['action']) && isset($_GET['product_id'])){
+    $action = $_GET['action'];
+    $product_id = $_GET['product_id'];
+}else{
+    $action = '';
+    $product_id = '';
+}
 ?>
 
 <div class="wrap">
@@ -32,6 +40,8 @@ if(isset($_GET['template'])){
             echo "Sorry, Editor 3 is not Completed";
         }else if($templateId == "custom"){
             include('custom-template.php');
+        }else if($action == "edit" && !empty($product_id)){
+            include('edit-template.php');
         }else{
             include('aplus-content-admin-templates.php');
         }

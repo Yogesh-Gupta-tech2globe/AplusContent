@@ -1,192 +1,49 @@
 <?php
-
-
-
-global $wpdb, $table_prefix;
-
-
-
-if (isset($_POST['module_submit'])) {
-
-
-
-    global $wpdb;
-
-
-
-    $product_id = $_POST['product_id'];
-
-    $module_id = $_POST['module_id'];
-
-
-
-    $implodedModule_id = implode(',', $module_id);
-
-
-
-    $query = "INSERT INTO `wp_apluscontent`(`product_id`, `module_id`) VALUES ('$product_id','$implodedModule_id')";
-
-    $query_run = $wpdb->query($query);
-
-
-
-    $latest_id = $wpdb->get_var("SELECT ID FROM wp_apluscontent ORDER BY ID DESC LIMIT 1");
-
-
-
-    $i = 0;
-
-    $k = 0;
-
-
-
-    for ($j = 0; $j < count($module_id); $j++) {
-
-
-
-        $a = $module_id[$j];
-
-        $u =  explode('.', $a);
-
-
-
-        if ($u[0] == 1) {
-
-
-
-            $heading = $_POST['heading'][$i];
-
-            $paragraph = $_POST['paragraph'][$i];
-
-
-
-            if ($_FILES['module1Image']) {
-
-                $file_name = $_FILES['module1Image']['name'][$i];
-
-                $info = pathinfo($file_name); // Get file info
-
-                $ext = empty($info['extension']) ? '' : '.' . $info['extension']; // Get file extension
-
-                $newname = "aplus-" . uniqid() . $ext; // Generate a unique name with a custom prefix
-
-                $file_tmp = $_FILES['module1Image']['tmp_name'][$i];
-
-
-
-                // Move the uploaded file to a custom directory
-
-                $upload_dir = WP_CONTENT_DIR . '/uploads/apluscontent_uploads/'; // Path to WordPress uploads directory
-
-
-
-                // Create the destination folder if it doesn't exist
-
-                if (!file_exists($upload_dir)) {
-
-                    mkdir($upload_dir, 0777, true); // Create the folder recursively
-
-                }
-
-                move_uploaded_file($file_tmp, $upload_dir . $newname);
-            }
-
-
-
-            $query2 = "INSERT INTO `wp_aplusmodule1`(`content_id`, `Image`, `Heading`, `Text`, `status`) VALUES ('$latest_id','$newname','$heading','$paragraph',1)";
-
-            $query2_run = $wpdb->query($query2);
-
-
-
-            $i = $i + 1;
-        } else if ($u[0] == 2) {
-
-
-
-            if ($_FILES['module2Image']) {
-
-                $file_name = $_FILES['module2Image']['name'][$k];
-
-                $info = pathinfo($file_name); // Get file info
-
-                $ext = empty($info['extension']) ? '' : '.' . $info['extension']; // Get file extension
-
-                $newname2 = "aplus-" . uniqid() . $ext; // Generate a unique name with a custom prefix
-
-                $file_tmp = $_FILES['module2Image']['tmp_name'][$k];
-
-
-
-                // Move the uploaded file to a custom directory
-
-                $upload_dir = WP_CONTENT_DIR . '/uploads/apluscontent_uploads/'; // Path to WordPress uploads directory
-
-
-
-                // Create the destination folder if it doesn't exist
-
-                if (!file_exists($upload_dir)) {
-
-                    mkdir($upload_dir, 0777, true); // Create the folder recursively
-
-                }
-
-
-
-                move_uploaded_file($file_tmp, $upload_dir . $newname2);
-            }
-
-
-
-            $query2 = "INSERT INTO `wp_aplusmodule2`(`content_id`, `image_name`, `status`) VALUES ('$latest_id','$newname2',1)";
-
-            $query2_run = $wpdb->query($query2);
-
-
-
-            $k = $k + 1;
-        }
-    }
-
-
-
-    $redirectionPage = admin_url("admin.php?page=a-plus-content");
-
-
-
-    if ($query2_run) {
-
-        echo "<script>alert('A+ Content Added Succsesfully.'); window.location.href='" . $redirectionPage . "'; </script>";
+$api_url = 'http://127.0.0.1:8000/api/aplus-content/getProducts';
+
+$data = array(
+    'user_id' => 10,
+);
+
+$response = wp_remote_post($api_url, array(
+    'method'    => 'POST',
+    'body'      => json_encode($data),
+    'headers'   => array(
+        'Content-Type' => 'application/json',
+    ),
+));
+
+if (is_wp_error($response)) {
+    $error_message = $response->get_error_message();
+    echo "Something went wrong: $error_message";
+    return;
+} else {
+    $body = wp_remote_retrieve_body($response);
+    $decodedData = json_decode($body, true);
+
+    if (isset($decodedData['data'])) {
+        $data = json_decode($decodedData['data'], true);
     } else {
-
-        echo "<script>alert('Something went wrong.'); window.location.href='" . $redirectionPage . "'; </script>";
+        $data = $decodedData;
     }
 }
 
-
-
-//Listing of Products not having A+ Content
-global $wpdb;
-
-// Fetch excluded product IDs from the custom table
-$excluded_product_ids = $wpdb->get_col("SELECT product_id FROM wp_apluscontent");
-
-// Convert the array of excluded product IDs to a comma-separated string
-$excluded_product_ids_string = implode(',', $excluded_product_ids);
+$aplusProduct = array();
+foreach ($data as $key => $row) {
+    $productID = $row['product_id'];
+    array_push($aplusProduct, $productID);
+}
 
 // Query to fetch all products except those with IDs present in the excluded_product_ids
 $args = array(
     'post_type'      => 'product',
     'post_status'    => 'publish',
     'posts_per_page' => -1,
-    // 'post__not_in'   => $excluded_product_ids, // Exclude the specified product IDs
+    'post__not_in'   => $aplusProduct,
 );
 
 $products = new WC_Product_Query($args);
-
 $products = $products->get_products();
-
 ?>
 
 <div class="row">
@@ -195,7 +52,7 @@ $products = $products->get_products();
             <p class="h6">A+ Content Custom Editor</p>
         </div>
 
-        <form method="post" enctype="multipart/form-data">
+        <form id="customTemplateFormSubmit" method="post" enctype="multipart/form-data">
             <div class="card-body">
                 <p class="h6">Select Product</p>
                 <select class="form-control" name="product_id" id="product-selection" required>
@@ -213,7 +70,7 @@ $products = $products->get_products();
                 <div id="moduleContent"></div>
 
                 <div class="text-center border border-primary my-3" style="padding: 100px;">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customTemplateModal">
                         Add Module
                     </button>
                 </div>
@@ -228,7 +85,7 @@ $products = $products->get_products();
 
 
 
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="customTemplateModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -240,20 +97,6 @@ $products = $products->get_products();
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <!-- <div class="col-md-6">
-                            <div class="card module" moduleNumber="1">
-                                <div class="card-header">
-                                    <h6>Standard Image Header With Text</h6>
-                                </div>
-                                <div class="card-body">
-                                    <img src="<?php echo esc_url(plugins_url('../img/module-demo-img1.jpeg', __FILE__)); ?>" alt="Demo1">
-                                </div>
-                                <div class="card-footer">
-                                    <h6>This is a demo Heading</h6>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when...</p>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-md-6">
                             <div class="card module" moduleNumber="1">
                                 <div class="card-header">
@@ -275,20 +118,5 @@ $products = $products->get_products();
     </div>
 </div>
 
-<script>
-        function previewImage(event, clickCount) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview' + clickCount);
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                    document.querySelector('.apluscontent-upload-box span').style.display = 'none'; // Hide the span inside the upload box
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-</script>
 
 

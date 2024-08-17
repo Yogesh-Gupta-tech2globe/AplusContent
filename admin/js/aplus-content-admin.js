@@ -1,63 +1,63 @@
 
 
 jQuery(document).ready(function($){
+
+    // new DataTable('#aplusProductTable');
+    
     var clickCount = 0;
+
     $(".module").click(function (e) { 
         e.preventDefault();
         clickCount++;
     
-        $('#myModal').modal('hide');
+        // $('#customTemplateModal').fadeOut("slow");
+        $('#customTemplateModal').modal("hide");
+    
         var moduleNumber = $(this).attr('moduleNumber');
         var content = '';
     
         switch (moduleNumber) {
             case "1":
-                content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image</h6></div><div class="card-body"><input type="hidden" value="1.'+ clickCount +'" name="module_id[]"><div class="apluscontent-upload-box" onclick="document.getElementById(\'imageInput'+ clickCount +'\').click()"><span>Click to upload an image</span><input type="file" id="imageInput'+ clickCount +'" name="module1Image[]" accept="image/*" onchange="previewImage(event, '+ clickCount +')"><img id="imagePreview'+ clickCount +'" src=""></div></div></div></div>';
-                break;
-            case "2":
-                content = '<div class="my-3"><div class="card"><div class="card-header"><h6>Standard Image Header With Text</h6></div><div class="card-body"><input type="hidden" value="2.'+ clickCount +'" name="module_id[]"><input type="file" name="module2Image[]" class="form-control" multiple /><input type="text" name="heading[]" class="form-control my-2" placeholder="Enter Heading"><input type="text" name="paragraph[]" class="form-control my-2" placeholder="Enter Text"></div></div></div>';
+                content = `
+                    <div class="my-3">
+                        <div class="card">
+                            <div class="card-header"><h6>Standard Image</h6></div>
+                            <div class="card-body">
+                                <input type="hidden" value="1.${clickCount}" name="module_id[]">
+                                <div class="apluscontent-upload-box" onclick="document.getElementById('imageInput${clickCount}').click()">
+                                    <span>Click to upload an image</span>
+                                    <input type="file" class="wp-media-file" id="imageInput${clickCount}" accept="image/*">
+                                    <img id="imagePreview${clickCount}" src="" style="display: none;">
+                                    <input type="hidden" name="module1Image[]" id="imageUrl${clickCount}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
                 break;
         }
     
         $('#moduleContent').append(content);
     });
+
+    $('#customTemplateFormSubmit').on('submit', function(e) {
+        e.preventDefault();
     
-
+        var data = $(this).serialize();
     
-
-    $('#file-5').change(function(event) {
-
-        var file = event.target.files[0];
-
-        var reader = new FileReader();
-
-
-
-        reader.onload = function(e) {
-
-            var image = $('<img>').attr('src', e.target.result);
-
-
-
-            $(image).on('load', function() {
-
-                $('#imageContainer').empty().append(image);
-
-                $('#imageContainer').show();
-
-                $('#file-5').hide();
-
-            });
-
-        };
-
-
-
-        reader.readAsDataURL(file);
-
+        $.post(myAjax.ajaxurl, data + '&action=customTemplateFormSubmit_action', function(response) {
+            if(response.success == true){
+                let message = JSON.parse(response.data.body);
+                console.log(message.message);
+                alert(message.message);
+                location.href = 'admin.php?page=a-plus-content';
+            }else{
+                alert("Something went wrong");
+            }
+            
+        }).fail(function(xhr, status, error) {
+            console.error('Error:', error); // Log any errors to the console
+        });
     });
-
-
 
     $(".status-button").click(function (e) { 
 
@@ -260,3 +260,99 @@ document.addEventListener('DOMContentLoaded', function() {
         options[0].classList.add('selected');
     }
 });
+
+jQuery(document).ready(function($) {
+    // Handle the click event on the file input using event delegation
+    $(document).on('click', 'input[type="file"].wp-media-file', function(e) {
+        e.preventDefault();
+
+        var $inputField = $(this);
+        var clickCount = $inputField.attr('id').replace('imageInput', ''); // Extract clickCount from input ID
+
+        // Create a new media frame for each input click
+        var file_frame = wp.media({
+            title: 'Select or Upload Media',
+            button: {
+                text: 'Use this media',
+            },
+            multiple: false
+        });
+
+        // When an image is selected, handle the response
+        file_frame.on('select', function() {
+            var attachment = file_frame.state().get('selection').first().toJSON();
+            previewImageFromURL(attachment.url, clickCount, $inputField);
+        });
+
+        // Open the media library
+        file_frame.open();
+    });
+
+    // Function to preview image from URL
+    function previewImageFromURL(url, clickCount, $inputField) {
+        const img = new Image();
+        img.src = url;
+
+        img.onload = function() {
+            const width = img.width;
+            const height = img.height;
+
+            if (width === 1440 && height === 900) {
+                const $preview = $('#imagePreview' + clickCount);
+                $preview.attr('src', url).show();
+
+                // Hide the span within the closest .apluscontent-upload-box
+                $inputField.closest('.apluscontent-upload-box').find('span').hide();
+
+                // Set the URL in the hidden input field
+                $('#imageUrl' + clickCount).val(url);
+            } else {
+                alert('Invalid dimensions. Only images with dimensions 1440x900 are allowed.');
+            }
+        };
+    }
+
+    // Function to preview image from file input
+    window.previewImage = function(event, clickCount, element) {
+        const file = event.target.files[0];
+        const validExtensions = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+        if (file) {
+            if (!validExtensions.includes(file.type)) {
+                alert('Invalid file type. Only JPG, JPEG, PNG, and WEBP images are allowed.');
+                event.target.value = ''; // Clear the file input
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function() {
+                    const width = img.width;
+                    const height = img.height;
+
+                    if (width === 1440 && height === 900) {
+                        const $preview = $('#imagePreview' + clickCount);
+                        $preview.attr('src', e.target.result).show();
+
+                        const $imageUrl = $('#imageUrl' + clickCount);
+                        $imageUrl.val(e.target.result);
+
+                        // Hide the span within the closest .apluscontent-upload-box
+                        $(element).closest('.apluscontent-upload-box').find('span').hide();
+                    } else {
+                        alert('Invalid dimensions. Only images with dimensions 1440x900 are allowed.');
+                        event.target.value = ''; // Clear the file input
+                    }
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+});
+
+
+
+

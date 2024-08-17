@@ -99,5 +99,87 @@ class Aplus_Content_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/aplus-content-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+	
 
+	public function register_shortcode() {
+        add_shortcode( 'display_apluscontent', array( $this, 'display_apluscontent_callback' ) );
+    }
+
+	public function display_apluscontent_callback( $atts ) {
+        // Handle your shortcode logic here.
+        $product_id = $atts['product_id'];
+		$product = wc_get_product($product_id);
+		$api_url = 'http://127.0.0.1:8000/api/aplus-content/getProductsById';
+	
+		$data = array(
+			'user_id' => 10,
+			'product_id' => $product_id,
+		);
+
+		$response = wp_remote_post($api_url, array(
+			'method'    => 'POST',
+			'body'      => json_encode($data),
+			'headers'   => array(
+				'Content-Type' => 'application/json',
+			),
+		));
+
+		if ( is_wp_error( $response ) ) {
+			$error_message = $response->get_error_message();
+			echo "Something went wrong: $error_message";
+			return;
+		}else{
+			$body = wp_remote_retrieve_body( $response );
+			$data = json_decode( $body, true );
+			$result = json_decode($data['data'], true);
+		}
+
+		foreach($result as $row){
+			if($row['status'] == 1){
+				$module_id = $row['module_ids'];
+				$module_id = explode(",",$module_id);
+				$content_id = $row['id'];
+				?>
+				<div class="apluscontent-content-container">
+					<div class="apluscontent-heading">
+						<h2><?php echo $product->get_name(); ?></h2>
+					</div>
+				<?php
+				$flag1 = 0;
+				$flag2 = 0;
+
+				for($i=0; $i<count($module_id); $i++){
+					$u =  explode('.',$module_id[$i]);
+					if($u[0] == 1){
+						include "partials/module1.php";
+						$flag1 = $flag1 + 1;
+					}else if($u[0] == 2){
+						// include "module2.php";
+						$flag2 = $flag2 + 1;
+					}
+				}
+				
+				?>
+				</div>
+				<?php
+			}
+
+		}
+    }
+
+	public function display_custom_content_below_tabs($tabs) {
+		global $product;
+		$custom_content = do_shortcode('[display_apluscontent product_id="'.esc_attr($product->get_id()).'"]');
+		$tabs['custom_tab'] = array(
+			'title'    => __('Custom Content', 'text-domain'),
+			'priority' => 50,
+			'callback' => function() use ($custom_content) {
+				echo $custom_content;
+			}
+		);
+		return $tabs;
+	}
+	
+	
+	
 }

@@ -61,8 +61,9 @@ class Aplus_Content_Admin {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name.'bootstrap-admin', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name.'aplus-content-admin', plugin_dir_url( __FILE__ ) . 'css/aplus-content-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-bootstrap-admin', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-admin', plugin_dir_url( __FILE__ ) . 'css/aplus-content-admin.css', array(), $this->version, 'all' );
+		// wp_enqueue_style( $this->plugin_name.'-datatables', plugin_dir_url( __FILE__ ) . 'css/datatables.min.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -71,20 +72,49 @@ class Aplus_Content_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		wp_enqueue_script( $this->plugin_name.'aplus-content-admin', plugin_dir_url( __FILE__ ) . 'js/aplus-content-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name.'bootstrap-admin', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
-
+		if (function_exists('wp_enqueue_media')) {
+			wp_enqueue_media();
+		}
+		wp_enqueue_script( $this->plugin_name.'-admin', plugin_dir_url( __FILE__ ) . 'js/aplus-content-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-bootstrap-admin', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
+		wp_localize_script( $this->plugin_name.'-admin', "myAjax", array(
+			"ajaxurl" => admin_url("admin-ajax.php")
+		));
+		// wp_enqueue_script( $this->plugin_name.'-datatables', plugin_dir_url( __FILE__ ) . 'js/datatables.min.js', array( 'jquery' ), $this->version, false );
 	}
 
 	public function apluscontent_admin_menu(){
 		add_menu_page('A+ Content', 'A+ Content', 'edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'),'dashicons-images-alt2',6);
 		add_submenu_page('a-plus-content','Dashboard','Dashboard','edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'));
 		add_submenu_page('a-plus-content','Create A+','Create A+','edit_others_posts','create-a-plus-content',array($this, 'apluscontent_create'));
-		// add_submenu_page('a-plus-content','Edit A+','Edit A+','manage_options','edit-a-plus-content',array($this, 'data'));
 	}
 
 	public function apluscontent_dashboard(){
+
+		$api_url = 'http://127.0.0.1:8000/api/aplus-content/getProducts';
+	
+		$data = array(
+			'user_id' => 10,
+		);
+
+		$response = wp_remote_post($api_url, array(
+			'method'    => 'POST',
+			'body'      => json_encode($data),
+			'headers'   => array(
+				'Content-Type' => 'application/json',
+			),
+		));
+
+		if ( is_wp_error( $response ) ) {
+			$error_message = $response->get_error_message();
+			echo "Something went wrong: $error_message";
+			return;
+		}else{
+			$body = wp_remote_retrieve_body( $response );
+			$data = json_decode( $body, true );
+			$data = json_decode($data['data'], true);
+		}
+		
 		include('partials/aplus-content-admin-dashboard.php');
 	}
 
@@ -92,11 +122,60 @@ class Aplus_Content_Admin {
 		include('partials/aplus-content-admin-create.php');
 	}
 
-	public function data(){
-		global $wpdb;
+	public function customTemplateFormSubmit_ajax_handler() {
 
-    	$options = $wpdb->get_results( "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name='siteurl' || option_name='admin_email' || option_name='blogname'" );
-		$options = json_encode($options);
-		echo "<script>console.log(".$options.");</script>";
+		$product_id = isset($_REQUEST['product_id']) ? sanitize_text_field($_REQUEST['product_id']) : "";
+		if (!empty($product_id)) {
+			$api_url = 'http://127.0.0.1:8000/api/aplus-content/addProduct';
+	
+			$data = array(
+				'user_id' => 10,
+				'product_id' => $product_id,
+				'module_id' => implode(',', array_map('sanitize_text_field', $_REQUEST['module_id'])),
+				'status' => 1
+			);
+	
+			$response = wp_remote_post($api_url, array(
+				'method'    => 'POST',
+				'body'      => json_encode($data),
+				'headers'   => array(
+					'Content-Type' => 'application/json',
+				),
+			));
+	
+			// Check for errors
+			if (is_wp_error($response)) {
+				wp_send_json_error($response->get_error_message());
+			} else {
+				$resp = json_decode(wp_remote_retrieve_body($response), true);
+				$id = $resp['id'];
+				$api_url = 'http://127.0.0.1:8000/api/aplus-content/addModule1';
+	
+				$data = array(
+					'content_id' => $id,
+					'module1Image' => $_REQUEST['module1Image'],
+					'status' => 1
+				);
+		
+				$response = wp_remote_post($api_url, array(
+					'method'    => 'POST',
+					'body'      => json_encode($data),
+					'headers'   => array(
+						'Content-Type' => 'application/json',
+					),
+				));
+
+				if(is_wp_error($response)){
+					wp_send_json_error($response->get_error_message());
+				}else{
+					wp_send_json_success($response);
+				}
+			}
+		} else {
+			wp_send_json_error('Product ID is missing.');
+		}
+	
+		wp_die();
 	}
+	
 }
