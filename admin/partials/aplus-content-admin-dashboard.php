@@ -80,7 +80,7 @@ $products = wc_get_products( array(
                                         $percentage = ($aplusProducts / $totalProducts)*100;
                                         ?>
                                         <p class="mt-3 mb-0 text-muted text-sm">
-                                            <span class="text-danger mr-2"><?php echo $percentage; ?>%</span>
+                                            <span class="text-danger mr-2"><?php echo round($percentage,2); ?>%</span>
                                             <span class="text-nowrap">of total products</span>
                                         </p>
                                     </div>
@@ -185,10 +185,10 @@ $products = wc_get_products( array(
                                         <td class="text-center"><?php echo date('Y-m-d',strtotime($row['created_at'])); ?></td>
                                         <td class="text-center"><?php echo date('Y-m-d',strtotime($row['updated_at'])); ?></td>
                                         <td class="text-center">
-                                            <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-danger'; } ?> status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>">
+                                            <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-warning'; } ?> aplus-status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>">
                                                 <i class="fa-solid <?php if($row['status'] == 1){ echo 'fa-toggle-on'; }else{ echo 'fa-toggle-off'; } ?>"></i>
                                             </button>
-                                            <button class="btn btn-danger delete-button" content-id="<?php echo $row['id']; ?>">
+                                            <button class="btn btn-danger aplus-delete-button" content-id="<?php echo $row['id']; ?>">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </button>
                                             <a href="<?= admin_url("admin.php?page=create-a-plus-content&action=edit&product_id=".$row['product_id']."") ?>" class="btn btn-primary">
@@ -199,7 +199,11 @@ $products = wc_get_products( array(
                                     <?php
                                 }
                             } else {
-                                echo 'No data available or data is not an array.';
+                                ?>
+                                <tr>
+                                    <td colspan="6" class="text-center">No data available</td>
+                                </tr>
+                                <?php
                             }
                             ?>
 
@@ -210,3 +214,4 @@ $products = wc_get_products( array(
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.all.min.js"></script>

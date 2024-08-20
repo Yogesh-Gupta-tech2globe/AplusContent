@@ -35,6 +35,7 @@ class Aplus_Content_Deactivator {
 			'site_name' => get_bloginfo('name'),
 			'site_url' => get_bloginfo('url'),
 			'admin_email' => get_bloginfo('admin_email'),
+            'public_key' => get_option('aplus_plugin_public_key'),
 		);
 
 		 // API endpoint to send the data

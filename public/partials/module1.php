@@ -1,9 +1,9 @@
 <?php
 
-$api_url = 'http://127.0.0.1:8000/api/aplus-content/getModule1ById';
+$api_url = $GLOBALS['authorSite'].'/getModule1ById';
 	
 $data = array(
-    'user_id' => 10,
+    'public_key' => get_option('aplus_plugin_public_key'),
     'content_id' => $content_id,
 );
 

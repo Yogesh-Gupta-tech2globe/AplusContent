@@ -1,8 +1,8 @@
 <?php
-$api_url = 'http://127.0.0.1:8000/api/aplus-content/getProducts';
+$api_url = $GLOBALS['authorSite'].'/getProducts';
 
 $data = array(
-    'user_id' => 10,
+    'public_key' => get_option('aplus_plugin_public_key'),
 );
 
 $response = wp_remote_post($api_url, array(
@@ -21,10 +21,10 @@ if (is_wp_error($response)) {
     $body = wp_remote_retrieve_body($response);
     $decodedData = json_decode($body, true);
 
-    if (isset($decodedData['data'])) {
+    if (isset($decodedData['data']) && !empty($decodedData['data'])) {
         $data = json_decode($decodedData['data'], true);
     } else {
-        $data = $decodedData;
+        $data = [];
     }
 }
 
@@ -77,7 +77,9 @@ $products = $products->get_products();
             </div>
 
             <div class="card-footer">
-                <button type="submit" name="module_submit" class="btn btn-primary">Submit</button>
+                <input type="hidden" name="status" id="customTemplateFormStatus" value="">
+                <button type="submit" id="customTemplateFormSubmitBtn1" data-status="0" class="btn btn-warning">Draft</button>
+                <button type="submit" id="customTemplateFormSubmitBtn2" data-status="1" class="btn btn-primary">Publish</button>
             </div>
         </form>
     </div>

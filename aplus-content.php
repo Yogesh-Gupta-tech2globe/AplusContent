@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://https://github.com/Yogesh-Gupta-tech2globe
+ * @link              https://github.com/Yogesh-Gupta-tech2globe
  * @since             1.0.0
  * @package           Aplus_Content
  *
  * @wordpress-plugin
  * Plugin Name:       A+ Content
- * Plugin URI:        https://https://tech2globe.com/
+ * Plugin URI:        https://tech2globe.com/
  * Description:       This plugin is useful for managing A+ Content of your Site.
  * Version:           1.0.0
  * Author:            Yogesh Gupta
- * Author URI:        https://https://github.com/Yogesh-Gupta-tech2globe/
+ * Author URI:        https://github.com/Yogesh-Gupta-tech2globe/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       aplus-content
@@ -47,6 +47,12 @@ if ( ! defined( 'ABSPATH' ) ) {
    exit;
 }
 
+global $authorSite;
+$authorSite = "http://127.0.0.1:8000/api/aplus-content";
+
+function generate_random_public_key() {
+    return bin2hex(random_bytes(16));
+}
 
 /**
  * The code that runs during plugin activation.
@@ -54,7 +60,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function activate_aplus_content() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/class-aplus-content-activator.php';
+    if (!get_option('aplus_plugin_public_key')) {
+        $public_key = generate_random_public_key();
+        update_option('aplus_plugin_public_key', $public_key);
+    }
     Aplus_Content_Activator::activate();
+}
+
+// Retrieve the public key as a global variable
+function aplus_plugin_get_public_key() {
+    return get_option('aplus_plugin_public_key');
 }
 
 /**

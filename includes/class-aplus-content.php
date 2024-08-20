@@ -158,6 +158,9 @@ class Aplus_Content {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'apluscontent_admin_menu' );
 		$this->loader->add_action( 'wp_ajax_customTemplateFormSubmit_action', $plugin_admin, 'customTemplateFormSubmit_ajax_handler' );
+		$this->loader->add_action( 'wp_ajax_aplus_status_action', $plugin_admin, 'aplus_status_ajax_handler' );
+		$this->loader->add_action( 'wp_ajax_aplus_delete_action', $plugin_admin, 'aplus_delete_ajax_handler' );
+		$this->loader->add_action( 'wp_ajax_updateContentFormSubmit_action', $plugin_admin, 'updateContentFormSubmit_ajax_handler' );
 
 	}
 
@@ -174,7 +177,7 @@ class Aplus_Content {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'woocommerce_product_tabs', $plugin_public, 'display_custom_content_below_tabs', 98 );
+		$this->loader->add_action( 'woocommerce_product_tabs', $plugin_public, 'display_custom_content_below_tabs' );
 		$plugin_public->register_shortcode();
 	}
 

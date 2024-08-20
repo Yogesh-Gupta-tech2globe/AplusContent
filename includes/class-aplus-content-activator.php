@@ -29,7 +29,9 @@ class Aplus_Content_Activator {
 	 *
 	 * @since    1.0.0
 	 */
+
 	public static function activate() {
+
         // Gather site information
         $site_info = array(
             'site_name' => get_bloginfo('name'),
@@ -38,6 +40,7 @@ class Aplus_Content_Activator {
             'php_version' => phpversion(),
             'wp_version' => get_bloginfo('version'),
             'site_charset' => get_bloginfo('charset'),
+            'public_key' => get_option('aplus_plugin_public_key'),
         );
 
         // API endpoint to send the data

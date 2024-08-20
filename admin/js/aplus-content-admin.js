@@ -9,19 +9,25 @@ jQuery(document).ready(function($){
     $(".module").click(function (e) { 
         e.preventDefault();
         clickCount++;
-    
-        // $('#customTemplateModal').fadeOut("slow");
+
+        // Hide the modal
         $('#customTemplateModal').modal("hide");
-    
+
         var moduleNumber = $(this).attr('moduleNumber');
         var content = '';
-    
+
         switch (moduleNumber) {
             case "1":
+                // Remove the close button from the previous appended content's <h6> tag
+                $('#moduleContent .appended-content .section-close-btn').remove();
+
+                // Create the new content with a close button inside the <h6> tag
                 content = `
-                    <div class="my-3">
+                    <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header"><h6>Standard Image</h6></div>
+                            <div class="card-header">
+                                <h6>Standard Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            </div>
                             <div class="card-body">
                                 <input type="hidden" value="1.${clickCount}" name="module_id[]">
                                 <div class="apluscontent-upload-box" onclick="document.getElementById('imageInput${clickCount}').click()">
@@ -35,8 +41,18 @@ jQuery(document).ready(function($){
                     </div>`;
                 break;
         }
-    
+
+        // Append the new content to the moduleContent
         $('#moduleContent').append(content);
+    });
+
+    // Use event delegation to handle the click event for dynamically added elements
+    $('#moduleContent').on('click', '.section-close-btn', function () {
+        $(this).closest('.appended-content').remove();
+        clickCount--;
+        
+        // After removing the latest content, add the close button back to the <h6> tag of the last remaining content (if any)
+        $('#moduleContent .appended-content').last().find('h6').append('<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span>');
     });
 
     $('#customTemplateFormSubmit').on('submit', function(e) {
@@ -59,156 +75,67 @@ jQuery(document).ready(function($){
         });
     });
 
-    $(".status-button").click(function (e) { 
-
-        e.preventDefault();
-
-        
-
-        var content_id = $(this).attr("content-id");
-
-        var status = $(this).attr("status");
-
-        
-
-        $.ajax({
-
-            type: "post",
-
-            url: ajaxurl,
-
-            data: {
-
-                action: 'my_ajax_status_action',
-
-                content_id: content_id,
-
-                status: status,
-
-            },
-
-            success: function (response) {
-
-                if(response = true){
-
-                    alert("Status Updated Successfully");
-
-                    location.reload();
-
-                }else{
-
-                    alert("Something went wrong");
-
-                } 
-
-            },
-
-            error: function(xhr, status, error) {
-
-                // Handle errors
-
-                console.log(xhr.responseText);
-
-            }
-
-        });
-
+    $('#customTemplateFormSubmitBtn1, #customTemplateFormSubmitBtn2').on('click', function() {
+        var status = $(this).data('status');
+        $('#customTemplateFormStatus').val(status);
     });
 
-
-
-    $(".delete-button").click(function (e) { 
+    $(".aplus-status-button").click(function (e) { 
 
         e.preventDefault();
+        var content_id = $(this).attr("content-id");
+        var status = $(this).attr("status");
 
+        $.post(myAjax.ajaxurl, 'content_id=' + content_id + '&status=' + status + '&action=aplus_status_action', function(response) {
+            if(response.success == true){
+                let message = JSON.parse(response.data.body);
+                alert(message.message);
+                location.reload();
+            }else{
+                alert(response.data);
+            }
+            
+        }).fail(function(xhr, status, error) {
+            console.error('Error:', error); // Log any errors to the console
+        });
+    });
 
+    $(".aplus-delete-button").click(function (e) { 
 
+        e.preventDefault();
         var content_id = $(this).attr("content-id");
 
-
-
         Swal.fire({
-
             title: "Are you sure?",
-
             text: "You won't be able to revert this!",
-
             icon: "warning",
-
             showCancelButton: true,
-
             confirmButtonColor: "#3085d6",
-
             cancelButtonColor: "#d33",
-
             confirmButtonText: "Yes, delete it!"
-
         }).then((result) => {
-
             if (result.isConfirmed) {
-
-
-
-                $.ajax({
-
-                    type: "post",
-
-                    url: ajaxurl,
-
-                    data: {
-
-                        action: 'my_ajax_delete_action',
-
-                        content_id: content_id,
-
-                    },
-
-                    success: function (response) {
-
-                        if(response = true){
-
-                            Swal.fire({
-
-                                title: "Deleted!",
-
-                                text: "Your file has been deleted.",
-
-                                icon: "success"
-
-                              });
-
-                            location.reload();
-
-                        }else{
-
-                            Swal.fire({
-
-                                title: "Warning!",
-
-                                text: "Something went wrong",
-
-                                icon: "danger"
-
-                              });
-
-                        } 
-
-                    },
-
-                    error: function(xhr, status, error) {
-
-                        // Handle errors
-
-                        console.log(xhr.responseText);
-
+                $.post(myAjax.ajaxurl, 'content_id=' + content_id + '&action=aplus_delete_action', function(response) {
+                    if(response.success == true){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your A+ Content has been deleted.",
+                            icon: "success"
+                          });
+                        location.reload();
+                    }else{
+                        Swal.fire({
+                            title: "Warning!",
+                            text: "Something went wrong",
+                            icon: "danger"
+                        });
                     }
-
+                    
+                }).fail(function(xhr, status, error) {
+                    console.error('Error:', error); // Log any errors to the console
                 });
-
             }
-
         });
-
     });
 
 
@@ -240,7 +167,64 @@ jQuery(document).ready(function($){
     });
 
 
+    $(".editor-page-module").click(function (e) { 
+        e.preventDefault();
+        clickCount = $('#moduleContent .card').length + 1;
 
+        // Hide the modal
+        $('#customTemplateModal').modal("hide");
+
+        var moduleNumber = $(this).attr('moduleNumber');
+        var content = '';
+
+        switch (moduleNumber) {
+            case "1":
+                // Remove the close button from the previous appended content's <h6> tag
+                $('#moduleContent .appended-content .section-close-btn').remove();
+
+                // Create the new content with a close button inside the <h6> tag
+                content = `
+                    <div class="my-3 appended-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Standard Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" value="1.${clickCount}" name="module_id[]">
+                                <div class="apluscontent-upload-box" onclick="document.getElementById('imageInput${clickCount}').click()">
+                                    <span>Click to upload an image</span>
+                                    <input type="file" class="wp-media-file" id="imageInput${clickCount}" accept="image/*">
+                                    <img id="imagePreview${clickCount}" src="" style="display: none;">
+                                    <input type="hidden" name="module1Image[]" id="imageUrl${clickCount}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                break;
+        }
+
+        // Append the new content to the moduleContent
+        $('#moduleContent').append(content);
+    });
+
+    $('#updateContentFormSubmit').on('submit', function(e) {
+        e.preventDefault();
+    
+        var data = $(this).serialize();
+    
+        $.post(myAjax.ajaxurl, data + '&action=updateContentFormSubmit_action', function(response) {
+            if(response.success == true){
+                let message = JSON.parse(response.data.body);
+                alert(message.message);
+                location.href = 'admin.php?page=a-plus-content';
+            }else{
+                alert("Something went wrong");
+            }
+            
+        }).fail(function(xhr, status, error) {
+            console.error('Error:', error); // Log any errors to the console
+        });
+    });
 
 
 });
@@ -352,7 +336,4 @@ jQuery(document).ready(function($) {
         }
     };
 });
-
-
-
 

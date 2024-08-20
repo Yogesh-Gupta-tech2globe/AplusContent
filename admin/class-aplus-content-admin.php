@@ -91,10 +91,10 @@ class Aplus_Content_Admin {
 
 	public function apluscontent_dashboard(){
 
-		$api_url = 'http://127.0.0.1:8000/api/aplus-content/getProducts';
+		$api_url = $GLOBALS['authorSite'].'/getProducts';
 	
 		$data = array(
-			'user_id' => 10,
+			'public_key' => get_option('aplus_plugin_public_key'),
 		);
 
 		$response = wp_remote_post($api_url, array(
@@ -112,7 +112,11 @@ class Aplus_Content_Admin {
 		}else{
 			$body = wp_remote_retrieve_body( $response );
 			$data = json_decode( $body, true );
-			$data = json_decode($data['data'], true);
+			if(!empty($data['data'])){
+				$data = json_decode($data['data'], true);
+			}else{
+				$data = [];
+			}
 		}
 		
 		include('partials/aplus-content-admin-dashboard.php');
@@ -123,16 +127,16 @@ class Aplus_Content_Admin {
 	}
 
 	public function customTemplateFormSubmit_ajax_handler() {
-
+	
 		$product_id = isset($_REQUEST['product_id']) ? sanitize_text_field($_REQUEST['product_id']) : "";
 		if (!empty($product_id)) {
-			$api_url = 'http://127.0.0.1:8000/api/aplus-content/addProduct';
+			$api_url = $GLOBALS['authorSite'].'/addProduct';
 	
 			$data = array(
-				'user_id' => 10,
+				'public_key' => get_option('aplus_plugin_public_key'),
 				'product_id' => $product_id,
 				'module_id' => implode(',', array_map('sanitize_text_field', $_REQUEST['module_id'])),
-				'status' => 1
+				'status' => sanitize_text_field($_REQUEST['status']),
 			);
 	
 			$response = wp_remote_post($api_url, array(
@@ -149,7 +153,7 @@ class Aplus_Content_Admin {
 			} else {
 				$resp = json_decode(wp_remote_retrieve_body($response), true);
 				$id = $resp['id'];
-				$api_url = 'http://127.0.0.1:8000/api/aplus-content/addModule1';
+				$api_url = $GLOBALS['authorSite'].'/addModule1';
 	
 				$data = array(
 					'content_id' => $id,
@@ -173,6 +177,105 @@ class Aplus_Content_Admin {
 			}
 		} else {
 			wp_send_json_error('Product ID is missing.');
+		}
+	
+		wp_die();
+	}
+
+	public function aplus_status_ajax_handler() {
+
+		$content_id = isset($_REQUEST['content_id']) ? sanitize_text_field($_REQUEST['content_id']) : "";
+		if (!empty($content_id)) {
+			$api_url = $GLOBALS['authorSite'].'/updateProductStatus';
+	
+			$data = array(
+				'public_key' => get_option('aplus_plugin_public_key'),
+				'content_id' => $content_id,
+				'status' => sanitize_text_field($_REQUEST['status'])
+			);
+	
+			$response = wp_remote_post($api_url, array(
+				'method'    => 'POST',
+				'body'      => json_encode($data),
+				'headers'   => array(
+					'Content-Type' => 'application/json',
+				),
+			));
+	
+			// Check for errors
+			if (is_wp_error($response)) {
+				wp_send_json_error($response->get_error_message());
+			} else {
+				wp_send_json_success($response);
+			}
+		} else {
+			wp_send_json_error('Content ID is missing.');
+		}
+	
+		wp_die();
+	}
+
+	public function aplus_delete_ajax_handler() {
+
+		$content_id = isset($_REQUEST['content_id']) ? sanitize_text_field($_REQUEST['content_id']) : "";
+		if (!empty($content_id)) {
+			$api_url = $GLOBALS['authorSite'].'/deleteProduct';
+	
+			$data = array(
+				'public_key' => get_option('aplus_plugin_public_key'),
+				'content_id' => $content_id,
+			);
+	
+			$response = wp_remote_post($api_url, array(
+				'method'    => 'POST',
+				'body'      => json_encode($data),
+				'headers'   => array(
+					'Content-Type' => 'application/json',
+				),
+			));
+	
+			// Check for errors
+			if (is_wp_error($response)) {
+				wp_send_json_error($response->get_error_message());
+			} else {
+				wp_send_json_success($response);
+			}
+		} else {
+			wp_send_json_error('Content ID is missing.');
+		}
+	
+		wp_die();
+	}
+
+	public function updateContentFormSubmit_ajax_handler() {
+
+		$content_id = isset($_REQUEST['content_id']) ? sanitize_text_field($_REQUEST['content_id']) : "";
+		if (!empty($content_id)) {
+			$api_url = $GLOBALS['authorSite'].'/updateProduct';
+	
+			$data = array(
+				'public_key' => get_option('aplus_plugin_public_key'),
+				'content_id' => $content_id,
+				'module_id' => implode(',', array_map('sanitize_text_field', $_REQUEST['module_id'])),
+				'module1Image' => $_REQUEST['module1Image'],
+			);
+	
+			$response = wp_remote_post($api_url, array(
+				'method'    => 'POST',
+				'body'      => json_encode($data),
+				'headers'   => array(
+					'Content-Type' => 'application/json',
+				),
+			));
+	
+			// Check for errors
+			if (is_wp_error($response)) {
+				wp_send_json_error($response->get_error_message());
+			} else {
+				wp_send_json_success($response);
+			}
+		} else {
+			wp_send_json_error('Content ID is missing.');
 		}
 	
 		wp_die();

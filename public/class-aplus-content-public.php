@@ -109,10 +109,10 @@ class Aplus_Content_Public {
         // Handle your shortcode logic here.
         $product_id = $atts['product_id'];
 		$product = wc_get_product($product_id);
-		$api_url = 'http://127.0.0.1:8000/api/aplus-content/getProductsById';
+		$api_url = $GLOBALS['authorSite'].'/getProductsById';
 	
 		$data = array(
-			'user_id' => 10,
+			'public_key' => get_option('aplus_plugin_public_key'),
 			'product_id' => $product_id,
 		);
 
@@ -167,19 +167,10 @@ class Aplus_Content_Public {
 		}
     }
 
-	public function display_custom_content_below_tabs($tabs) {
+	public function display_custom_content_below_tabs() {
 		global $product;
-		$custom_content = do_shortcode('[display_apluscontent product_id="'.esc_attr($product->get_id()).'"]');
-		$tabs['custom_tab'] = array(
-			'title'    => __('Custom Content', 'text-domain'),
-			'priority' => 50,
-			'callback' => function() use ($custom_content) {
-				echo $custom_content;
-			}
-		);
-		return $tabs;
-	}
-	
-	
+		// Generate the content using the shortcode
+		echo do_shortcode('[display_apluscontent product_id="'.esc_attr($product->get_id()).'"]');
+	}	
 	
 }
