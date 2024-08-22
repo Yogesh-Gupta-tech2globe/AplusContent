@@ -127,7 +127,7 @@ class Aplus_Content_Admin {
 	}
 
 	public function customTemplateFormSubmit_ajax_handler() {
-	
+		
 		$product_id = isset($_REQUEST['product_id']) ? sanitize_text_field($_REQUEST['product_id']) : "";
 		if (!empty($product_id)) {
 			$api_url = $GLOBALS['authorSite'].'/addProduct';
@@ -136,6 +136,28 @@ class Aplus_Content_Admin {
 				'public_key' => get_option('aplus_plugin_public_key'),
 				'product_id' => $product_id,
 				'module_id' => implode(',', array_map('sanitize_text_field', $_REQUEST['module_id'])),
+				'module1Image' => $_REQUEST['module1Image'],
+				'module2Image1' => $_REQUEST['module2Image1'],
+				'module2Image2' => $_REQUEST['module2Image2'],
+				'module2Image3' => $_REQUEST['module2Image3'],
+				'module2heading1' =>  $_REQUEST['module2heading1'],
+				'module2heading2' =>  $_REQUEST['module2heading2'],
+				'module2heading3' =>  $_REQUEST['module2heading3'],
+				'module2description1' => $_REQUEST['module2description1'],
+				'module2description2' => $_REQUEST['module2description2'],
+				'module2description3' => $_REQUEST['module2description3'],
+				'module3Image' => $_REQUEST['module3Image'],
+				'module3heading' => $_REQUEST['module3heading'],
+				'module3description' => $_REQUEST['module3description'],
+				'module4Image' => $_REQUEST['module4Image'],
+				'module4heading' => $_REQUEST['module4heading'],
+				'module4description' => $_REQUEST['module4description'],
+				'module5Image1' => $_REQUEST['module5Image1'],
+				'module5Image2' => $_REQUEST['module5Image2'],
+				'module5Image3' => $_REQUEST['module5Image3'],
+				'module6Image' => $_REQUEST['module6Image'],
+				'module6ThumbImage' => $_REQUEST['module6ThumbImage'],
+				'module6video' => $_REQUEST['module6video'],
 				'status' => sanitize_text_field($_REQUEST['status']),
 			);
 	
@@ -151,29 +173,7 @@ class Aplus_Content_Admin {
 			if (is_wp_error($response)) {
 				wp_send_json_error($response->get_error_message());
 			} else {
-				$resp = json_decode(wp_remote_retrieve_body($response), true);
-				$id = $resp['id'];
-				$api_url = $GLOBALS['authorSite'].'/addModule1';
-	
-				$data = array(
-					'content_id' => $id,
-					'module1Image' => $_REQUEST['module1Image'],
-					'status' => 1
-				);
-		
-				$response = wp_remote_post($api_url, array(
-					'method'    => 'POST',
-					'body'      => json_encode($data),
-					'headers'   => array(
-						'Content-Type' => 'application/json',
-					),
-				));
-
-				if(is_wp_error($response)){
-					wp_send_json_error($response->get_error_message());
-				}else{
-					wp_send_json_success($response);
-				}
+				wp_send_json_success($response);
 			}
 		} else {
 			wp_send_json_error('Product ID is missing.');
@@ -258,6 +258,27 @@ class Aplus_Content_Admin {
 				'content_id' => $content_id,
 				'module_id' => implode(',', array_map('sanitize_text_field', $_REQUEST['module_id'])),
 				'module1Image' => $_REQUEST['module1Image'],
+				'module2Image1' => $_REQUEST['module2Image1'],
+				'module2Image2' => $_REQUEST['module2Image2'],
+				'module2Image3' => $_REQUEST['module2Image3'],
+				'module2heading1' =>  $_REQUEST['module2heading1'],
+				'module2heading2' =>  $_REQUEST['module2heading2'],
+				'module2heading3' =>  $_REQUEST['module2heading3'],
+				'module2description1' => $_REQUEST['module2description1'],
+				'module2description2' => $_REQUEST['module2description2'],
+				'module2description3' => $_REQUEST['module2description3'],
+				'module3Image' => $_REQUEST['module3Image'],
+				'module3heading' => $_REQUEST['module3heading'],
+				'module3description' => $_REQUEST['module3description'],
+				'module4Image' => $_REQUEST['module4Image'],
+				'module4heading' => $_REQUEST['module4heading'],
+				'module4description' => $_REQUEST['module4description'],
+				'module5Image1' => $_REQUEST['module5Image1'],
+				'module5Image2' => $_REQUEST['module5Image2'],
+				'module5Image3' => $_REQUEST['module5Image3'],
+				'module6Image' => $_REQUEST['module6Image'],
+				'module6ThumbImage' => $_REQUEST['module6ThumbImage'],
+				'module6video' => $_REQUEST['module6video'],
 			);
 	
 			$response = wp_remote_post($api_url, array(

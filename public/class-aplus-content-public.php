@@ -61,19 +61,8 @@ class Aplus_Content_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Aplus_Content_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Aplus_Content_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/aplus-content-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-custom', plugin_dir_url( __FILE__ ) . 'css/aplus-content-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -84,19 +73,8 @@ class Aplus_Content_Public {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Aplus_Content_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Aplus_Content_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/aplus-content-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-custom', plugin_dir_url( __FILE__ ) . 'js/aplus-content-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-bootstrap', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 	
@@ -135,18 +113,20 @@ class Aplus_Content_Public {
 		}
 
 		foreach($result as $row){
-			if($row['status'] == 1){
+			if($row['status'] == 1 || isset($_GET['preview']) == "true"){
 				$module_id = $row['module_ids'];
 				$module_id = explode(",",$module_id);
 				$content_id = $row['id'];
 				?>
+				<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
 				<div class="apluscontent-content-container">
-					<div class="apluscontent-heading">
-						<h2><?php echo $product->get_name(); ?></h2>
-					</div>
 				<?php
 				$flag1 = 0;
 				$flag2 = 0;
+				$flag3 = 0;
+				$flag4 = 0;
+				$flag5 = 0;
+				$flag6 = 0;
 
 				for($i=0; $i<count($module_id); $i++){
 					$u =  explode('.',$module_id[$i]);
@@ -154,8 +134,20 @@ class Aplus_Content_Public {
 						include "partials/module1.php";
 						$flag1 = $flag1 + 1;
 					}else if($u[0] == 2){
-						// include "module2.php";
+						include "partials/module2.php";
 						$flag2 = $flag2 + 1;
+					}else if($u[0] == 3){
+						include "partials/module3.php";
+						$flag3 = $flag3 + 1;
+					}else if($u[0] == 4){
+						include "partials/module4.php";
+						$flag4 = $flag4 + 1;
+					}else if($u[0] == 5){
+						include "partials/module5.php";
+						$flag5 = $flag5 + 1;
+					}else if($u[0] == 6){
+						include "partials/module6.php";
+						$flag6 = $flag6 + 1;
 					}
 				}
 				

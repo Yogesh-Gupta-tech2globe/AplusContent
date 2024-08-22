@@ -18,7 +18,6 @@
 // Get the current user object
 $current_user = wp_get_current_user();
 $user_name = !empty($current_user->display_name) ? $current_user->display_name : $current_user->user_login;
-require_once plugin_dir_path(__FILE__) . '..\class-aplus-content-products-table.php';
 
 $products = wc_get_products( array(
     'limit' => -1,
@@ -166,9 +165,9 @@ $products = wc_get_products( array(
                             <tr>
                                 <th class="text-center">Product ID</th>
                                 <th class="text-center">Product Name</th>
-                                <th class="text-center">View</th>
                                 <th class="text-center">Created At</th>
                                 <th class="text-center">Updated At</th>
+                                <th class="text-center">View</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -181,16 +180,22 @@ $products = wc_get_products( array(
                                     <tr>
                                         <td class="text-center"><?php echo esc_html( $row['product_id'] ); ?></td>
                                         <td class="text-center"><?php echo $product->get_name(); ?></td>
-                                        <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug(); ?>" target="_blank">View</a></td>
                                         <td class="text-center"><?php echo date('Y-m-d',strtotime($row['created_at'])); ?></td>
                                         <td class="text-center"><?php echo date('Y-m-d',strtotime($row['updated_at'])); ?></td>
+                                        <?php if($row['status'] == 1){ ?>
+                                            <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug(); ?>" target="_blank">View</a></td>
+                                        <?php } else { ?>
+                                            <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug()."/?preview=true" ?>" target="_blank">Preview</a></td>
+                                        <?php } ?>
                                         <td class="text-center">
                                             <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-warning'; } ?> aplus-status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>">
                                                 <i class="fa-solid <?php if($row['status'] == 1){ echo 'fa-toggle-on'; }else{ echo 'fa-toggle-off'; } ?>"></i>
                                             </button>
+                                            <?php if(current_user_can('administrator')){ ?>
                                             <button class="btn btn-danger aplus-delete-button" content-id="<?php echo $row['id']; ?>">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </button>
+                                            <?php } ?>
                                             <a href="<?= admin_url("admin.php?page=create-a-plus-content&action=edit&product_id=".$row['product_id']."") ?>" class="btn btn-primary">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
