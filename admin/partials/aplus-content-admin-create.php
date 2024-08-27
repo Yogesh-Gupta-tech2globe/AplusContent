@@ -33,11 +33,11 @@ if(isset($_GET['action']) && isset($_GET['product_id'])){
         
         <?php
         if($templateId == 1){
-            echo "Sorry, Editor 1 is not Completed";
+            include('templates/template1.php');
         }else if($templateId == 2){
-            echo "Sorry, Editor 2 is not Completed";
+            include('templates/template2.php');
         }else if($templateId == 3){
-            echo "Sorry, Editor 3 is not Completed";
+            include('templates/template3.php');
         }else if($templateId == "custom"){
             include('custom-template.php');
         }else if($action == "edit" && !empty($product_id)){

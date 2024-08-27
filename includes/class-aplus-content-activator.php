@@ -44,7 +44,7 @@ class Aplus_Content_Activator {
         );
 
         // API endpoint to send the data
-        $api_url = 'http://127.0.0.1:8000/api/aplus-content/register';
+        $api_url = $GLOBALS['authorSite'].'/register';
 
         // Send the data to the server
         $response = wp_remote_post($api_url, array(
@@ -62,5 +62,23 @@ class Aplus_Content_Activator {
             error_log('Site Info Sender: Site information sent successfully.');
         }
     }
+
+    public static function create_log_table() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'aplus_logs';
+    
+        $charset_collate = $wpdb->get_charset_collate();
+    
+        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            operation varchar(255) NOT NULL,
+            product_id mediumint(9) NOT NULL,
+            user_id mediumint(9) NOT NULL,
+            log_time datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            PRIMARY KEY  (id)
+        ) $charset_collate;";
+    
+        $wpdb->query($sql);
+    }    
 
 }

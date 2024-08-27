@@ -125,35 +125,32 @@ $products = wc_get_products( array(
                     </div>
                 </div>
 
-                <div class="col-md-4 mt-2"> <!-- Recent Activity -->
-                    <!-- <div class="recent-activity mb-2">
+                <div class="col-md-4 mt-2">
+                    <!-- Recent Activity -->
+                    <div class="recent-activity mb-2">
                         <h4>Recent Activity</h4>
                         <ol class="activity-feed m-0 mt-2">
-                            <ul class="recent-activity p-0">
-                                <li class="feed-item">
-                                    <time class="date" datetime="2024-08-05">Aug 5</time>
-                                    <span class="text">Deleted A+ content from product <a href="#">“Premium TWS”</a></span>
-                                </li>
-                                <li class="feed-item">
-                                    <time class="date" datetime="2024-08-04">Aug 4</time>
-                                    <span class="text">Modified A+ content for product <a href="#">“Smart Watch”</a></span>
-                                </li>
-                                <li class="feed-item">
-                                    <time class="date" datetime="2024-08-03">Aug 3</time>
-                                    <span class="text">Created A+ content to product <a href="#">“Premium TWS"</a></span>
-                                </li>
-                                <li class="feed-item">
-                                    <time class="date" datetime="2024-08-03">Aug 3</time>
-                                    <span class="text">Created A+ content to product <a href="#">“Smart Watch”</a></span>
-                                </li>
-                                <li class="feed-item">
-                                    <time class="date" datetime="2024-08-02">Aug 2</time>
-                                    <span class="text">Installed plugin and started on Free plan</span>
-                                </li>
+                            <ul class="recent-activity" style="max-height: 200px; overflow-y: auto;"> <!-- Add scroll -->
+                                <?php
+                                if ($logs) {
+                                    foreach ($logs as $log) {
+                                        $product = wc_get_product($log->product_id);
+                                        $user = get_userdata($log->user_id);
+                                        $role = !empty($user->roles) ? implode(', ', $user->roles) : 'No role assigned';
+                                        ?>
+                                        <li class="feed-item">
+                                            <time class="date" datetime="<?= date('Y-m-d', strtotime($log->log_time)) ?>"><?= date('Y-m-d', strtotime($log->log_time)) ?></time>
+                                            <span class="text"><?= esc_html($log->operation) ?> A+ content for product <a href="<?php echo esc_url(site_url() . "/product/" . $product->get_slug()); ?>" target="_blank"><?= esc_html($product->get_name()); ?></a> by <?= esc_html($user->display_name) . " (" . esc_html($role) . ")"; ?></span>
+                                        </li>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </ul>
                         </ol>
-                    </div> -->
+                    </div>
                 </div>
+
             </div>
 
             <div id="productsTableSection" class="row">
@@ -188,11 +185,11 @@ $products = wc_get_products( array(
                                             <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug()."/?preview=true" ?>" target="_blank">Preview</a></td>
                                         <?php } ?>
                                         <td class="text-center">
-                                            <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-warning'; } ?> aplus-status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>">
+                                            <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-warning'; } ?> aplus-status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>" product-id="<?= $row['product_id'] ?>">
                                                 <i class="fa-solid <?php if($row['status'] == 1){ echo 'fa-toggle-on'; }else{ echo 'fa-toggle-off'; } ?>"></i>
                                             </button>
                                             <?php if(current_user_can('administrator')){ ?>
-                                            <button class="btn btn-danger aplus-delete-button" content-id="<?php echo $row['id']; ?>">
+                                            <button class="btn btn-danger aplus-delete-button" content-id="<?php echo $row['id']; ?>" product-id="<?= $row['product_id'] ?>">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </button>
                                             <?php } ?>

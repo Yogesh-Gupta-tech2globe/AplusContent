@@ -1,6 +1,6 @@
 <?php
 
-$api_url = $GLOBALS['authorSite'].'/getModule1ById';
+$api_url = $GLOBALS['authorSite'].'/getModule7ById';
 	
 $data = array(
     'public_key' => get_option('aplus_plugin_public_key'),
@@ -25,13 +25,17 @@ if ( is_wp_error( $response ) ) {
     $result = json_decode($data['data'], true);
 }
 
-$item = $result[$flag1];
+$item = $result[$flag7];
 ?>
 
-<div class="inner-apluscontent-content-container my-4">
-    <div class="apluscontent-inner-card">
-        <img src="<?php echo esc_url($item['image']); ?>" class="img-fluid">
+<div class="container my-4 banner-section-one">
+    <img src="<?php echo esc_url($item['module7Image']); ?>" class="img-fluid" alt="..." />
+</div>
+<div class="container my-4 banner-section-two">
+    <div class="row">
+        <h1><?php echo esc_html($item['module7heading']); ?></h1>
+        <p>
+        <?php echo esc_html($item['module7description']); ?>
+        </p>
     </div>
 </div>
-
-    

@@ -64,7 +64,12 @@ function activate_aplus_content() {
         $public_key = generate_random_public_key();
         update_option('aplus_plugin_public_key', $public_key);
     }
+
+    if (!get_option('aplus_plugin_plan')) {
+        update_option('aplus_plugin_plan', "Free");
+    }
     Aplus_Content_Activator::activate();
+    Aplus_Content_Activator::create_log_table();
 }
 
 // Retrieve the public key as a global variable
@@ -106,3 +111,5 @@ function run_aplus_content() {
 
 }
 run_aplus_content();
+
+

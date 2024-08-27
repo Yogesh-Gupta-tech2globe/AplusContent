@@ -43,6 +43,7 @@
                         <p class="h6">Selected Product</p>
                         <input type="text" class="form-control" value="<?php echo $product->get_name(); ?>" readonly>
                         <input type="hidden" value="<?php echo $content_id; ?>" name="content_id">
+                        <input type="hidden" value="<?php echo $product_id; ?>" name="product_id">
                         <hr>
                         <p class="h6">Edit Content</p>
                         <div id="moduleContent">
@@ -54,6 +55,8 @@
                         $flag4 = 0;
                         $flag5 = 0;
                         $flag6 = 0;
+                        $flag7 = 0;
+                        $flag8 = 0;
 
                         for($i=0; $i<count($module_id); $i++){
                             $u =  explode('.',$module_id[$i]);
@@ -80,6 +83,14 @@
                             }else if($u[0] == 6){
                                 include "modules/module6.php";
                                 $flag6 = $flag6 + 1;
+                                $count++;
+                            }else if($u[0] == 7){
+                                include "modules/module7.php";
+                                $flag7 = $flag7 + 1;
+                                $count++;
+                            }else if($u[0] == 8){
+                                include "modules/module8.php";
+                                $flag8 = $flag8 + 1;
                                 $count++;
                             }
                         }
@@ -119,14 +130,28 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="container">
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-md-6">
-                            <div class="card editor-page-module" moduleNumber="1" style="cursor: pointer;">
+                            <div class="card h-100 editor-page-module" moduleNumber="1" style="cursor: pointer;">
                                 <div class="card-header">
                                     <h6>Standard Image</h6>
                                 </div>
                                 <div class="card-body">
-                                    <img src="<?php echo esc_url(plugins_url('../img/module1.jpeg', __FILE__)); ?>" alt="Demo1" width="auto" height="200px">
+                                    <div class="container">
+                                        <img src="<?php echo esc_url(plugins_url('../img/image2.jpg', __FILE__)); ?>" class="img-fluid" alt="Demo1" width="auto" height="auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 editor-page-module" moduleNumber="8" style="cursor: pointer;">
+                                <div class="card-header">
+                                    <h6>Logo</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="logo-container mx-auto text-center h-25 w-25">
+                                        <img src="<?php echo esc_url(plugins_url('../img/single-left-image.jpg', __FILE__)); ?>" alt="" class="w-100 h-auto"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -301,6 +326,33 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card editor-page-module" moduleNumber="7" style="cursor: pointer;">
+                                <div class="card-header">
+                                    <h6>Hero Banner</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container banner-section-one">
+                                        <img src="<?php echo esc_url(plugins_url('../img/default-banner-img1.jpg', __FILE__)); ?>" class="img-fluid w-100" alt="..." />
+                                    </div>
+                                    <div class="container banner-section-two">
+                                        <div class="row">
+                                            <h1>Lorem Ipsum</h1>
+                                            <p>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                                since the 1500s, when an unknown printer took a galley of type and
+                                                scrambled it to make a type specimen book. It has survived not only
+                                                five centuries, but also the leap into electronic typesetting,
+                                                remaining essentially unchanged. 
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Modal footer -->
@@ -311,8 +363,30 @@
     </div>
 </div>
 
+<script>
+    jQuery(document).ready(function($) {
+        var formSubmitted = false;
 
-          
+        // Set flag when a form is submitted
+        $('form').on('submit', function() {
+            formSubmitted = true;
+        });
+
+        // Handle beforeunload event
+        $(window).on('beforeunload', function(e) {
+            if (!formSubmitted) {
+                // Display custom alert (Note: Alert is separate from beforeunload confirmation)
+                alert("Are you sure you want to leave this page? Changes you made may not be saved.");
+                
+                // Return a message to show the native confirmation dialog
+                var message = "Are you sure you want to leave this page? Changes you made may not be saved.";
+                e.returnValue = message; // For most browsers
+                return message; // For others
+            }
+        });
+    });
+</script>
+
 
 
 

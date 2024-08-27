@@ -6,6 +6,45 @@ jQuery(document).ready(function($){
     
     var clickCount = 0;
 
+    $(function () {
+        // Initialize sortable functionality
+        $("#moduleContent").sortable({
+            handle: ".card-header", // Only allow dragging by the card-header
+            update: function (event, ui) {
+                // Update the order of module_id[] values based on new order
+                $('#moduleContent .appended-content').each(function (index) {
+                    var newOrder = index + 1;
+                    $(this).find('input[type="hidden"][name="module_id[]"]').val(function(i, oldVal) {
+                        return oldVal.split('.')[0] + '.' + newOrder;
+                    });
+                });
+    
+                // Ensure the close button is on the last appended content after dragging
+                updateCloseButton();
+            }
+        }).disableSelection();
+    
+        // Use event delegation to handle the click event for dynamically added elements
+        $('#moduleContent').on('click', '.section-close-btn', function () {
+            $(this).closest('.appended-content').remove();
+            clickCount--;
+            
+            // After removing an element, update the close button on the last remaining content
+            updateCloseButton();
+        });
+    
+        // Function to update the close button on the last appended content
+        function updateCloseButton() {
+            // Remove any existing close button from all content
+            $('#moduleContent .section-close-btn').remove();
+    
+            // Add the close button to the last remaining content
+            $('#moduleContent .appended-content').last().find('h6').append('<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span>');
+        }
+    });
+        
+    
+
     $(".module").click(function (e) { 
         e.preventDefault();
         clickCount++;
@@ -25,7 +64,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Standard Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -48,7 +87,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Three Columns with Images, Heading, and Description<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -103,7 +142,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Single Right Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -134,7 +173,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Single Left Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -165,22 +204,22 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Slider <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="5.${clickCount}" name="module_id[]">
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" placeholder="Upload Image for slider1" required name="module5Image1[]" readonly>
-                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                 </div>
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" placeholder="Upload Image for slider2" required name="module5Image2[]" readonly>
-                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                 </div>
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" placeholder="Upload Image for slider3" required name="module5Image3[]" readonly>
-                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +233,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Video with Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -221,19 +260,60 @@ jQuery(document).ready(function($){
                         </div>
                     </div>`;
                     break;
+            case "7":
+                // Remove the close button from the previous appended content's <h6> tag
+                $('#moduleContent .appended-content .section-close-btn').remove();
+
+                // Create the new content with a close button inside the <h6> tag
+                content = `
+                    <div class="my-3 appended-content">
+                        <div class="card">
+                            <div class="card-header" style="cursor: move;">
+                                <h6>Hero Banner <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" value="7.${clickCount}" name="module_id[]">
+                                <div class="row">
+                                    <div class="input-group my-3">
+                                        <input type="text" class="form-control" placeholder="Upload Image" required name="module7Image[]" readonly>
+                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="text" class="form-control mb-2" placeholder="Enter Heading" required name="module7heading[]">
+                                    <textarea class="form-control mb-2" placeholder="Enter Description of Hero Banner" required name="module7description[]" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    break;
+            case "8":
+                // Remove the close button from the previous appended content's <h6> tag
+                $('#moduleContent .appended-content .section-close-btn').remove();
+
+                // Create the new content with a close button inside the <h6> tag
+                content = `
+                    <div class="my-3 appended-content">
+                        <div class="card">
+                            <div class="card-header" style="cursor: move;">
+                                <h6>Logo <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" value="8.${clickCount}" name="module_id[]">
+                                <div class="row">
+                                    <div class="input-group my-3">
+                                        <input type="text" class="form-control" placeholder="Upload Image" required name="module8logo[]" readonly>
+                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    break;
         }
 
         // Append the new content to the moduleContent
         $('#moduleContent').append(content);
-    });
-
-    // Use event delegation to handle the click event for dynamically added elements
-    $('#moduleContent').on('click', '.section-close-btn', function () {
-        $(this).closest('.appended-content').remove();
-        clickCount--;
-        
-        // After removing the latest content, add the close button back to the <h6> tag of the last remaining content (if any)
-        $('#moduleContent .appended-content').last().find('h6').append('<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span>');
     });
 
     $('#customTemplateFormSubmit').on('submit', function(e) {
@@ -244,7 +324,6 @@ jQuery(document).ready(function($){
         $.post(myAjax.ajaxurl, data + '&action=customTemplateFormSubmit_action', function(response) {
             if(response.success == true){
                 let message = JSON.parse(response.data.body);
-                console.log(message.message);
                 alert(message.message);
                 location.href = 'admin.php?page=a-plus-content';
             }else{
@@ -265,9 +344,10 @@ jQuery(document).ready(function($){
 
         e.preventDefault();
         var content_id = $(this).attr("content-id");
+        var product_id = $(this).attr("product-id");
         var status = $(this).attr("status");
 
-        $.post(myAjax.ajaxurl, 'content_id=' + content_id + '&status=' + status + '&action=aplus_status_action', function(response) {
+        $.post(myAjax.ajaxurl, 'content_id=' + content_id + '&product_id=' + product_id + '&status=' + status + '&action=aplus_status_action', function(response) {
             if(response.success == true){
                 let message = JSON.parse(response.data.body);
                 alert(message.message);
@@ -285,6 +365,7 @@ jQuery(document).ready(function($){
 
         e.preventDefault();
         var content_id = $(this).attr("content-id");
+        var product_id = $(this).attr("product-id");
 
         Swal.fire({
             title: "Are you sure?",
@@ -296,7 +377,7 @@ jQuery(document).ready(function($){
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                $.post(myAjax.ajaxurl, 'content_id=' + content_id + '&action=aplus_delete_action', function(response) {
+                $.post(myAjax.ajaxurl, 'content_id=' + content_id + '&product_id=' + product_id + '&action=aplus_delete_action', function(response) {
                     if(response.success == true){
                         Swal.fire({
                             title: "Deleted!",
@@ -319,35 +400,6 @@ jQuery(document).ready(function($){
         });
     });
 
-
-
-    var selectInteracted = false;
-
-
-
-    // Event listener for when the select element changes
-
-    $('#product-selection').change(function() {
-
-        selectInteracted = true;
-
-    });
-
-
-
-    // Event listener for beforeunload event
-
-    $(window).on('beforeunload', function() {
-
-        if (selectInteracted) {
-
-            alert('You have unsaved changes. Are you sure you want to leave?');
-
-        }
-
-    });
-
-
     $(".editor-page-module").click(function (e) { 
         e.preventDefault();
         clickCount = $('#moduleContent .appended-content').length + 1;
@@ -367,7 +419,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Standard Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -390,7 +442,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Three Columns with Images, Heading, and Description<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -445,7 +497,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Single Right Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -476,7 +528,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Single Left Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -507,7 +559,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Slider <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -536,7 +588,7 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" style="cursor: move;">
                                 <h6>Video with Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
@@ -557,6 +609,56 @@ jQuery(document).ready(function($){
                                             <input type="text" class="form-control" placeholder="Upload Video" required name="module6video[]" readonly>
                                             <button class="btn btn-primary wp-media-file3" type="submit">Upload Image</button>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    break;
+            case "7":
+                // Remove the close button from the previous appended content's <h6> tag
+                $('#moduleContent .appended-content .section-close-btn').remove();
+
+                // Create the new content with a close button inside the <h6> tag
+                content = `
+                    <div class="my-3 appended-content">
+                        <div class="card">
+                            <div class="card-header" style="cursor: move;">
+                                <h6>Hero Banner <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" value="7.${clickCount}" name="module_id[]">
+                                <div class="row">
+                                    <div class="input-group my-3">
+                                        <input type="text" class="form-control" placeholder="Upload Image" required name="module7Image[]" readonly>
+                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="text" class="form-control mb-2" placeholder="Enter Heading" required name="module7heading[]">
+                                    <textarea class="form-control mb-2" placeholder="Enter Description of Hero Banner" required name="module7description[]" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    break;
+            case "8":
+                // Remove the close button from the previous appended content's <h6> tag
+                $('#moduleContent .appended-content .section-close-btn').remove();
+
+                // Create the new content with a close button inside the <h6> tag
+                content = `
+                    <div class="my-3 appended-content">
+                        <div class="card">
+                            <div class="card-header" style="cursor: move;">
+                                <h6>Logo <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" value="8.${clickCount}" name="module_id[]">
+                                <div class="row">
+                                    <div class="input-group my-3">
+                                        <input type="text" class="form-control" placeholder="Upload Image" required name="module8logo[]" readonly>
+                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
                                     </div>
                                 </div>
                             </div>
@@ -588,6 +690,99 @@ jQuery(document).ready(function($){
         });
     });
 
+    $('#paymentFormSubmit').on('submit', function(e) {
+        e.preventDefault();
+        
+        var data = $(this).serialize();
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to proceed payment?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Proceed!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $("#planContainer").hide();
+                $("#aplusloader").show();
+
+                $.post(myAjax.ajaxurl, data + '&action=paymentFormSubmit_action', function(response) {
+                    $("#aplusloader").hide();
+                    if(response.success && response.data.res == "success") {
+                        var orderID = response.data.order_number;
+                        var options = {
+                            "key": response.data.razorpay_key, // Enter the Key ID generated from the Dashboard
+                            "amount": response.data.userData.amount, // Amount is in currency subunits
+                            "currency": "INR",
+                            "name": "A+ Content Plugin", // Your business name
+                            "description": response.data.userData.description,
+                            "image": "https://www.tech2globe.com/images/new-page-images/tech2globe-logo.png",
+                            "order_id": response.data.userData.rpay_order_id, // Pass the Razorpay order ID
+                            "handler": function (paymentResponse){
+                                $.post(myAjax.ajaxurl, "payment_status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id + "&rp_signature=" + paymentResponse.razorpay_signature + "&action=paymentStatus_action",function(response){
+                                    if(response.success == true){
+                                        window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id);
+                                    }else{
+                                        alert("Something went wrong after successful payment");
+                                    }
+                                }).fail(function(xhr, status, error) {
+                                    console.error('Error:', error); // Log any errors to the console
+                                });
+                            },
+                            "modal": {
+                                "ondismiss": function(){
+                                    $.post(myAjax.ajaxurl, "payment_status=cancelled&oid=" + orderID  + "&action=paymentStatus_action",function(response){
+                                        if(response.success == true){
+                                            window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=cancelled&oid=" + orderID);
+                                        }else{
+                                            alert("Something went wrong after Cancelled payment");
+                                        }
+                                    }).fail(function(xhr, status, error) {
+                                        console.error('Error:', error); // Log any errors to the console
+                                    });
+                                }
+                            },
+                            "prefill": {
+                                "name": response.data.userData.name,
+                                "email": response.data.userData.email,
+                                "contact": '' // Provide the customer's phone number for better conversion rates
+                            },
+                            "notes": {
+                                "address": "A+ Content"
+                            },
+                            "theme": {
+                                "color": "#3399cc"
+                            }
+                        };
+                        var rzp1 = new Razorpay(options);
+                        rzp1.on('payment.failed', function (paymentErrorResponse){
+                            $.post(myAjax.ajaxurl, "payment_status=failed&oid=" + orderID + "&reason=" + paymentErrorResponse.error.description + "&paymentid=" + paymentErrorResponse.error.metadata.payment_id + "&action=paymentStatus_action",function(response){
+                                if(response.success == true){
+                                    window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=failed&oid=" + orderID + "&reason=" + paymentErrorResponse.error.description + "&paymentid=" + paymentErrorResponse.error.metadata.payment_id);
+                                }else{
+                                    alert("Something went wrong after failed payment");
+                                }
+                            }).fail(function(xhr, status, error) {
+                                console.error('Error:', error); // Log any errors to the console
+                            });
+                        });
+                        rzp1.open();
+                        e.preventDefault();
+                        
+                    } else {
+                        alert("Something went wrong");
+                    }
+                    
+                }).fail(function(xhr, status, error) {
+                    console.error('Error:', error); 
+                    alert("Something went wrong");
+                });
+            }
+        });
+         
+    });
 
 });
 

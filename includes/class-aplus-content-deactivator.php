@@ -39,7 +39,7 @@ class Aplus_Content_Deactivator {
 		);
 
 		 // API endpoint to send the data
-		 $api_url = 'http://127.0.0.1:8000/api/aplus-content/deactivate';
+		 $api_url = $GLOBALS['authorSite'].'/deactivate';
 
 		 // Send the data to the server
 		 $response = wp_remote_post($api_url, array(

@@ -30,7 +30,7 @@ $item = $result[$flag3];
 
 <div class="my-3 appended-content">
     <div class="card">
-        <div class="card-header"><h6>Single Right Image <?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
+        <div class="card-header" style="cursor: move;"><h6>Single Right Image <?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
         <div class="card-body">
         <input type="hidden" value="3.<?php echo $count; ?>" name="module_id[]">
         <div class="row align-items-center">

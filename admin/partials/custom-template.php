@@ -1,49 +1,5 @@
 <?php
-$api_url = $GLOBALS['authorSite'].'/getProducts';
-
-$data = array(
-    'public_key' => get_option('aplus_plugin_public_key'),
-);
-
-$response = wp_remote_post($api_url, array(
-    'method'    => 'POST',
-    'body'      => json_encode($data),
-    'headers'   => array(
-        'Content-Type' => 'application/json',
-    ),
-));
-
-if (is_wp_error($response)) {
-    $error_message = $response->get_error_message();
-    echo "Something went wrong: $error_message";
-    return;
-} else {
-    $body = wp_remote_retrieve_body($response);
-    $decodedData = json_decode($body, true);
-
-    if (isset($decodedData['data']) && !empty($decodedData['data'])) {
-        $data = json_decode($decodedData['data'], true);
-    } else {
-        $data = [];
-    }
-}
-
-$aplusProduct = array();
-foreach ($data as $key => $row) {
-    $productID = $row['product_id'];
-    array_push($aplusProduct, $productID);
-}
-
-// Query to fetch all products except those with IDs present in the excluded_product_ids
-$args = array(
-    'post_type'      => 'product',
-    'post_status'    => 'publish',
-    'posts_per_page' => -1,
-    'post__not_in'   => $aplusProduct,
-);
-
-$products = new WC_Product_Query($args);
-$products = $products->get_products();
+list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
 ?>
 
 <div class="row">
@@ -56,18 +12,36 @@ $products = $products->get_products();
             <div class="card-body">
                 <p class="h6">Select Product</p>
                 <select class="form-control" name="product_id" id="product-selection" required>
-                    <option value="">Select Product</option>
-                    <?php
-                    foreach ($products as $product) :
-                    ?>
-                        <option value="<?php echo $product->get_id(); ?>"><?php echo $product->get_name(); ?></option>
-                    <?php
-                    endforeach;
-                    ?>
+                    <?php if(count($products) == 0): ?>
+                        <option value="" selected>No product found, please add or publish a product</option>
+                    <?php else: ?>
+                        <option value="">Select Product</option>
+                        <?php
+                
+                        foreach ($products as $product):
+                            if($allowProduct != 0):
+                        ?>
+                            <option value="<?php echo $product->get_id(); ?>">
+                                <?php echo $product->get_name(); ?>
+                            </option>
+                        <?php else: ?>
+                            <option value="<?php echo $product->get_id(); ?>" disabled>
+                                <?php echo $product->get_name(); ?> &#128274;
+                            </option>
+                        <?php
+                            endif;
+            
+                        endforeach;
+                        ?>
+                    <?php endif; ?>
                 </select>
+                
                 <hr>
                 <p class="h6">Create Content</p>
-                <div id="moduleContent"></div>
+             
+                    <div id="moduleContent">
+
+                    </div>
 
                 <div class="text-center border border-primary my-3" style="padding: 100px;">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customTemplateModal">
@@ -98,14 +72,28 @@ $products = $products->get_products();
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="container">
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-md-6">
-                            <div class="card module" moduleNumber="1" style="cursor: pointer;">
+                            <div class="card h-100 module" moduleNumber="1" style="cursor: pointer;">
                                 <div class="card-header">
                                     <h6>Standard Image</h6>
                                 </div>
                                 <div class="card-body">
-                                    <img src="<?php echo esc_url(plugins_url('../img/image2.jpg', __FILE__)); ?>" alt="Demo1" width="auto" height="200px">
+                                    <div class="container">
+                                        <img src="<?php echo esc_url(plugins_url('../img/image2.jpg', __FILE__)); ?>" class="img-fluid" alt="Demo1" width="auto" height="auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 module" moduleNumber="8" style="cursor: pointer;">
+                                <div class="card-header">
+                                    <h6>Logo</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="logo-container mx-auto text-center h-25 w-25">
+                                        <img src="<?php echo esc_url(plugins_url('../img/single-left-image.jpg', __FILE__)); ?>" alt="" class="w-100 h-auto"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -280,6 +268,33 @@ $products = $products->get_products();
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card module" moduleNumber="7" style="cursor: pointer;">
+                                <div class="card-header">
+                                    <h6>Hero Banner</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container banner-section-one">
+                                        <img src="<?php echo esc_url(plugins_url('../img/default-banner-img1.jpg', __FILE__)); ?>" class="img-fluid w-100" alt="..." />
+                                    </div>
+                                    <div class="container banner-section-two">
+                                        <div class="row">
+                                            <h1>Lorem Ipsum</h1>
+                                            <p>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                                since the 1500s, when an unknown printer took a galley of type and
+                                                scrambled it to make a type specimen book. It has survived not only
+                                                five centuries, but also the leap into electronic typesetting,
+                                                remaining essentially unchanged. 
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Modal footer -->
@@ -290,5 +305,29 @@ $products = $products->get_products();
     </div>
 </div>
 
+
+<script>
+    jQuery(document).ready(function($) {
+        var formSubmitted = false;
+
+        // Set flag when a form is submitted
+        $('form').on('submit', function() {
+            formSubmitted = true;
+        });
+
+        // Handle beforeunload event
+        $(window).on('beforeunload', function(e) {
+            if (!formSubmitted) {
+                // Display custom alert (Note: Alert is separate from beforeunload confirmation)
+                alert("Are you sure you want to leave this page? Changes you made may not be saved.");
+                
+                // Return a message to show the native confirmation dialog
+                var message = "Are you sure you want to leave this page? Changes you made may not be saved.";
+                e.returnValue = message; // For most browsers
+                return message; // For others
+            }
+        });
+    });
+</script>
 
 

@@ -161,6 +161,8 @@ class Aplus_Content {
 		$this->loader->add_action( 'wp_ajax_aplus_status_action', $plugin_admin, 'aplus_status_ajax_handler' );
 		$this->loader->add_action( 'wp_ajax_aplus_delete_action', $plugin_admin, 'aplus_delete_ajax_handler' );
 		$this->loader->add_action( 'wp_ajax_updateContentFormSubmit_action', $plugin_admin, 'updateContentFormSubmit_ajax_handler' );
+		$this->loader->add_action( 'wp_ajax_paymentFormSubmit_action', $plugin_admin, 'paymentFormSubmit_ajax_handler' );
+		$this->loader->add_action( 'wp_ajax_paymentStatus_action', $plugin_admin, 'paymentStatus_ajax_handler' );
 
 	}
 

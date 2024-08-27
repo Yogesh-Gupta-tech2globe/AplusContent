@@ -127,6 +127,8 @@ class Aplus_Content_Public {
 				$flag4 = 0;
 				$flag5 = 0;
 				$flag6 = 0;
+				$flag7 = 0;
+				$flag8 = 0;
 
 				for($i=0; $i<count($module_id); $i++){
 					$u =  explode('.',$module_id[$i]);
@@ -148,6 +150,12 @@ class Aplus_Content_Public {
 					}else if($u[0] == 6){
 						include "partials/module6.php";
 						$flag6 = $flag6 + 1;
+					}else if($u[0] == 7){
+						include "partials/module7.php";
+						$flag7 = $flag7 + 1;
+					}else if($u[0] == 8){
+						include "partials/module8.php";
+						$flag8 = $flag8 + 1;
 					}
 				}
 				
