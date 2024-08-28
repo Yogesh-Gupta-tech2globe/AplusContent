@@ -118,6 +118,9 @@
 
 ?>
 
+<div class="text-center" id="aplusloader" style="display: none;">
+    <img src="<?php echo plugins_url('../img/Spinner-3.gif', __FILE__); ?>" alt="loader" class="img-fluid" width="100px" height="100px">
+</div>
 
 <div class="modal fade" id="customTemplateModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -134,7 +137,7 @@
                         <div class="col-md-6">
                             <div class="card h-100 editor-page-module" moduleNumber="1" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Standard Image</h6>
+                                    <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="container">
@@ -146,7 +149,7 @@
                         <div class="col-md-6">
                             <div class="card h-100 editor-page-module" moduleNumber="8" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Logo</h6>
+                                    <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="logo-container mx-auto text-center h-25 w-25">
@@ -160,7 +163,7 @@
                         <div class="col-md-12">
                             <div class="card editor-page-module" moduleNumber="2" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Three Columns with Images, Heading, and Description</h6>
+                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -203,7 +206,7 @@
                         <div class="col-md-12">
                             <div class="card editor-page-module" moduleNumber="3" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Single Right Image</h6>
+                                    <h6>Single Right Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -234,7 +237,7 @@
                         <div class="col-md-12">
                             <div class="card editor-page-module" moduleNumber="4" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Single Left Image</h6>
+                                    <h6>Single Left Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -265,7 +268,7 @@
                         <div class="col-md-12">
                             <div class="card editor-page-module" moduleNumber="5" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Slider</h6>
+                                    <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -307,7 +310,7 @@
                         <div class="col-md-12">
                             <div class="card editor-page-module" moduleNumber="6" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Video with Image</h6>
+                                    <h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -330,7 +333,7 @@
                         <div class="col-md-12">
                             <div class="card editor-page-module" moduleNumber="7" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Hero Banner</h6>
+                                    <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="container banner-section-one">

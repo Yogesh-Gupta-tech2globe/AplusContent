@@ -65,7 +65,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Standard Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="1.${clickCount}" name="module_id[]">
@@ -88,7 +88,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Three Columns with Images, Heading, and Description<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="2.${clickCount}" name="module_id[]">
@@ -143,7 +143,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Single Right Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Single Right Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="3.${clickCount}" name="module_id[]">
@@ -174,7 +174,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Single Left Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Single Left Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="4.${clickCount}" name="module_id[]">
@@ -205,7 +205,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Slider <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span> <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="5.${clickCount}" name="module_id[]">
@@ -234,7 +234,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Video with Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="6.${clickCount}" name="module_id[]">
@@ -269,14 +269,14 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Hero Banner <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="7.${clickCount}" name="module_id[]">
                                 <div class="row">
                                     <div class="input-group my-3">
                                         <input type="text" class="form-control" placeholder="Upload Image" required name="module7Image[]" readonly>
-                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                        <button class="btn btn-primary wp-media-file-heroBanner" type="submit">Upload Image</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -296,7 +296,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Logo <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="8.${clickCount}" name="module_id[]">
@@ -320,6 +320,8 @@ jQuery(document).ready(function($){
         e.preventDefault();
     
         var data = $(this).serialize();
+        $("#customTemplateFormSubmit").hide();
+        $("#aplusloader").show();
     
         $.post(myAjax.ajaxurl, data + '&action=customTemplateFormSubmit_action', function(response) {
             if(response.success == true){
@@ -327,6 +329,8 @@ jQuery(document).ready(function($){
                 alert(message.message);
                 location.href = 'admin.php?page=a-plus-content';
             }else{
+                $("#customTemplateFormSubmit").show();
+                $("#aplusloader").hide();
                 alert("Something went wrong");
             }
             
@@ -420,7 +424,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Standard Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="1.${clickCount}" name="module_id[]">
@@ -443,7 +447,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Three Columns with Images, Heading, and Description<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="2.${clickCount}" name="module_id[]">
@@ -498,7 +502,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Single Right Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Single Right Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="3.${clickCount}" name="module_id[]">
@@ -529,7 +533,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Single Left Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Single Left Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="4.${clickCount}" name="module_id[]">
@@ -560,21 +564,21 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Slider <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="5.${clickCount}" name="module_id[]">
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" placeholder="Upload Image for slider1" required name="module5Image1[]" readonly>
-                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                 </div>
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" placeholder="Upload Image for slider2" required name="module5Image2[]" readonly>
-                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                 </div>
                                 <div class="input-group mb-2">
                                     <input type="text" class="form-control" placeholder="Upload Image for slider3" required name="module5Image3[]" readonly>
-                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                    <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                 </div>
                             </div>
                         </div>
@@ -589,7 +593,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Video with Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="6.${clickCount}" name="module_id[]">
@@ -624,14 +628,14 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Hero Banner <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="7.${clickCount}" name="module_id[]">
                                 <div class="row">
                                     <div class="input-group my-3">
                                         <input type="text" class="form-control" placeholder="Upload Image" required name="module7Image[]" readonly>
-                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                        <button class="btn btn-primary wp-media-file-heroBanner" type="submit">Upload Image</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -651,7 +655,7 @@ jQuery(document).ready(function($){
                     <div class="my-3 appended-content">
                         <div class="card">
                             <div class="card-header" style="cursor: move;">
-                                <h6>Logo <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="8.${clickCount}" name="module_id[]">
@@ -675,6 +679,8 @@ jQuery(document).ready(function($){
         e.preventDefault();
     
         var data = $(this).serialize();
+        $("#updateContentFormSubmit").hide();
+        $("#aplusloader").show();
     
         $.post(myAjax.ajaxurl, data + '&action=updateContentFormSubmit_action', function(response) {
             if(response.success == true){
@@ -682,6 +688,8 @@ jQuery(document).ready(function($){
                 alert(message.message);
                 location.href = 'admin.php?page=a-plus-content';
             }else{
+                $("#updateContentFormSubmit").show();
+                $("#aplusloader").hide();
                 alert("Something went wrong");
             }
             
@@ -949,10 +957,82 @@ jQuery(document).ready(function($) {
     
         frame.open();
     });
-    
-    
-    
 
+    //Code to open the wordpress  media uploader
+    $(document).on('click', '.wp-media-file-slider', function(e) {
+        e.preventDefault();
+    
+        var inputField = $(this).closest('.input-group').find('input[type="text"]'); // Find the associated input field
+    
+        var frame = wp.media({
+            title: 'Select a file',
+            button: {
+                text: 'Select'
+            },
+            multiple: false
+        });
+    
+        frame.on('select', function() {
+            var attachment = frame.state().get('selection').first().toJSON();
+            var allowedTypes = ['jpg', 'jpeg', 'png', 'webp'];
+            var fileExtension = attachment.url.split('.').pop().toLowerCase();
+    
+            if (allowedTypes.includes(fileExtension)) {
+                var img = new Image();
+                img.src = attachment.url;
+    
+                img.onload = function() {
+                    if (img.width >= 1320 && img.width <= 1650 && img.height >= 550 && img.height <= 700) {
+                        inputField.val(attachment.url); // Set the input value with the image URL
+                    } else {
+                        alert('The image should have width between: 1320-1650 px and height between: 550-700 px.');
+                    }
+                };
+            } else {
+                alert('Only JPG, JPEG, PNG, and WEBP files are allowed.');
+            }
+        });
+    
+        frame.open();
+    });
 
+    $(document).on('click', '.wp-media-file-heroBanner', function(e) {
+        e.preventDefault();
+    
+        var inputField = $(this).closest('.input-group').find('input[type="text"]'); // Find the associated input field
+    
+        var frame = wp.media({
+            title: 'Select a file',
+            button: {
+                text: 'Select'
+            },
+            multiple: false
+        });
+    
+        frame.on('select', function() {
+            var attachment = frame.state().get('selection').first().toJSON();
+            var allowedTypes = ['jpg', 'jpeg', 'png', 'webp'];
+            var fileExtension = attachment.url.split('.').pop().toLowerCase();
+    
+            if (allowedTypes.includes(fileExtension)) {
+                var img = new Image();
+                img.src = attachment.url;
+    
+                img.onload = function() {
+                    if (img.width >= 1320 && img.width <= 1650 && img.height >= 385 && img.height <= 700) {
+                        inputField.val(attachment.url); // Set the input value with the image URL
+                    } else {
+                        alert('The image should have width between: 1320-1650 px and height between: 385-700 px.');
+                    }
+                };
+            } else {
+                alert('Only JPG, JPEG, PNG, and WEBP files are allowed.');
+            }
+        });
+    
+        frame.open();
+    });
+    
+    
 });
 

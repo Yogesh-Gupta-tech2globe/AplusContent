@@ -17,9 +17,9 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                     <?php else: ?>
                         <option value="">Select Product</option>
                         <?php
-                        $c = 1;
+                
                         foreach ($products as $product):
-                            if($c <= $allowProduct):
+                            if($allowProduct != 0):
                         ?>
                             <option value="<?php echo $product->get_id(); ?>">
                                 <?php echo $product->get_name(); ?>
@@ -30,7 +30,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                             </option>
                         <?php
                             endif;
-                            $c++;
+            
                         endforeach;
                         ?>
                     <?php endif; ?>
@@ -44,7 +44,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Logo</h6>
+                                    <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="8.1" name="module_id[]">
@@ -61,7 +61,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Standard Image</h6>
+                                    <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="1.2" name="module_id[]">
@@ -78,7 +78,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Three Columns with Images, Heading, and Description</h6>
+                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="2.3" name="module_id[]">
@@ -127,21 +127,21 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Slider</h6>
+                                    <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="5.4" name="module_id[]">
                                     <div class="input-group mb-2">
                                         <input type="text" class="form-control" placeholder="Upload Image for slider1" required name="module5Image1[]" readonly>
-                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                        <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                     </div>
                                     <div class="input-group mb-2">
                                         <input type="text" class="form-control" placeholder="Upload Image for slider2" required name="module5Image2[]" readonly>
-                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                        <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                     </div>
                                     <div class="input-group mb-2">
                                         <input type="text" class="form-control" placeholder="Upload Image for slider3" required name="module5Image3[]" readonly>
-                                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                        <button class="btn btn-primary wp-media-file-slider" type="submit">Upload Image</button>
                                     </div>
                                 </div>
                             </div>
@@ -150,10 +150,10 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Single Left Image</h6>
+                                    <h6>Single Left Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
-                                    <input type="hidden" value="4.6" name="module_id[]">
+                                    <input type="hidden" value="4.5" name="module_id[]">
                                     <div class="row align-items-center">
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="input-group">
@@ -175,10 +175,10 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Standard Image</h6>
+                                    <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
-                                    <input type="hidden" value="1.7" name="module_id[]">
+                                    <input type="hidden" value="1.6" name="module_id[]">
                                     <div class="apluscontent-upload-box" onclick="document.getElementById('imageInput7').click()">
                                         <span>Click to upload an image</span>
                                         <input type="file" class="wp-media-file singleImage" id="imageInput7" accept="image/*">
@@ -192,10 +192,10 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Video with Image<span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                    <h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                                 </div>
                                 <div class="card-body">
-                                    <input type="hidden" value="6.8" name="module_id[]">
+                                    <input type="hidden" value="6.7" name="module_id[]">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group">
@@ -229,6 +229,10 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
             </div>
         </form>
     </div>
+</div>
+
+<div class="text-center" id="aplusloader" style="display: none;">
+    <img src="<?php echo plugins_url('../img/Spinner-3.gif', __FILE__); ?>" alt="loader" class="img-fluid" width="100px" height="100px">
 </div>
 
 <script>
