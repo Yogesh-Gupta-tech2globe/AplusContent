@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://https://github.com/Yogesh-Gupta-tech2globe
+ * @link       https://github.com/Yogesh-Gupta-tech2globe
  * @since      1.0.0
  *
  * @package    Aplus_Content
@@ -21,7 +21,6 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
 
 $products = wc_get_products( array(
     'limit' => -1,
-    'status' => 'publish',
 ) );
 ?>
 
@@ -65,7 +64,7 @@ $products = wc_get_products( array(
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted">Products with A+ Content</h5>
-                                                <span class="h2 font-weight-bold mb-0"><?php echo count($data); ?></span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo count($productData); ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -75,13 +74,17 @@ $products = wc_get_products( array(
                                         </div>
                                         <?php
                                         $totalProducts = count($products);
-                                        $aplusProducts = count($data);
+                                        $aplusProducts = count($productData);
+                                        if($totalProducts != 0){
                                         $percentage = ($aplusProducts / $totalProducts)*100;
                                         ?>
                                         <p class="mt-3 mb-0 text-muted text-sm">
                                             <span class="text-danger mr-2"><?php echo round($percentage,2); ?>%</span>
                                             <span class="text-nowrap">of total products</span>
                                         </p>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -156,36 +159,58 @@ $products = wc_get_products( array(
             <div id="productsTableSection" class="row">
                 <!-- <div class="text-end p-0"><i class="fa-solid fa-grip-vertical grabbable"></i></div> -->
                 <h4>Products A+ Content Status</h4>
-                <div class="responsive-table mt-3">
-                    <table id="aplusProductTable" class="table table-primary table-stripped" border="">
+                <div class="table-responsive mt-3">
+                    <table id="aplusProductTable" class="table table-primary table-hover table-stripped" border="">
                         <thead>
                             <tr>
                                 <th class="text-center">Product ID</th>
                                 <th class="text-center">Product Name</th>
                                 <th class="text-center">Created At</th>
                                 <th class="text-center">Updated At</th>
+                                <th class="text-center">Created By</th>
                                 <th class="text-center">View</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            if ( is_array( $data ) && ! empty( $data ) ) {
-                                foreach ( $data as $key => $row ) {
+                            if ( is_array( $productData ) && ! empty( $productData ) ) {
+                                foreach ( $productData as $key => $row ) {
                                     $product = wc_get_product($row['product_id']);
+
+                                    // Filter the array
+                                    $filtered = array_filter($logs, function($item) use ($row) {
+                                        return $item->product_id == $row['product_id'] && strtolower($item->operation) == 'create';
+                                    });
+
+                                    // Sort by id in descending order
+                                    usort($filtered, function($a, $b) {
+                                        return $b->id <=> $a->id;
+                                    });
+
+                                    // Get the user_id of the first element
+                                    if (!empty($filtered)) {
+                                        $userData = get_userdata($filtered[0]->user_id);
+                                    } else {
+                                        $userData = "NO USER";
+                                    }
                                     ?>
                                     <tr>
                                         <td class="text-center"><?php echo esc_html( $row['product_id'] ); ?></td>
                                         <td class="text-center"><?php echo $product->get_name(); ?></td>
-                                        <td class="text-center"><?php echo date('Y-m-d',strtotime($row['created_at'])); ?></td>
-                                        <td class="text-center"><?php echo date('Y-m-d',strtotime($row['updated_at'])); ?></td>
+                                        <td class="text-center"><?php echo date('d-m-Y',strtotime($row['created_at']))."<br>".date('h:m:s',strtotime($row['created_at'])); ?> </td>
+                                        <td class="text-center"><?php echo date('d-m-Y',strtotime($row['updated_at']))."<br>".date('h:m:s',strtotime($row['updated_at'])); ?></td>
+                                        <td class="text-center"><?php echo esc_html($userData->display_name); echo "<br> (".implode(', ', $user->roles).")"; ?></td>
+                                        <?php if($product->get_status() == "draft"){ ?>
+                                            <td class="text-center"><a href="<?php echo site_url()."/?post_type=product&p=".$product->get_id()."&preview=true" ?>" target="_blank">Preview(D)</a></td>
+                                        <?php }else{ ?>
                                         <?php if($row['status'] == 1){ ?>
                                             <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug(); ?>" target="_blank">View</a></td>
                                         <?php } else { ?>
                                             <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug()."/?preview=true" ?>" target="_blank">Preview</a></td>
-                                        <?php } ?>
+                                        <?php } }?>
                                         <td class="text-center">
-                                            <button class="btn <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-warning'; } ?> aplus-status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>" product-id="<?= $row['product_id'] ?>">
+                                            <button class="btn <?php if($product->get_status() == "draft"){ echo 'disabled'; } ?> <?php if($row['status'] == 1){ echo 'btn-success'; }else{ echo 'btn-warning'; } ?> aplus-status-button" status="<?php echo $row['status']; ?>" content-id="<?php echo $row['id']; ?>" product-id="<?= $row['product_id'] ?>">
                                                 <i class="fa-solid <?php if($row['status'] == 1){ echo 'fa-toggle-on'; }else{ echo 'fa-toggle-off'; } ?>"></i>
                                             </button>
                                             <?php if(current_user_can('administrator')){ ?>
@@ -200,12 +225,74 @@ $products = wc_get_products( array(
                                     </tr>
                                     <?php
                                 }
-                            } else {
-                                ?>
-                                <tr>
-                                    <td colspan="6" class="text-center">No data available</td>
-                                </tr>
-                                <?php
+                            } 
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row my-5">
+                <h4>Products A+ Content (Deleted)</h4>
+                <div class="table-responsive mt-3">
+                    <table id="aplusDelProductTable" class="table table-secondary table-hover table-stripped" border="">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Product ID</th>
+                                <th class="text-center">Product Name</th>
+                                <th class="text-center">Created At</th>
+                                <th class="text-center">Updated At</th>
+                                <th class="text-center">Created By</th>
+                                <th class="text-center">View</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ( is_array( $delProductData ) && ! empty( $delProductData ) ) {
+                                foreach ( $delProductData as $key => $row ) {
+                                    $product = wc_get_product($row['product_id']);
+
+                                    if($product->get_status() != "trash"){
+                                    // Filter the array
+                                    $filtered = array_filter($logs, function($item) use ($row) {
+                                        return $item->product_id == $row['product_id'] && strtolower($item->operation) == 'create';
+                                    });
+
+                                    // Sort by id in descending order
+                                    usort($filtered, function($a, $b) {
+                                        return $b->id <=> $a->id;
+                                    });
+
+                                    // Get the user_id of the first element
+                                    if (!empty($filtered)) {
+                                        $userData = get_userdata($filtered[0]->user_id);
+                                    } else {
+                                        $userData = "NO USER";
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td class="text-center"><?php echo esc_html( $row['product_id'] ); ?></td>
+                                        <td class="text-center"><?php echo $product->get_name(); ?></td>
+                                        <td class="text-center"><?php echo date('d-m-Y',strtotime($row['created_at']))."<br>".date('h:m:s',strtotime($row['created_at'])); ?> </td>
+                                        <td class="text-center"><?php echo date('d-m-Y',strtotime($row['updated_at']))."<br>".date('h:m:s',strtotime($row['updated_at'])); ?></td>
+                                        <td class="text-center"><?php echo esc_html($userData->display_name); echo "<br> (".implode(', ', $userData->roles).")"; ?></td>
+                                        <?php if($product->get_status() == "draft"){ ?>
+                                            <td class="text-center"><a href="<?php echo site_url()."/?post_type=product&p=".$product->get_id()."&preview=true" ?>" target="_blank">Preview(D)</a></td>
+                                        <?php }else{ ?>
+                                        <?php if($row['status'] == 1){ ?>
+                                            <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug(); ?>" target="_blank">View</a></td>
+                                        <?php } else { ?>
+                                            <td class="text-center"><a href="<?php echo site_url()."/product/".$product->get_slug()."/?preview=true" ?>" target="_blank">Preview</a></td>
+                                        <?php } }?>
+                                        <td class="text-center">
+                                            <a href="https://www.tech2globe.com/contact-us" class="btn btn-success" target="_blank">Contact Support</a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    }
+                                }
                             }
                             ?>
 
@@ -213,7 +300,16 @@ $products = wc_get_products( array(
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.all.min.js"></script>
+<script>
+    jQuery(document).ready(function($){
+        $("#aplusProductTable").DataTable({  
+        });
+        $("#aplusDelProductTable").DataTable({  
+        });
+    });
+</script>

@@ -9,9 +9,9 @@
     </div>
     <!-- Support and Button -->
     <div class="header-support d-flex align-items-center">
-      <a href="#feedback" class="link-dark"><i class="fas fa-comment-dots"></i> Feedback</a>
+      <a href="mailto:info@tech2globe.com" class="link-dark"><i class="fas fa-comment-dots"></i> Feedback</a>
       <a href="#help" class="link-dark"><i class="fas fa-question-circle"></i> Help</a>
-      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upgradeModal">Upgrade Now</button>
+      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upgradeModal">Our Plans</button>
     </div>
   </div>
   <hr>
@@ -23,7 +23,6 @@
       <div class="navbar-nav">
         <a class="nav-link <?php if($page == 'a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=a-plus-content") ?>">Dashboard</a>
         <a class="nav-link <?php if($page == 'create-a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=create-a-plus-content") ?>">Create A+</a>
-        <!-- <a class="nav-link" href="#settings">Settings</a> -->
         <a class="nav-link <?php if($page == 'upgrade-a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=upgrade-a-plus-content") ?>">Upgrade</a>
       </div>
     </div>
@@ -41,45 +40,102 @@
         <h4 class="modal-title" id="upgradeModalLabel">Our Plans</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
+      <?php $current_plan = get_option('aplus_plugin_plan'); ?>
       <!-- Modal Body -->
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="plan-card">
-              <input type="radio" name="plan" id="basicPlanModal" value="basic">
               <label for="basicPlanModal">
-                  <div class="plan-title">Basic Plan</div>
+                  <div class="plan-title">
+                  <?php
+                  if($current_plan == "Free"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
+                  ?>   
+                  Free Plan
+                  <?php
+                  if($current_plan == "Free"){
+                      echo "<span class='text-center form-text'>(Current Plan)</span>";
+                  }
+                  ?>
+                  </div>
+                  <div class="plan-price">$0</div>
+                  <p class="form-text">For 1 Product.</p>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="plan-card">
+              <label for="basicPlanModal">
+                  <div class="plan-title">
+                  <?php
+                  if($current_plan == "Basic"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
+                  ?>   
+                  Basic Plan
+                  <?php
+                  if($current_plan == "Basic"){
+                      echo "<span class='text-center form-text'>(Current Plan)</span>";
+                  }
+                  ?>
+                  </div>
                   <div class="plan-price">$20</div>
                   <p class="form-text">For 2-10 Products.</p>
               </label>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="plan-card">
-              <input type="radio" name="plan" id="premiumPlanModal" value="premium">
               <label for="premiumPlanModal">
-                  <div class="plan-title">Premium Plan</div>
+                  <div class="plan-title">
+                  <?php
+                  if($current_plan == "Premium"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
+                  ?>   
+                  Premium Plan
+                  <?php
+                  if($current_plan == "Premium"){
+                      echo "<span class='text-center form-text'>(Current Plan)</span>";
+                  }
+                  ?>
+                  </div>
                   <div class="plan-price">$40</div>
                   <p class="form-text">For 11-50 Products.</p>
               </label>
             </div>
           </div>
-          <div class="col-md-3">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
             <div class="plan-card">
-              <input type="radio" name="plan" id="proPlanModal" value="pro">
               <label for="proPlanModal">
-                  <div class="plan-title">Pro Plan</div>
+                  <div class="plan-title">
+                  <?php
+                  if($current_plan == "Pro"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
+                  ?>  
+                  Pro Plan
+                  <?php
+                  if($current_plan == "Pro"){
+                      echo "<span class='text-center form-text'>(Current Plan)</span>";
+                  }
+                  ?>
+                  </div>
                   <div class="plan-price">$99</div>
                   <p class="form-text">For 51-200 Products.</p>
               </label>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="plan-card">
-              <input type="radio" name="plan" id="proPlusPlanModal" value="proPlus">
               <label for="proPlusPlanModal">
-                  <div class="plan-title">Pro Plus Plan</div>
+                  <div class="plan-title">
+                  <?php
+                  if($current_plan == "Pro Plus"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
+                  ?>   
+                  Pro Plus Plan
+                  <?php
+                  if($current_plan == "Pro Plus"){
+                      echo "<span class='text-center form-text'>(Current Plan)</span>";
+                  }
+                  ?>
+                  </div>
                   <div class="plan-price">$499</div>
                   <p class="form-text">For Unlimited Products.</p>
               </label>
@@ -91,7 +147,7 @@
       <!-- Modal Footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <a href="<?= admin_url("admin.php?page=upgrade-a-plus-content") ?>" type="button" class="btn btn-primary">Proceed</a>
+        <a href="<?= admin_url("admin.php?page=upgrade-a-plus-content") ?>" type="button" class="btn btn-primary">Want To Upgrade</a>
       </div>
 
     </div>

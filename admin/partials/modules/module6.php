@@ -30,24 +30,24 @@ $item = $result[$flag6];
 
 <div class="my-3 appended-content">
     <div class="card">
-        <div class="card-header" style="cursor: move;"><h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
+        <div class="card-header" style="cursor: move;"><h6>Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
         <div class="card-body">
             <input type="hidden" value="6.<?php echo $count; ?>" name="module_id[]">
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Upload Image" required name="module6Image[]" readonly value="<?php echo esc_url($item['module6Image']); ?>">
-                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                        <button class="btn btn-primary wp-media-file-videoImage" type="submit">Upload Image</button>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" placeholder="Upload Video Thumbnail Image" required name="module6ThumbImage[]" readonly value="<?php echo esc_url($item['module6ThumbImage']); ?>">
-                        <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                        <input type="text" class="form-control" placeholder="Upload Thumbnail Image" required name="module6ThumbImage[]" readonly value="<?php echo esc_url($item['module6ThumbImage']); ?>">
+                        <button class="btn btn-primary wp-media-file-videoImage" type="submit">Upload Thumbnail</button>
                     </div>
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Upload Video" required name="module6video[]" readonly value="<?php echo esc_url($item['module6video']); ?>">
-                        <button class="btn btn-primary wp-media-file3" type="submit">Upload Image</button>
+                        <button class="btn btn-primary wp-media-file3" type="submit">Upload Video</button>
                     </div>
                 </div>
             </div>

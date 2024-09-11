@@ -33,9 +33,9 @@ $item = $result[$flag7];
 </div>
 <div class="container my-4 banner-section-two">
     <div class="row">
-        <h1><?php echo esc_html($item['module7heading']); ?></h1>
+        <h1><?php echo mb_strimwidth(nl2br(stripslashes($item['module7heading'])), 0, 60, '...'); ?></h1>
         <p>
-        <?php echo esc_html($item['module7description']); ?>
+        <?php echo mb_strimwidth(nl2br(stripslashes($item['module7description'])), 0, 460, '...'); ?>
         </p>
     </div>
 </div>

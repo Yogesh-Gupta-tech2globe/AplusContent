@@ -16,7 +16,7 @@
             <div class="screen template-option" data-id="template1">
                 <img src="<?php echo esc_url(plugins_url('../img/temp1-prev.jpg', __FILE__)); ?>" alt="Template 1">
             </div>
-            <a class="btn btn-info my-2" href="<?php echo esc_url(plugins_url('../img/temp1-prev.jpg', __FILE__)); ?>" target="_blank" role="button"><i class="fa-regular fa-eye"></i> Preview</a>
+            <a class="btn btn-info my-2" onclick="openImageInNewTab('<?php echo esc_url(plugins_url('../img/temp1-prev.jpg', __FILE__)); ?>')" role="button"><i class="fa-regular fa-eye"></i> Preview </a>
             <a class="btn btn-warning my-2" href="<?= admin_url("admin.php?page=create-a-plus-content&template=1") ?>"><i class="fa-regular fa-edit"></i> Customize</a>
         </div>
         <div class="col-md-6">
@@ -24,7 +24,7 @@
             <div class="screen  template-option" data-id="template2">
                 <img src="<?php echo esc_url(plugins_url('../img/temp2-prev.jpg', __FILE__)); ?>" alt="Template 2">
             </div>
-            <a class="btn btn-info my-2" href="<?php echo esc_url(plugins_url('../img/temp2-prev.jpg', __FILE__)); ?>" target="_blank" role="button"><i class="fa-regular fa-eye"></i> Preview</a>
+            <a class="btn btn-info my-2" onclick="openImageInNewTab('<?php echo esc_url(plugins_url('../img/temp2-prev.jpg', __FILE__)); ?>')" role="button"><i class="fa-regular fa-eye"></i> Preview </a>
             <a class="btn btn-warning my-2" href="<?= admin_url("admin.php?page=create-a-plus-content&template=2") ?>"><i class="fa-regular fa-edit"></i> Customize</a>
         </div>
         <div class="col-md-6">
@@ -32,7 +32,7 @@
             <div class="screen template-option" data-id="template3">
                 <img src="<?php echo esc_url(plugins_url('../img/temp3-prev.jpg', __FILE__)); ?>" alt="Template 3">
             </div>
-            <a class="btn btn-info my-2" href="<?php echo esc_url(plugins_url('../img/temp3-prev.jpg', __FILE__)); ?>" target="_blank" role="button"><i class="fa-regular fa-eye"></i> Preview</a>
+            <a class="btn btn-info my-2" onclick="openImageInNewTab('<?php echo esc_url(plugins_url('../img/temp3-prev.jpg', __FILE__)); ?>')" role="button"><i class="fa-regular fa-eye"></i> Preview </a>
             <a class="btn btn-warning my-2" href="<?= admin_url("admin.php?page=create-a-plus-content&template=3") ?>"><i class="fa-regular fa-edit"></i> Customize</a>
         </div>
     </div>
@@ -81,6 +81,40 @@
         // Load order when the page loads
         loadOrder();
     });
+
+    function openImageInNewTab(imageUrl) {
+            // Create a new window or tab
+            const newTab = window.open();
+
+            // Set up the HTML content in the new tab
+            newTab.document.write(`
+                <html><head>
+                    <title>Template Preview</title>
+                    <style>
+                        html, body {
+                            margin: 0;
+                            height: 100%;
+                            overflow-x: hidden;
+                        }
+                        .fullscreen-image {
+                            width: 100%;
+                            overflow-x: hidden;
+                        }
+                    </style>
+                </head>
+                <body data-new-gr-c-s-check-loaded="14.1193.0" data-gr-ext-installed="" style="
+                overflow: scroll;
+                ">
+                <img src="${imageUrl}" alt="Full Size Image" class="fullscreen-image">
+
+
+                </body></html>  
+            `);
+
+            // Close the document to apply the HTML content
+            newTab.document.close();
+        }
+
 </script>
     
    

@@ -30,7 +30,7 @@ $item = $result[$flag7];
 
 <div class="my-3 appended-content">
     <div class="card">
-        <div class="card-header" style="cursor: move;"><h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
+        <div class="card-header" style="cursor: move;"><h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
         <div class="card-body">
             <input type="hidden" value="7.<?php echo $count; ?>" name="module_id[]">
             <div class="row">
@@ -40,8 +40,8 @@ $item = $result[$flag7];
                 </div>
             </div>
             <div class="row">
-                <input type="text" class="form-control mb-2" placeholder="Enter Heading" required name="module7heading[]" value="<?php echo esc_html($item['module7heading']); ?>">
-                <textarea class="form-control mb-2" placeholder="Enter Description of Hero Banner" required name="module7description[]" rows="5"><?php echo esc_html($item['module7description']); ?></textarea>
+                <input type="text" class="form-control mb-2" placeholder="Enter Heading" required name="module7heading[]" value="<?php echo stripslashes($item['module7heading']); ?>" maxlength="60">
+                <textarea class="form-control mb-2" placeholder="Enter Description of Hero Banner" required name="module7description[]" rows="5" maxlength="460"><?php echo stripslashes($item['module7description']); ?></textarea>
             </div>
         </div>
     </div>

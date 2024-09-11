@@ -1,5 +1,5 @@
 <?php
-list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
+list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getProducts();
 ?>
 
 <div class="row">
@@ -13,7 +13,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                 <p class="h6">Select Product</p>
                 <select class="form-control" name="product_id" id="product-selection" required>
                     <?php if(count($products) == 0): ?>
-                        <option value="" selected>No product found, please add or publish a product</option>
+                        <option value="" selected>No product found, please add a product</option>
                     <?php else: ?>
                         <option value="">Select Product</option>
                         <?php
@@ -61,7 +61,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="7.2" name="module_id[]">
@@ -72,8 +72,8 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <input type="text" class="form-control mb-2" placeholder="Enter Heading" required name="module7heading[]">
-                                        <textarea class="form-control mb-2" placeholder="Enter Description of Hero Banner" required name="module7description[]" rows="5"></textarea>
+                                        <input type="text" class="form-control mb-2" placeholder="Enter Heading" required name="module7heading[]" maxlength="60">
+                                        <textarea class="form-control mb-2" placeholder="Enter Description of Hero Banner" required name="module7description[]" rows="5" maxlength="460"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="2.4" name="module_id[]">
@@ -114,11 +114,11 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                                             <div class="card h-100">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Upload Image" required name="module2Image1[]" readonly>
-                                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                    <button class="btn btn-primary wp-media-file-three" type="submit">Upload Image</button>
                                                 </div>
                                                 <div class="card-body">
-                                                    <input type="text" class="form-control" required name="module2heading1[]" placeholder="Enter Heading">
-                                                    <textarea class="form-control mt-2" required name="module2description1[]" placeholder="Enter Description" rows="5"></textarea>
+                                                    <input type="text" class="form-control" required name="module2heading1[]" placeholder="Enter Heading" maxlength="60">
+                                                    <textarea class="form-control mt-2" required name="module2description1[]" placeholder="Enter Description" rows="5" maxlength="160"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,11 +126,11 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                                             <div class="card h-100">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Upload Image" required name="module2Image2[]" readonly>
-                                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                    <button class="btn btn-primary wp-media-file-three" type="submit">Upload Image</button>
                                                 </div>
                                                 <div class="card-body">
-                                                    <input type="text" class="form-control" required name="module2heading2[]" placeholder="Enter Heading">
-                                                    <textarea class="form-control mt-2" required name="module2description2[]" placeholder="Enter Description" rows="5"></textarea>
+                                                    <input type="text" class="form-control" required name="module2heading2[]" placeholder="Enter Heading" maxlength="60">
+                                                    <textarea class="form-control mt-2" required name="module2description2[]" placeholder="Enter Description" rows="5" maxlength="160"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,11 +138,11 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                                             <div class="card h-100">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Upload Image" required name="module2Image3[]" readonly>
-                                                    <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                    <button class="btn btn-primary wp-media-file-three" type="submit">Upload Image</button>
                                                 </div>
                                                 <div class="card-body">
-                                                    <input type="text" class="form-control" required name="module2heading3[]" placeholder="Enter Heading">
-                                                    <textarea class="form-control mt-2" required name="module2description3[]" placeholder="Enter Description" rows="5"></textarea>
+                                                    <input type="text" class="form-control" required name="module2heading3[]" placeholder="Enter Heading" maxlength="60">
+                                                    <textarea class="form-control mt-2" required name="module2description3[]" placeholder="Enter Description" rows="5" maxlength="160"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,21 +154,21 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Single Right Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Single Right Image <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="3.5" name="module_id[]">
                                     <div class="row align-items-center">
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="contant">
-                                                <input type="text" class="form-control" required name="module3heading[]" placeholder="Enter Heading">
-                                                <textarea class="form-control mt-2" required name="module3description[]" placeholder="Enter Description" rows="5"></textarea>
+                                                <input type="text" class="form-control" required name="module3heading[]" placeholder="Enter Heading" maxlength="60">
+                                                <textarea class="form-control mt-2" required name="module3description[]" placeholder="Enter Description" rows="5" maxlength="460"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Upload Image" required name="module3Image[]" readonly>
-                                                <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                <button class="btn btn-primary wp-media-file-single" type="submit">Upload Image</button>
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +179,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Single Left Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Single Left Image <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="4.6" name="module_id[]">
@@ -187,13 +187,13 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Upload Image" required name="module4Image[]" readonly>
-                                                <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                <button class="btn btn-primary wp-media-file-single" type="submit">Upload Image</button>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="contant">
-                                                <input type="text" class="form-control" required name="module4heading[]" placeholder="Enter Heading">
-                                                <textarea class="form-control mt-2" required name="module4description[]" placeholder="Enter Description" rows="5"></textarea>
+                                                <input type="text" class="form-control" required name="module4heading[]" placeholder="Enter Heading" maxlength="60">
+                                                <textarea class="form-control mt-2" required name="module4description[]" placeholder="Enter Description" rows="5" maxlength="460"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +204,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="my-3 appended-content">
                             <div class="card">
                                 <div class="card-header" style="cursor: move;">
-                                    <h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                                    <h6>Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="6.7" name="module_id[]">
@@ -212,17 +212,116 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Upload Image" required name="module6Image[]" readonly>
-                                                <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                <button class="btn btn-primary wp-media-file-videoImage" type="submit">Upload Image</button>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group mb-2">
                                                 <input type="text" class="form-control" placeholder="Upload Video Thumbnail Image" required name="module6ThumbImage[]" readonly>
-                                                <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                                                <button class="btn btn-primary wp-media-file-videoImage" type="submit">Upload Thumbnail</button>
                                             </div>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" placeholder="Upload Video" required name="module6video[]" readonly>
-                                                <button class="btn btn-primary wp-media-file3" type="submit">Upload Image</button>
+                                                <button class="btn btn-primary wp-media-file3" type="submit">Upload Video</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        $colNum = 4;
+                        $rowNum = 5;
+                        ?>
+                        <div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
+                        <div class="my-3 appended-content">
+                            <div class="card">
+                                <div class="card-header" style="cursor: move;">
+                                    <h6>Compare with similar items | 
+                                    <label for="colSelect">Products:</label>
+                                    <select id="colSelect" class="form-control select-columns d-inline" style="width: 5%;">
+                                        <option value="2" <?php echo ($colNum == 2) ? 'selected' : ''; ?>>2</option>
+                                        <option value="3" <?php echo ($colNum == 3) ? 'selected' : ''; ?>>3</option>
+                                        <option value="4" <?php echo ($colNum == 4) ? 'selected' : ''; ?>>4</option>
+                                    </select>
+
+                                    <label for="rowSelect">Attributes:</label>
+                                    <select id="rowSelect" class="form-control select-rows d-inline" style="width: 5%;">
+                                        <option value="0" <?php echo ($rowNum == 0) ? 'selected' : ''; ?>>0</option>
+                                        <option value="1" <?php echo ($rowNum == 1) ? 'selected' : ''; ?>>1</option>
+                                        <option value="2" <?php echo ($rowNum == 2) ? 'selected' : ''; ?>>2</option>
+                                        <option value="3" <?php echo ($rowNum == 3) ? 'selected' : ''; ?>>3</option>
+                                        <option value="4" <?php echo ($rowNum == 4) ? 'selected' : ''; ?>>4</option>
+                                        <option value="5" <?php echo ($rowNum == 5) ? 'selected' : ''; ?>>5</option>
+                                    </select>
+                                    
+                                    <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span>
+                                    
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <input type="hidden" value="10.9" name="module_id[]">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>Select Product</td>
+                                                        <?php for ($i = 0; $i < $colNum; $i++) : ?>
+                                                            <td>
+                                                                <select class="form-control product-select" data-index="<?php echo $i; ?>" required name="module10product<?php echo $i+1; ?>id[]">
+                                                                    <option value="">Choose Product</option>
+                                                                    <?php foreach ($productAttributes as $product) : ?>
+                                                                        <option value="<?php echo $product['id']; ?>"><?php echo $product['name']; ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </td>
+                                                        <?php endfor; ?>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Image</td>
+                                                        <?php for ($i = 0; $i < $colNum; $i++) : ?>
+                                                            <td>
+                                                                <img src="" class="product-image<?php echo $i+1; ?> img-fluid" alt="Product Image" style="display: none; width: 100%; height :150px;">
+                                                                <input type="hidden" name="module10product<?php echo $i+1; ?>image[]" class="form-control product-image" required value="">
+                                                            </td>
+                                                        <?php endfor; ?>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <?php for ($i = 0; $i < $colNum; $i++) : ?>
+                                                            <td>
+                                                                <input type="text" name="module10product<?php echo $i+1; ?>name[]" class="form-control product-name" required value="" readonly>
+                                                            </td>
+                                                        <?php endfor; ?>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Price</td>
+                                                        <?php for ($i = 0; $i < $colNum; $i++) : ?>
+                                                            <td>
+                                                                <input type="number" name="module10product<?php echo $i+1; ?>price[]" class="form-control product-price" required value="" readonly>
+                                                            </td>
+                                                        <?php endfor; ?>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Review</td>
+                                                        <?php for ($i = 0; $i < $colNum; $i++) : ?>
+                                                            <td>
+                                                                <input type="number" name="module10product<?php echo $i+1; ?>review[]" class="form-control product-review" value="" maxlength="1" required readonly>
+                                                            </td>
+                                                        <?php endfor; ?>
+                                                    </tr>
+
+                                                    <?php for ($j = 0; $j < $rowNum; $j++) : ?>
+                                                        <tr>
+                                                            <td><input type="text" name="module10heading<?php echo $j+1; ?>[]" class="form-control" required placeholder="Enter Heading" maxlength="20" value=""></td>
+                                                            <?php for ($i = 0; $i < $colNum; $i++) : ?>
+                                                                <td><input type="text" name="module10product<?php echo $i+1; ?>content<?php echo $j+1; ?>[]" class="form-control" required value=""></td>
+                                                            <?php endfor; ?>
+                                                        </tr>
+                                                    <?php endfor; ?>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -244,7 +343,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
 </div>
 
 <div class="text-center" id="aplusloader" style="display: none;">
-    <img src="<?php echo plugins_url('../img/Spinner-3.gif', __FILE__); ?>" alt="loader" class="img-fluid" width="100px" height="100px">
+    <img src="<?php echo plugins_url('../../img/Spinner-3.gif', __FILE__); ?>" alt="loader" class="img-fluid" width="100px" height="100px">
 </div>
 
 <script>

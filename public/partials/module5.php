@@ -28,6 +28,27 @@ if ( is_wp_error( $response ) ) {
 $item = $result[$flag5];
 ?>
 
+<style>
+    .carousel-indicators button {
+        background-color: #333 !important; /* Color of the dots */
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50% !important;
+        border: none !important;
+    }
+
+    .carousel-indicators button.active {
+        background-color: #fff; /* Color of the active dot */
+        width: 12px;
+        height: 12px;
+    }
+
+    .carousel-indicators button:focus {
+        outline: none; /* Remove the focus outline */
+    }
+
+</style>
+
 <div class="container my-4 slider-section">
     <div id="carouselExampleIndicators<?php echo $flag5; ?>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -38,6 +59,7 @@ $item = $result[$flag5];
             <button type="button" data-bs-target="#carouselExampleIndicators<?php echo $flag5; ?>" data-bs-slide-to="2"
                 aria-label="Slide 3"></button>
         </div>
+
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="<?php echo esc_url($item['module5Image1']); ?>" class="d-block w-100" alt="..." />

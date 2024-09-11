@@ -1,5 +1,5 @@
 <?php
-list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
+list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getProducts();
 ?>
 
 <div class="row">
@@ -13,7 +13,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                 <p class="h6">Select Product</p>
                 <select class="form-control" name="product_id" id="product-selection" required>
                     <?php if(count($products) == 0): ?>
-                        <option value="" selected>No product found, please add or publish a product</option>
+                        <option value="" selected>No product found, please add a product</option>
                     <?php else: ?>
                         <option value="">Select Product</option>
                         <?php
@@ -40,7 +40,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                 <p class="h6">Create Content</p>
              
                     <div id="moduleContent">
-
+                    
                     </div>
 
                 <div class="text-center border border-primary my-3" style="padding: 100px;">
@@ -104,7 +104,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="col-md-12">
                             <div class="card module" moduleNumber="2" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -147,7 +147,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="col-md-12">
                             <div class="card module" moduleNumber="3" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Single Right Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Single Right Image <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -178,7 +178,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="col-md-12">
                             <div class="card module" moduleNumber="4" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Single Left Image <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                    <h6>Single Left Image <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -251,7 +251,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                         <div class="col-md-12">
                             <div class="card module" moduleNumber="6" style="cursor: pointer;">
                                 <div class="card-header">
-                                    <h6>Video with Image <span class="text-secondary">(Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span></h6>
+                                    <h6>Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
@@ -297,6 +297,127 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card module" moduleNumber="9" style="cursor: pointer;">
+                                <div class="card-header">
+                                    <h6>Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6 col-md-12 col-12">
+                                            <img src="<?php echo esc_url(plugins_url('../img/default-banner-img1.jpg', __FILE__)); ?>" class="w-100" alt="" />
+                                            <b>Heading1</b>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dolor minus magnam blanditiis quis, dolore eius ratione ipsum</p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-12">
+                                            <img src="<?php echo esc_url(plugins_url('../img/slide1.jpg', __FILE__)); ?>" class="w-100" alt="" />
+                                            <b>Heading2</b>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dolor minus magnam blanditiis quis, dolore eius ratione ipsum</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="moduleNo10">
+                        <div class="col-md-12">
+                            <div class="card module" moduleNumber="10" totalProducts='<?php echo json_encode($productAttributes); ?>' style="cursor: pointer;">
+                                <div class="card-header">
+                                    <h6>Compare with similar items</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-12"  style="overflow-x:auto;">
+                                        <table class="table  compare-table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">
+                                                    <div class="related-product">
+                                                        <img src="<?php echo esc_url(plugins_url('../img/compare-mod1.jpg', __FILE__)); ?>" alt="">
+                                                        <p class="product-des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, nisi?</p>
+                                                    </div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="related-product">
+                                                        <img src="<?php echo esc_url(plugins_url('../img/compare-2.jpg', __FILE__)); ?>" alt="">
+                                                        <p class="product-des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, nisi?</p>
+                                                    </div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="related-product">
+                                                        <img src="<?php echo esc_url(plugins_url('../img/compare-mod3.jpg', __FILE__)); ?>" alt="">
+                                                        <p class="product-des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, nisi?</p>
+                                                    </div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="related-product">
+                                                        <img src="<?php echo esc_url(plugins_url('../img/compare-4.jpg', __FILE__)); ?>" alt="">
+                                                        <p class="product-des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, nisi?</p>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">Price</th>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Breed Review</th>
+                                                <td><div class="rating d-flex align-item-center justify-content-start text-warning"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></div></td>
+                                                <td><div class="rating d-flex align-item-center justify-content-start text-warning"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></div></td>
+                                                <td><div class="rating d-flex align-item-center justify-content-start text-warning"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></div></td>
+                                                <td><div class="rating d-flex align-item-center justify-content-start text-warning"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></div></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Size</th>
+                                                <td>3-4</td>
+                                                <td>3-4</td>
+                                                <td>3-4</td>
+                                                <td>3-4</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Kid Friendly</th>
+                                                <td>5.0</td>
+                                                <td>5.0</td>
+                                                <td>5.0</td>
+                                                <td>5.0</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Easy to Groom</th>
+                                                <td>4.5</td>
+                                                <td>4.5</td>
+                                                <td>4.5</td>
+                                                <td>4.5</td>
+                                            
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">High Energy</th>
+                                                <td>3-4</td>
+                                                <td>3-4</td>
+                                                <td>3-4</td>
+                                                <td>3-4</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Good Health</th>
+                                                <td>4.3</td>
+                                                <td>4.3</td>
+                                                <td>4.3</td>
+                                                <td>4.3</td>
+                                            
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Modal footer -->
@@ -310,6 +431,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
 
 <script>
     jQuery(document).ready(function($) {
+
         var formSubmitted = false;
 
         // Set flag when a form is submitted
@@ -330,6 +452,7 @@ list($products, $allowProduct) = Aplus_Content_Admin::getProducts();
             }
         });
     });
+
 </script>
 
 

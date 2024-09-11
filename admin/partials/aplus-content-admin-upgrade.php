@@ -221,6 +221,11 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                     </style>
                     <?php
                     $current_plan = get_option('aplus_plugin_plan');
+                    if(!empty(get_option('aplus_plugin_plan_updated_date'))){
+                        $plan_activate_date = date('d/m/Y',strtotime(get_option('aplus_plugin_plan_updated_date')));
+                    }else{
+                        $plan_activate_date = '';
+                    }
                     $plan1 = ['Basic','Premium','Pro','Pro Plus'];
                     $plan2 = ['Premium','Pro','Pro Plus'];
                     $plan3 = ['Pro','Pro Plus'];
@@ -244,12 +249,15 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                                 </div>
                                                 <div class="plan-price">$20</div>
                                                 <p class="form-text">For 2-10 Products.</p>
-                                                <?php
-                                                if($current_plan == "Basic"){
-                                                    echo "<p class='text-center form-text'>Current Plan</p>";
-                                                }
-                                                ?>
                                             </label>
+                                        </div>
+                                        <div class="card-footer mb-2">
+                                            <?php
+                                            if($current_plan == "Basic"){
+                                                echo "<p class='text-center form-text'>Current Plan</p>";
+                                                echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -264,12 +272,15 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                                 </div>
                                                 <div class="plan-price">$40</div>
                                                 <p class="form-text">For 11-50 Products.</p>
-                                                <?php
-                                                if($current_plan == "Premium"){
-                                                    echo "<p class='text-center form-text'>Current Plan</p>";
-                                                }
-                                                ?>
                                             </label>
+                                        </div>
+                                        <div class="card-footer mb-2">
+                                            <?php
+                                            if($current_plan == "Premium"){
+                                                echo "<p class='text-center form-text'>Current Plan</p>";
+                                                echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -284,12 +295,15 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                                 </div>
                                                 <div class="plan-price">$99</div>
                                                 <p class="form-text">For 51-200 Products.</p>
-                                                <?php
+                                            </label>
+                                        </div>
+                                        <div class="card-footer mb-2">
+                                            <?php
                                                 if($current_plan == "Pro"){
                                                     echo "<p class='text-center form-text'>Current Plan</p>";
+                                                    echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
                                                 }
-                                                ?>
-                                            </label>
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -304,12 +318,15 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                                 </div>
                                                 <div class="plan-price">$499</div>
                                                 <p class="form-text">For Unlimited Products.</p>
-                                                <?php
+                                            </label>
+                                        </div>
+                                        <div class="card-footer mb-2">
+                                            <?php
                                                 if($current_plan == "Pro Plus"){
                                                     echo "<p class='text-center form-text'>Current Plan</p>";
+                                                    echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
                                                 }
-                                                ?>
-                                            </label>
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +351,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                     Selected Plan: <span id="selectedPlan"><?php if($current_plan == "Free"){ echo "Basic Plan"; } ?></span> <br>
                                     Total Price: <span class="total-price"><?php if($current_plan == "Free"){ echo "$20"; } ?></span>
                                     <input type="hidden" name="public_key" value="<?php echo get_option('aplus_plugin_public_key'); ?>" required>
-                                    <input type="hidden" name="payAmount" id="payAmount" value="$20" required>
+                                    <input type="hidden" name="payAmount" id="payAmount" value="<?php if($current_plan == "Free"){ echo "$20"; } ?>" required>
                                 </div>
                                 
                                 <!-- Submit Button -->

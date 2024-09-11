@@ -31,7 +31,7 @@ $item = $result[$flag2];
 <div class="my-3 appended-content">
     <div class="card">
         <div class="card-header" style="cursor: move;">
-            <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span> <?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6>
+            <h6>Three Columns with Images, Heading, and Description <br> <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span> <?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6>
         </div>
         <div class="card-body">
             <input type="hidden" value="2.<?php echo $count; ?>" name="module_id[]">
@@ -40,11 +40,11 @@ $item = $result[$flag2];
                     <div class="card h-100">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Upload Image" required name="module2Image1[]" readonly value="<?php echo esc_url($item['module2Image1']); ?>">
-                            <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                            <button class="btn btn-primary wp-media-file-three" type="submit">Upload Image</button>
                         </div>
                         <div class="card-body">
-                            <input type="text" class="form-control" required name="module2heading1[]" placeholder="Enter Heading" value="<?php echo esc_html($item['module2heading1']); ?>">
-                            <textarea class="form-control mt-2" required name="module2description1[]" placeholder="Enter Description" rows="5"><?php echo esc_html($item['module2description1']); ?></textarea>
+                            <input type="text" class="form-control" required name="module2heading1[]" placeholder="Enter Heading" value="<?php echo stripslashes($item['module2heading1']); ?>" maxlength="60">
+                            <textarea class="form-control mt-2" required name="module2description1[]" placeholder="Enter Description" rows="5" maxlength="160"><?php echo stripslashes($item['module2description1']); ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -52,11 +52,11 @@ $item = $result[$flag2];
                     <div class="card h-100">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Upload Image" required name="module2Image2[]" readonly value="<?php echo esc_url($item['module2Image2']); ?>">
-                            <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                            <button class="btn btn-primary wp-media-file-three" type="submit">Upload Image</button>
                         </div>
                         <div class="card-body">
-                            <input type="text" class="form-control" required name="module2heading2[]" placeholder="Enter Heading" value="<?php echo esc_html($item['module2heading2']); ?>">
-                            <textarea class="form-control mt-2" required name="module2description2[]" placeholder="Enter Description" rows="5"><?php echo esc_html($item['module2description2']); ?></textarea>
+                            <input type="text" class="form-control" required name="module2heading2[]" placeholder="Enter Heading" value="<?php echo stripslashes($item['module2heading2']); ?>" maxlength="60">
+                            <textarea class="form-control mt-2" required name="module2description2[]" placeholder="Enter Description" rows="5" maxlength="160"><?php echo stripslashes($item['module2description2']); ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -64,11 +64,11 @@ $item = $result[$flag2];
                     <div class="card h-100">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Upload Image" required name="module2Image3[]" readonly value="<?php echo esc_url($item['module2Image3']); ?>">
-                            <button class="btn btn-primary wp-media-file2" type="submit">Upload Image</button>
+                            <button class="btn btn-primary wp-media-file-three" type="submit">Upload Image</button>
                         </div>
                         <div class="card-body">
-                            <input type="text" class="form-control" required name="module2heading3[]" placeholder="Enter Heading" value="<?php echo esc_html($item['module2heading3']); ?>">
-                            <textarea class="form-control mt-2" required name="module2description3[]" placeholder="Enter Description" rows="5"><?php echo esc_html($item['module2description3']); ?></textarea>
+                            <input type="text" class="form-control" required name="module2heading3[]" placeholder="Enter Heading" value="<?php echo stripslashes($item['module2heading3']); ?>" maxlength="60">
+                            <textarea class="form-control mt-2" required name="module2description3[]" placeholder="Enter Description" rows="5" maxlength="160"><?php echo stripslashes($item['module2description3']); ?></textarea>
                         </div>
                     </div>
                 </div>

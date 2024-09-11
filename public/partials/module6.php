@@ -31,7 +31,9 @@ $item = $result[$flag6];
 <div class="container my-4 video-section">
     <div class="row align-items-center">
         <div class="col-lg-6 col-md-12 col-12">
-            <img src="<?php echo esc_url($item['module6Image']); ?>" class="w-100" alt="" />
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="<?php echo esc_url($item['module6Image']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;" />
+            </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
             <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
@@ -44,19 +46,24 @@ $item = $result[$flag6];
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <video width="100%" controls>
-                                <source src="<?php echo esc_url($item['module6video']); ?>" type="video/mp4">
-                            </video>
+                            <div style="height: 420px;" class="d-flex justify-content-center align-items-center">
+                                <video class="img-fluid h-100" controls style="object-fit: contain;">
+                                    <source src="<?php echo esc_url($item['module6video']); ?>" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <a class="position-relative" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img
-                    class="w-100" src="<?php echo esc_url($item['module6ThumbImage']); ?>" alt="">
-                <div class="play-icon position-absolute top-50 start-50 translate-middle"><i
-                        class="fa-regular fa-circle-play fs-1 text-light"></i></div>
+            <a class="position-relative" data-bs-toggle="modal" href="#exampleModalToggle" role="button">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="<?php echo esc_url($item['module6ThumbImage']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;">
+                    <div class="play-icon position-absolute top-50 start-50 translate-middle">
+                        <i class="fa-regular fa-circle-play fs-1 text-light"></i>
+                    </div>
+                </div>
             </a>
         </div>
     </div>

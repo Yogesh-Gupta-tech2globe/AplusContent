@@ -63,7 +63,7 @@ class Aplus_Content_Admin {
 
 		wp_enqueue_style( $this->plugin_name.'-bootstrap-admin', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name.'-admin', plugin_dir_url( __FILE__ ) . 'css/aplus-content-admin.css', array(), $this->version, 'all' );
-		// wp_enqueue_style( $this->plugin_name.'-datatables', plugin_dir_url( __FILE__ ) . 'css/datatables.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'-datatables', plugin_dir_url( __FILE__ ) . 'css/datatables.min.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -77,12 +77,13 @@ class Aplus_Content_Admin {
 		}
 		wp_enqueue_script( $this->plugin_name.'-admin', plugin_dir_url( __FILE__ ) . 'js/aplus-content-admin.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name.'-bootstrap-admin', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-datatables', plugin_dir_url( __FILE__ ) . 'js/datatables.min.js', array( 'jquery' ), $this->version, false );
 		wp_localize_script( $this->plugin_name.'-admin', "myAjax", array(
 			"ajaxurl" => admin_url("admin-ajax.php")
 		));
-		// wp_enqueue_script( $this->plugin_name.'-datatables', plugin_dir_url( __FILE__ ) . 'js/datatables.min.js', array( 'jquery' ), $this->version, false );
 	}
-
+	
+	
 	public function apluscontent_admin_menu(){
 		add_menu_page('A+ Content', 'A+ Content', 'edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'),'dashicons-images-alt2',6);
 		add_submenu_page('a-plus-content','Dashboard','Dashboard','edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'));
@@ -112,11 +113,35 @@ class Aplus_Content_Admin {
 			return;
 		}else{
 			$body = wp_remote_retrieve_body( $response );
-			$data = json_decode( $body, true );
-			if(!empty($data['data'])){
-				$data = json_decode($data['data'], true);
+			$productData = json_decode( $body, true );
+			if(!empty($productData['data'])){
+				$productData = json_decode($productData['data'], true);
 			}else{
-				$data = [];
+				$productData = [];
+			}
+		}
+
+		$api_url2 = $GLOBALS['authorSite'].'/getDelProducts';
+
+		$response2 = wp_remote_post($api_url2, array(
+			'method'    => 'POST',
+			'body'      => json_encode($data),
+			'headers'   => array(
+				'Content-Type' => 'application/json',
+			),
+		));
+
+		if ( is_wp_error( $response2 ) ) {
+			$error_message = $response2->get_error_message();
+			echo "Something went wrong: $error_message";
+			return;
+		}else{
+			$body2 = wp_remote_retrieve_body( $response2 );
+			$delProductData = json_decode( $body2, true );
+			if(!empty($delProductData['data'])){
+				$delProductData = json_decode($delProductData['data'], true);
+			}else{
+				$delProductData = [];
 			}
 		}
 
@@ -137,9 +162,9 @@ class Aplus_Content_Admin {
 	}
 
 	public function customTemplateFormSubmit_ajax_handler() {
-		
+
 		$product_id = isset($_REQUEST['product_id']) ? sanitize_text_field($_REQUEST['product_id']) : "";
-		if (!empty($product_id)) {
+		if (!empty($product_id) && !empty($_REQUEST['module_id'])) {
 			$api_url = $GLOBALS['authorSite'].'/addProduct';
 	
 			$data = array(
@@ -172,6 +197,58 @@ class Aplus_Content_Admin {
 				'module7heading' => $_REQUEST['module7heading'],
 				'module7description' => $_REQUEST['module7description'],
 				'module8logo' => $_REQUEST['module8logo'],
+				'module9Image1' => $_REQUEST['module9Image1'],
+				'module9heading1' => $_REQUEST['module9heading1'],
+				'module9description1' => $_REQUEST['module9description1'],
+				'module9Image2' => $_REQUEST['module9Image2'],
+				'module9heading2' => $_REQUEST['module9heading2'],
+				'module9description2' => $_REQUEST['module9description2'],
+				
+				'module10product1id' => $_REQUEST['module10product1id'],
+				'module10product2id' => $_REQUEST['module10product2id'],
+				'module10product3id' => $_REQUEST['module10product3id'],
+				'module10product4id' => $_REQUEST['module10product4id'],
+				'module10product1image' => $_REQUEST['module10product1image'],
+				'module10product2image' => $_REQUEST['module10product2image'],
+				'module10product3image' => $_REQUEST['module10product3image'],
+				'module10product4image' => $_REQUEST['module10product4image'],
+				'module10product1name' => $_REQUEST['module10product1name'],
+				'module10product2name' => $_REQUEST['module10product2name'],
+				'module10product3name' => $_REQUEST['module10product3name'],
+				'module10product4name' => $_REQUEST['module10product4name'],
+				'module10product1price' => $_REQUEST['module10product1price'],
+				'module10product2price' => $_REQUEST['module10product2price'],
+				'module10product3price' => $_REQUEST['module10product3price'],
+				'module10product4price' => $_REQUEST['module10product4price'],
+				'module10product1review' => $_REQUEST['module10product1review'],
+				'module10product2review' => $_REQUEST['module10product2review'],
+				'module10product3review' => $_REQUEST['module10product3review'],
+				'module10product4review' => $_REQUEST['module10product4review'],
+				'module10heading1' => $_REQUEST['module10heading1'],
+				'module10product1content1' => $_REQUEST['module10product1content1'],
+				'module10product2content1' => $_REQUEST['module10product2content1'],
+				'module10product3content1' => $_REQUEST['module10product3content1'],
+				'module10product4content1' => $_REQUEST['module10product4content1'],
+				'module10heading2' => $_REQUEST['module10heading2'],
+				'module10product1content2' => $_REQUEST['module10product1content2'],
+				'module10product2content2' => $_REQUEST['module10product2content2'],
+				'module10product3content2' => $_REQUEST['module10product3content2'],
+				'module10product4content2' => $_REQUEST['module10product4content2'],
+				'module10heading3' => $_REQUEST['module10heading3'],
+				'module10product1content3' => $_REQUEST['module10product1content3'],
+				'module10product2content3' => $_REQUEST['module10product2content3'],
+				'module10product3content3' => $_REQUEST['module10product3content3'],
+				'module10product4content3' => $_REQUEST['module10product4content3'],
+				'module10heading4' => $_REQUEST['module10heading4'],
+				'module10product1content4' => $_REQUEST['module10product1content4'],
+				'module10product2content4' => $_REQUEST['module10product2content4'],
+				'module10product3content4' => $_REQUEST['module10product3content4'],
+				'module10product4content4' => $_REQUEST['module10product4content4'],
+				'module10heading5' => $_REQUEST['module10heading5'],
+				'module10product1content5' => $_REQUEST['module10product1content5'],
+				'module10product2content5' => $_REQUEST['module10product2content5'],
+				'module10product3content5' => $_REQUEST['module10product3content5'],
+				'module10product4content5' => $_REQUEST['module10product4content5'],
 				'status' => sanitize_text_field($_REQUEST['status']),
 			);
 	
@@ -191,7 +268,7 @@ class Aplus_Content_Admin {
 				wp_send_json_success($response);
 			}
 		} else {
-			wp_send_json_error('Product ID is missing.');
+			wp_send_json_error('Product is missing.');
 		}
 	
 		wp_die();
@@ -278,7 +355,7 @@ class Aplus_Content_Admin {
 		$product_id = isset($_REQUEST['product_id']) ? sanitize_text_field($_REQUEST['product_id']) : "";
 		$content_id = isset($_REQUEST['content_id']) ? sanitize_text_field($_REQUEST['content_id']) : "";
 
-		if (!empty($content_id)) {
+		if (!empty($content_id) && !empty($_REQUEST['module_id'])) {
 			$api_url = $GLOBALS['authorSite'].'/updateProduct';
 	
 			$data = array(
@@ -311,6 +388,58 @@ class Aplus_Content_Admin {
 				'module7heading' => $_REQUEST['module7heading'],
 				'module7description' => $_REQUEST['module7description'],
 				'module8logo' => $_REQUEST['module8logo'],
+				'module9Image1' => $_REQUEST['module9Image1'],
+				'module9heading1' => $_REQUEST['module9heading1'],
+				'module9description1' => $_REQUEST['module9description1'],
+				'module9Image2' => $_REQUEST['module9Image2'],
+				'module9heading2' => $_REQUEST['module9heading2'],
+				'module9description2' => $_REQUEST['module9description2'],
+
+				'module10product1id' => $_REQUEST['module10product1id'],
+				'module10product2id' => $_REQUEST['module10product2id'],
+				'module10product3id' => $_REQUEST['module10product3id'],
+				'module10product4id' => $_REQUEST['module10product4id'],
+				'module10product1image' => $_REQUEST['module10product1image'],
+				'module10product2image' => $_REQUEST['module10product2image'],
+				'module10product3image' => $_REQUEST['module10product3image'],
+				'module10product4image' => $_REQUEST['module10product4image'],
+				'module10product1name' => $_REQUEST['module10product1name'],
+				'module10product2name' => $_REQUEST['module10product2name'],
+				'module10product3name' => $_REQUEST['module10product3name'],
+				'module10product4name' => $_REQUEST['module10product4name'],
+				'module10product1price' => $_REQUEST['module10product1price'],
+				'module10product2price' => $_REQUEST['module10product2price'],
+				'module10product3price' => $_REQUEST['module10product3price'],
+				'module10product4price' => $_REQUEST['module10product4price'],
+				'module10product1review' => $_REQUEST['module10product1review'],
+				'module10product2review' => $_REQUEST['module10product2review'],
+				'module10product3review' => $_REQUEST['module10product3review'],
+				'module10product4review' => $_REQUEST['module10product4review'],
+				'module10heading1' => $_REQUEST['module10heading1'],
+				'module10product1content1' => $_REQUEST['module10product1content1'],
+				'module10product2content1' => $_REQUEST['module10product2content1'],
+				'module10product3content1' => $_REQUEST['module10product3content1'],
+				'module10product4content1' => $_REQUEST['module10product4content1'],
+				'module10heading2' => $_REQUEST['module10heading2'],
+				'module10product1content2' => $_REQUEST['module10product1content2'],
+				'module10product2content2' => $_REQUEST['module10product2content2'],
+				'module10product3content2' => $_REQUEST['module10product3content2'],
+				'module10product4content2' => $_REQUEST['module10product4content2'],
+				'module10heading3' => $_REQUEST['module10heading3'],
+				'module10product1content3' => $_REQUEST['module10product1content3'],
+				'module10product2content3' => $_REQUEST['module10product2content3'],
+				'module10product3content3' => $_REQUEST['module10product3content3'],
+				'module10product4content3' => $_REQUEST['module10product4content3'],
+				'module10heading4' => $_REQUEST['module10heading4'],
+				'module10product1content4' => $_REQUEST['module10product1content4'],
+				'module10product2content4' => $_REQUEST['module10product2content4'],
+				'module10product3content4' => $_REQUEST['module10product3content4'],
+				'module10product4content4' => $_REQUEST['module10product4content4'],
+				'module10heading5' => $_REQUEST['module10heading5'],
+				'module10product1content5' => $_REQUEST['module10product1content5'],
+				'module10product2content5' => $_REQUEST['module10product2content5'],
+				'module10product3content5' => $_REQUEST['module10product3content5'],
+				'module10product4content5' => $_REQUEST['module10product4content5'],
 			);
 	
 			$response = wp_remote_post($api_url, array(
@@ -410,6 +539,8 @@ class Aplus_Content_Admin {
 			if (!empty($json)) {
 				if(isset($json['plan'])){
 					$plan = $json['plan'];
+					$timestamp = current_time('mysql');
+
 					if($plan == "basic"){
 						update_option('aplus_plugin_plan', 'Basic');
 					}else if($plan == "premium"){
@@ -421,6 +552,8 @@ class Aplus_Content_Admin {
 					}else{
 						update_option('aplus_plugin_plan', 'Free');
 					}
+
+					update_option('aplus_plugin_plan_updated_date', $timestamp);
 				}
 				wp_send_json_success($json);
 			} else {
@@ -469,7 +602,6 @@ class Aplus_Content_Admin {
 
 		$args = array(
 			'limit' => -1,
-			'status' => 'publish',
 			'exclude' => $aplusProduct,
 		);
 
@@ -478,7 +610,31 @@ class Aplus_Content_Admin {
 		$planAllowProduct = $decodedData['allowProducts']['allow_product_num'];
 		$allowProduct = $planAllowProduct - count($aplusProduct);
 
-		return  array($products, $allowProduct);
+		$totalProducts = wc_get_products( array(
+			'limit' => -1,
+			'status' => 'publish',
+		) );
+
+		$productAttributes = array();
+
+		foreach ($totalProducts as $product) {
+			$productAttributes[] = array(
+				'id' => $product->get_id(),
+				'name' => $product->get_name(),
+				'price' => $product->get_price(),
+				'sku' => $product->get_sku(),
+				'stock' => $product->get_stock_quantity(),
+				'permalink' => $product->get_permalink(),
+				'image' => wp_get_attachment_url($product->get_image_id()), // Get the URL of the product image
+				'short_description' => $product->get_short_description(), // Get the short description
+				'reviews' => array(
+					'rating' => $product->get_average_rating(), // Get the average rating
+					'total_reviews' => $product->get_review_count() // Get the total number of reviews
+				)
+			);
+		}		
+
+		return  array($products, $allowProduct, $productAttributes);
 	}
 
 	public function log_plugin_operation($operation, $product_id) {
