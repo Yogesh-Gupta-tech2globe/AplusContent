@@ -43,7 +43,6 @@ for($b = 1; $b < 6; $b++){
 }
 ?>
 
-<div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
 <div class="my-3 appended-content">
     <div class="card">
         <div class="card-header" style="cursor: move;">

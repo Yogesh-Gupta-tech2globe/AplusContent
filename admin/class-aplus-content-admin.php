@@ -514,10 +514,8 @@ class Aplus_Content_Admin {
 	
 		$data = array(
 			'public_key' => get_option('aplus_plugin_public_key'),
-			'payment_status' => $_REQUEST['payment_status'],
 			'oid' => $_REQUEST['oid'],
 			'rp_payment_id' => $_REQUEST['rp_payment_id'],
-			'rp_signature' => $_REQUEST['rp_signature'],
 			'reason' => $_REQUEST['reason'],
 		);
 
@@ -537,25 +535,32 @@ class Aplus_Content_Admin {
 			$json = json_decode($body, true);
 
 			if (!empty($json)) {
-				if(isset($json['plan'])){
-					$plan = $json['plan'];
-					$timestamp = current_time('mysql');
-
-					if($plan == "basic"){
-						update_option('aplus_plugin_plan', 'Basic');
-					}else if($plan == "premium"){
-						update_option('aplus_plugin_plan', 'Premium');
-					}else if($plan == "pro"){
-						update_option('aplus_plugin_plan', 'Pro');
-					}else if($plan == "proPlus"){
-						update_option('aplus_plugin_plan', 'Pro Plus');
-					}else{
-						update_option('aplus_plugin_plan', 'Free');
-					}
-
-					update_option('aplus_plugin_plan_updated_date', $timestamp);
+				if(isset($json['plan']) && isset($json['payment_status'])){
+				    if($json['payment_status'] == 1){
+    					$plan = $json['plan'];
+    					$timestamp = current_time('mysql');
+    
+    					if($plan == "basic"){
+    						update_option('aplus_plugin_plan', 'Basic');
+    					}else if($plan == "premium"){
+    						update_option('aplus_plugin_plan', 'Premium');
+    					}else if($plan == "pro"){
+    						update_option('aplus_plugin_plan', 'Pro');
+    					}else if($plan == "proPlus"){
+    						update_option('aplus_plugin_plan', 'Pro Plus');
+    					}else{
+    						update_option('aplus_plugin_plan', 'Free');
+    					}
+    
+    					update_option('aplus_plugin_plan_updated_date', $timestamp);
+    					wp_send_json_success($json);
+				    }else{
+				        wp_send_json_error($json);
+				    }
+				}else{
+				    wp_send_json_error($json);
 				}
-				wp_send_json_success($json);
+				
 			} else {
 				wp_send_json_error('Invalid response from the server.');
 			}

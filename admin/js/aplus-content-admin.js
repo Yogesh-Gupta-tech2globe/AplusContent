@@ -537,17 +537,17 @@ jQuery(document).ready(function($){
                         }else if (rowIndex === 2) {
                             // Third row for name
                             $(this).append(`<td>
-                                <input type="text" name="module10product${i+1}name[]" class="form-control product-name" required value=""> 
+                                <input type="text" name="module10product${i+1}name[]" class="form-control product-name" required value="" readonly> 
                             </td>`);
                         }else if (rowIndex === 3) {
                             // Fourth row for price
                             $(this).append(`<td>
-                                <input type="number" name="module10product${i+1}price[]" class="form-control product-price" required value=""> 
+                                <input type="number" name="module10product${i+1}price[]" class="form-control product-price" required value="" readonly> 
                             </td>`);
                         }else if (rowIndex === 4) {
                             // First row for review
                             $(this).append(` <td>
-                                <input type="text" name="module10product${i+1}review[]" class="form-control product-review" required value=""> 
+                                <input type="number" name="module10product${i+1}review[]" class="form-control product-review" required value="" maxlength="1" readonly> 
                             </td>`);
                         } else {
                             // Other rows for image, name, price, review, and additional content
@@ -1200,17 +1200,17 @@ jQuery(document).ready(function($){
                         }else if (rowIndex === 2) {
                             // Third row for name
                             $(this).append(`<td>
-                                <input type="text" name="module10product${i+1}name[]" class="form-control product-name" required value=""> 
+                                <input type="text" name="module10product${i+1}name[]" class="form-control product-name" required value="" readonly> 
                             </td>`);
                         }else if (rowIndex === 3) {
                             // Fourth row for price
                             $(this).append(`<td>
-                                <input type="number" name="module10product${i+1}price[]" class="form-control product-price" required value=""> 
+                                <input type="number" name="module10product${i+1}price[]" class="form-control product-price" required value="" readonly> 
                             </td>`);
                         }else if (rowIndex === 4) {
                             // First row for review
                             $(this).append(` <td>
-                                <input type="text" name="module10product${i+1}review[]" class="form-control product-review" required value=""> 
+                                <input type="number" name="module10product${i+1}review[]" class="form-control product-review" required value="" maxlength="1" readonly> 
                             </td>`);
                         } else {
                             // Other rows for image, name, price, review, and additional content
@@ -1342,11 +1342,12 @@ jQuery(document).ready(function($){
                             "image": "https://www.tech2globe.com/images/new-page-images/tech2globe-logo.png",
                             "order_id": response.data.userData.rpay_order_id, // Pass the Razorpay order ID
                             "handler": function (paymentResponse){
-                                $.post(myAjax.ajaxurl, "payment_status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id + "&rp_signature=" + paymentResponse.razorpay_signature + "&action=paymentStatus_action",function(response){
+                                $.post(myAjax.ajaxurl, "payment_status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id + "&action=paymentStatus_action",function(response){
                                     if(response.success == true){
                                         window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id);
                                     }else{
-                                        alert("Something went wrong after successful payment");
+                                        alert("Something went wrong with payment");
+                                        window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=failed&oid=" + orderID + "&reason=Please contact our support team if amount is debited from you account." + "&paymentid=" + paymentResponse.razorpay_payment_id);
                                     }
                                 }).fail(function(xhr, status, error) {
                                     console.error('Error:', error); // Log any errors to the console
@@ -1354,15 +1355,7 @@ jQuery(document).ready(function($){
                             },
                             "modal": {
                                 "ondismiss": function(){
-                                    $.post(myAjax.ajaxurl, "payment_status=cancelled&oid=" + orderID  + "&action=paymentStatus_action",function(response){
-                                        if(response.success == true){
-                                            window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=cancelled&oid=" + orderID);
-                                        }else{
-                                            alert("Something went wrong after Cancelled payment");
-                                        }
-                                    }).fail(function(xhr, status, error) {
-                                        console.error('Error:', error); // Log any errors to the console
-                                    });
+                                    window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=cancelled&oid=" + orderID);
                                 }
                             },
                             "prefill": {
@@ -1813,11 +1806,11 @@ jQuery(document).ready(function($) {
         subtree: true    // Monitor changes within the entire DOM tree
     });
 
-    var totalProducts = $('#totalProducts').attr('totalProducts');
-    totalProducts = JSON.parse(totalProducts);
-
      // Handle column and row changes dynamically
     $('.select-columns, .select-rows').on('change', function() {
+        var totalProducts = $('#totalProducts').attr('totalProducts');
+        totalProducts = JSON.parse(totalProducts);
+
         var newColNum = parseInt($('#colSelect').val()); // Get new column count
         var newRowNum = parseInt($('#rowSelect').val()); // Get new row count
 
@@ -1868,17 +1861,17 @@ jQuery(document).ready(function($) {
                     }else if (rowIndex === 2) {
                         // Third row for name
                         $(this).append(`<td>
-                            <input type="text" name="module10product${i+1}name[]" class="form-control product-name" required value=""> 
+                            <input type="text" name="module10product${i+1}name[]" class="form-control product-name" required value="" readonly> 
                         </td>`);
                     }else if (rowIndex === 3) {
                         // Fourth row for price
                         $(this).append(`<td>
-                            <input type="number" name="module10product${i+1}price[]" class="form-control product-price" required value=""> 
+                            <input type="number" name="module10product${i+1}price[]" class="form-control product-price" required value="" readonly> 
                         </td>`);
                     }else if (rowIndex === 4) {
                         // First row for review
                         $(this).append(` <td>
-                            <input type="text" name="module10product${i+1}review[]" class="form-control product-review" required value=""> 
+                            <input type="number" name="module10product${i+1}review[]" class="form-control product-review" required value="" maxlength="1" readonly> 
                         </td>`);
                     } else {
                         // Other rows for image, name, price, review, and additional content
@@ -1899,6 +1892,9 @@ jQuery(document).ready(function($) {
 
     // Add event listener for dynamically added select elements
     $(document).on('change', '.product-select', function() {
+        var totalProducts = $('#totalProducts').attr('totalProducts');
+        totalProducts = JSON.parse(totalProducts);
+
         var selectedProductId = $(this).val();
         var index = $(this).data('index'); // Get the index of the current select
     

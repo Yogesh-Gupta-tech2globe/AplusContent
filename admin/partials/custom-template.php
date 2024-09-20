@@ -56,6 +56,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
                 <button type="submit" id="customTemplateFormSubmitBtn2" data-status="1" class="btn btn-primary">Publish</button>
             </div>
         </form>
+
+        <div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
     </div>
 </div>
 

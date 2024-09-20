@@ -60,7 +60,7 @@ $item = $result[$flag6];
             <a class="position-relative" data-bs-toggle="modal" href="#exampleModalToggle" role="button">
                 <div class="d-flex justify-content-center align-items-center">
                     <img src="<?php echo esc_url($item['module6ThumbImage']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;">
-                    <div class="play-icon position-absolute top-50 start-50 translate-middle">
+                    <div class="play-icon position-absolute">
                         <i class="fa-regular fa-circle-play fs-1 text-light"></i>
                     </div>
                 </div>

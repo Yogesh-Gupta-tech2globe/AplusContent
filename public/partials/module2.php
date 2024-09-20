@@ -32,9 +32,7 @@ $item = $result[$flag2];
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card h-100">
-                    <div style="height: 220px;" class="d-flex justify-content-center align-items-center">
-                        <img src="<?php echo esc_url($item['module2Image1']); ?>" class="card-img-top h-100" alt="" style="object-fit: contain;" />
-                    </div>
+                    <img src="<?php echo esc_url($item['module2Image1']); ?>" class="card-img-top" alt="" />
                     <div class="card-body">
                         <h5 class="card-title"><?php echo mb_strimwidth(nl2br(stripslashes($item['module2heading1'])), 0, 60, '...'); ?></h5>
                         <p class="card-text">
@@ -45,9 +43,7 @@ $item = $result[$flag2];
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card h-100">
-                    <div style="height: 220px;" class="d-flex justify-content-center align-items-center">
-                        <img src="<?php echo esc_url($item['module2Image2']); ?>" class="card-img-top h-100" alt="" style="object-fit: contain;" />
-                    </div>
+                    <img src="<?php echo esc_url($item['module2Image2']); ?>" class="card-img-top" alt="" />
                     <div class="card-body">
                         <h5 class="card-title"><?php echo mb_strimwidth(nl2br(stripslashes($item['module2heading2'])), 0, 60, '...'); ?></h5>
                         <p class="card-text">
@@ -58,9 +54,7 @@ $item = $result[$flag2];
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card h-100">
-                    <div style="height: 220px;" class="d-flex justify-content-center align-items-center">
-                        <img src="<?php echo esc_url($item['module2Image3']); ?>" class="card-img-top h-100" alt="" style="object-fit: contain;" />
-                    </div>
+                    <img src="<?php echo esc_url($item['module2Image3']); ?>" class="card-img-top" alt="" />
                     <div class="card-body">
                         <h5 class="card-title"><?php echo mb_strimwidth(nl2br(stripslashes($item['module2heading3'])), 0, 60, '...'); ?></h5>
                         <p class="card-text">

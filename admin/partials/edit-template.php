@@ -145,6 +145,7 @@
                     </div>
                 </form>
             </div>
+            <div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
         </div>
 
         <?php
