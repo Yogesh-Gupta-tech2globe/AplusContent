@@ -44,7 +44,7 @@ $item = $result[$flag10];
                         <th scope="col">
                             <div class="related-product">
                                 <div style="height: 200px;" class="d-flex justify-content-center align-items-center">
-                                    <img src="<?php echo esc_url($item['module10product1image']); ?>" class="h-100" alt="" style="object-fit: contain;">
+                                    <img src="<?php echo esc_url($upload_path.$item['module10product1image']); ?>" class="h-100" alt="" style="object-fit: contain;">
                                 </div>
                                 <p class="product-des"><?php echo esc_html($item['module10product1name']); ?></p>
                             </div>
@@ -53,7 +53,7 @@ $item = $result[$flag10];
                         <th scope="col">
                             <div class="related-product">
                                 <div style="height: 200px;" class="d-flex justify-content-center align-items-center">
-                                    <img src="<?php echo esc_url($item['module10product2image']); ?>" class="h-100" alt="" style="object-fit: contain;">
+                                    <img src="<?php echo esc_url($upload_path.$item['module10product2image']); ?>" class="h-100" alt="" style="object-fit: contain;">
                                 </div>
                                 <p class="product-des"><?php echo esc_html($item['module10product2name']); ?></p>
                             </div>
@@ -63,7 +63,7 @@ $item = $result[$flag10];
                         <th scope="col">
                             <div class="related-product">
                                 <div style="height: 200px;" class="d-flex justify-content-center align-items-center">
-                                    <img src="<?php echo esc_url($item['module10product3image']); ?>" class="h-100" alt="" style="object-fit: contain;">
+                                    <img src="<?php echo esc_url($upload_path.$item['module10product3image']); ?>" class="h-100" alt="" style="object-fit: contain;">
                                 </div>
                                 <p class="product-des"><?php echo esc_html($item['module10product3name']); ?></p>
                             </div>
@@ -73,7 +73,7 @@ $item = $result[$flag10];
                         <th scope="col">
                             <div class="related-product">
                                 <div style="height: 200px;" class="d-flex justify-content-center align-items-center">
-                                    <img src="<?php echo esc_url($item['module10product4image']); ?>" class="h-100" alt="" style="object-fit: contain;">
+                                    <img src="<?php echo esc_url($upload_path.$item['module10product4image']); ?>" class="h-100" alt="" style="object-fit: contain;">
                                 </div>
                                 <p class="product-des"><?php echo esc_html($item['module10product4name']); ?></p>
                             </div>

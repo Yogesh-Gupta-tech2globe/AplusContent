@@ -31,7 +31,7 @@ $item = $result[$flag4];
 <div class="container my-4 standard-single-left-image">
     <div class="row align-items-center">
         <div class="col-lg-6 col-md-12 col-12">
-            <img src="<?php echo esc_url($item['module4Image']); ?>" class="img-fluid" alt="" />
+            <img src="<?php echo esc_url($upload_path.$item['module4Image']); ?>" class="img-fluid" alt="" />
         </div>
         <div class="col-lg-6 col-md-12 col-12">
             <div class="contant">

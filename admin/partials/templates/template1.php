@@ -5,7 +5,7 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 <div class="row">
     <div class="col-md-12">
         <div class="card-header">
-            <p class="h6">A+ Content Custom Editor</p>
+            <p class="h6">A+ Content Manager</p>
         </div>
 
         <form id="customTemplateFormSubmit" method="post" enctype="multipart/form-data">
@@ -43,8 +43,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="8.1" name="module_id[]">
@@ -60,8 +60,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="1.2" name="module_id[]">
@@ -77,8 +77,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Three Columns with Images, Heading, and Description <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Three Columns with Images, Heading, and Description <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="2.3" name="module_id[]">
@@ -126,8 +126,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="5.4" name="module_id[]">
@@ -149,8 +149,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="9.5" name="module_id[]">
@@ -178,8 +178,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Single Left Image <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Single Left Image <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="4.6" name="module_id[]">
@@ -203,8 +203,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="1.7" name="module_id[]">
@@ -220,8 +220,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span></h6>
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span></h6>
                                 </div>
                                 <div class="card-body">
                                     <input type="hidden" value="6.8" name="module_id[]">
@@ -254,8 +254,8 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
                         <div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
                         <div class="my-3 appended-content">
                             <div class="card">
-                                <div class="card-header" style="cursor: move;">
-                                    <h6>Compare with similar items | 
+                                <div class="card-header">
+                                    <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Compare with similar items | 
                                     <label for="colSelect">Products:</label>
                                     <select id="colSelect" class="form-control select-columns d-inline" style="width: 5%;">
                                         <option value="2" <?php echo ($colNum == 2) ? 'selected' : ''; ?>>2</option>

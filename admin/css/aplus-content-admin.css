@@ -264,11 +264,11 @@ a.active {
   .plan-card input[type="radio"] {
     display: none;
   }
-  .plan-card input[type="radio"]:checked + label {
+  /* .plan-card input[type="radio"]:checked + label {
     border-color: #0d6efd;
     background-color: #e7f1ff;
     color: #0d6efd;
-  }
+  } */
   .plan-title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -283,4 +283,8 @@ a.active {
   select.dt-input{
     width: 50px !important;
     margin-right: 10px !important;
+  }
+
+  .moveCardButton{
+    cursor: move !important;
   }

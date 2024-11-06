@@ -30,7 +30,9 @@ $item = $result[$flag9];
 
 <div class="my-3 appended-content">
     <div class="card">
-        <div class="card-header" style="cursor: move;"><h6>Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span> <?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6></div>
+        <div class="card-header">
+            <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span> <?php if($i == count($module_id) - 1){ ?><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span><?php } ?></h6>
+        </div>
         <div class="card-body">
             <input type="hidden" value="9.<?php echo $count; ?>" name="module_id[]">
             <div class="row">

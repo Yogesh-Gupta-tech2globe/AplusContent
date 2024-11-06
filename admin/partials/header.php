@@ -10,7 +10,7 @@
     <!-- Support and Button -->
     <div class="header-support d-flex align-items-center">
       <a href="mailto:info@tech2globe.com" class="link-dark"><i class="fas fa-comment-dots"></i> Feedback</a>
-      <a href="#help" class="link-dark"><i class="fas fa-question-circle"></i> Help</a>
+      <a href="#" class="link-dark"><i class="fas fa-question-circle"></i> Help</a>
       <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upgradeModal">Our Plans</button>
     </div>
   </div>
@@ -23,6 +23,7 @@
       <div class="navbar-nav">
         <a class="nav-link <?php if($page == 'a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=a-plus-content") ?>">Dashboard</a>
         <a class="nav-link <?php if($page == 'create-a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=create-a-plus-content") ?>">Create A+</a>
+        <a class="nav-link <?php if($page == 'archive-a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=archive-a-plus-content") ?>">Archive A+</a>
         <a class="nav-link <?php if($page == 'upgrade-a-plus-content'){ echo 'active'; } ?>" href="<?= admin_url("admin.php?page=upgrade-a-plus-content") ?>">Upgrade</a>
       </div>
     </div>
@@ -129,7 +130,7 @@
                   <?php
                   if($current_plan == "Pro Plus"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
                   ?>   
-                  Pro Plus Plan
+                  Pro+ Plan
                   <?php
                   if($current_plan == "Pro Plus"){
                       echo "<span class='text-center form-text'>(Current Plan)</span>";

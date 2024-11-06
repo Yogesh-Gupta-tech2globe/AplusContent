@@ -33,19 +33,19 @@
 
     $productAttributes = array();
 
-    foreach ($totalProducts as $product) {
+    foreach ($totalProducts as $product2) {
         $productAttributes[] = array(
-            'id' => $product->get_id(),
-            'name' => $product->get_name(),
-            'price' => $product->get_price(),
-            'sku' => $product->get_sku(),
-            'stock' => $product->get_stock_quantity(),
-            'permalink' => $product->get_permalink(),
-            'image' => wp_get_attachment_url($product->get_image_id()), // Get the URL of the product image
-            'short_description' => $product->get_short_description(), // Get the short description
+            'id' => $product2->get_id(),
+            'name' => $product2->get_name(),
+            'price' => $product2->get_price(),
+            'sku' => $product2->get_sku(),
+            'stock' => $product2->get_stock_quantity(),
+            'permalink' => $product2->get_permalink(),
+            'image' => wp_get_attachment_url($product2->get_image_id()), // Get the URL of the product image
+            'short_description' => $product2->get_short_description(), // Get the short description
             'reviews' => array(
-                'rating' => $product->get_average_rating(), // Get the average rating
-                'total_reviews' => $product->get_review_count() // Get the total number of reviews
+                'rating' => $product2->get_average_rating(), // Get the average rating
+                'total_reviews' => $product2->get_review_count() // Get the total number of reviews
             )
         );
     }	
@@ -55,11 +55,14 @@
         $module_id = $row['module_ids'];
         $module_id = explode(",",$module_id);
         $content_id = $row['id'];
+
+        $uploads = wp_upload_dir();
+		$upload_path = $uploads['baseurl'];
         ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card-header">
-                    <p class="h6">A+ Content Editor</p>
+                    <p class="h6">A+ Content Manager</p>
                 </div>
 
                 <form id="updateContentFormSubmit" enctype="multipart/form-data">
@@ -137,7 +140,7 @@
                                 Add Module
                             </button>
                         </div>
-          
+                        <div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
                     </div>
 
                     <div class="card-footer">
@@ -145,7 +148,6 @@
                     </div>
                 </form>
             </div>
-            <div id="totalProducts" totalProducts='<?php echo json_encode($productAttributes); ?>'></div>
         </div>
 
         <?php
@@ -207,7 +209,7 @@
                                                 <img src="<?php echo esc_url(plugins_url('../img/image2.jpg', __FILE__)); ?>" class="card-img-top" alt="col1" width="100%" />
                                                 <b>Heading 1</b>
                                                 <p class="card-text">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry.
                                                 </p>
                                             </div>
@@ -217,7 +219,7 @@
                                                 <img src="<?php echo esc_url(plugins_url('../img/image 3.jpg', __FILE__)); ?>" class="card-img-top" alt="col2" width="100%" />
                                                 <b>Heading 2</b>
                                                 <p class="card-text">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry.
                                                 </p>
                                             </div>
@@ -227,7 +229,7 @@
                                                 <img src="<?php echo esc_url(plugins_url('../img/image 4.jpg', __FILE__)); ?>" class="card-img-top" alt="col3" width="100%" />
                                                 <b>Heading 3</b>
                                                 <p class="card-text">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry.
                                                 </p>
                                             </div>
@@ -247,11 +249,11 @@
                                     <div class="row align-items-center">
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="contant">
-                                                <h3>Dog at Work</h3>
+                                                <h3>Heading</h3>
                                                 <p>
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry. Lorem Ipsum has been the industry's standard dummy text
-                                                    ever since the 1500s,  when an unknown printer took a galley of
+                                                    ever since the 1500s,  when an unknown printer took a galley of
                                                     type and scrambled it to make a type specimen book. It has
                                                     survived not only five centuries, but also the leap into
                                                     electronic typesetting, remaining essentially unchanged. It was
@@ -281,11 +283,11 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="contant">
-                                                <h3>Cat at Work</h3>
+                                                <h3>Heading</h3>
                                                 <p>
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry. Lorem Ipsum has been the industry's standard dummy text
-                                                    ever since the 1500s,  when an unknown printer took a galley of
+                                                    ever since the 1500s,  when an unknown printer took a galley of
                                                     type and scrambled it to make a type specimen book. It has
                                                     survived not only five centuries, but also the leap into
                                                     electronic typesetting, remaining essentially unchanged. It was
@@ -378,12 +380,12 @@
                                         <div class="row">
                                             <h1>Lorem Ipsum</h1>
                                             <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting
                                                 industry. Lorem Ipsum has been the industry's standard dummy text ever
                                                 since the 1500s, when an unknown printer took a galley of type and
                                                 scrambled it to make a type specimen book. It has survived not only
                                                 five centuries, but also the leap into electronic typesetting,
-                                                remaining essentially unchanged. 
+                                                remaining essentially unchanged. 
                                             </p>
                                         </div>
                                     </div>
@@ -455,10 +457,10 @@
                                             <tbody>
                                             <tr>
                                                 <th scope="row">Price</th>
-                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
-                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
-                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
-                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
+                                                <td><p><span class="text-danger fw-bold">-69%</span> ₹20,000</p><span>M.R.P: ₹18,999.00</span></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Breed Review</th>
@@ -546,7 +548,3 @@
         });
     });
 </script>
-
-
-
-

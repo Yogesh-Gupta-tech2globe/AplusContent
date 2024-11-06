@@ -39,7 +39,7 @@ $item = $result[$flag3];
             </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
-            <img src="<?php echo esc_url($item['module3Image']); ?>" class="img-fluid" alt="" />
+            <img src="<?php echo esc_url($upload_path.$item['module3Image']); ?>" class="img-fluid" alt="" />
         </div>
     </div>
 </div>

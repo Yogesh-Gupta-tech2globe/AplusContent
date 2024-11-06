@@ -32,7 +32,7 @@ $item = $result[$flag6];
     <div class="row align-items-center">
         <div class="col-lg-6 col-md-12 col-12">
             <div class="d-flex justify-content-center align-items-center">
-                <img src="<?php echo esc_url($item['module6Image']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;" />
+                <img src="<?php echo esc_url($upload_path.$item['module6Image']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;" />
             </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
@@ -48,7 +48,7 @@ $item = $result[$flag6];
                         <div class="modal-body">
                             <div style="height: 420px;" class="d-flex justify-content-center align-items-center">
                                 <video class="img-fluid h-100" controls style="object-fit: contain;">
-                                    <source src="<?php echo esc_url($item['module6video']); ?>" type="video/mp4">
+                                    <source src="<?php echo esc_url($upload_path.$item['module6video']); ?>" type="video/mp4">
                                 </video>
                             </div>
                         </div>
@@ -59,7 +59,7 @@ $item = $result[$flag6];
 
             <a class="position-relative" data-bs-toggle="modal" href="#exampleModalToggle" role="button">
                 <div class="d-flex justify-content-center align-items-center">
-                    <img src="<?php echo esc_url($item['module6ThumbImage']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;">
+                    <img src="<?php echo esc_url($upload_path.$item['module6ThumbImage']); ?>" class="img-fluid h-100" alt="" style="object-fit: contain;">
                     <div class="play-icon position-absolute">
                         <i class="fa-regular fa-circle-play fs-1 text-light"></i>
                     </div>

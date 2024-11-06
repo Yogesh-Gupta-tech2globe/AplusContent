@@ -29,7 +29,7 @@ $item = $result[$flag7];
 ?>
 
 <div class="container my-4 banner-section-one">
-    <img src="<?php echo esc_url($item['module7Image']); ?>" class="img-fluid" alt="..." />
+    <img src="<?php echo esc_url($upload_path.$item['module7Image']); ?>" class="img-fluid" alt="..." />
 </div>
 <div class="container my-4 banner-section-two">
     <div class="row">

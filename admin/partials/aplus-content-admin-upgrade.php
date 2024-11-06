@@ -178,14 +178,18 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                             border-color: #0d6efd;
                             background-color: #f1f8ff;
                         }
+                        .active {
+                            border-color: #0d6efd;
+                            background-color: #f1f8ff;
+                        }
                         .plan-card input[type="radio"] {
                             display: none;
                         }
-                        .plan-card input[type="radio"]:checked + label {
+                        /* .plan-card input[type="radio"]:checked + label {
                             border-color: #0d6efd;
                             background-color: #e7f1ff;
                             color: #0d6efd;
-                        }
+                        } */
                         .plan-title {
                             font-size: 1.25rem;
                             font-weight: 600;
@@ -238,7 +242,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                             <form id="paymentFormSubmit" method="post">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="plan-card <?php if(in_array($current_plan,$plan1)){ echo "disableCard"; } ?>">
+                                        <div class="plan-card <?php if($current_plan == "Free"){ echo "active"; } ?> <?php if(in_array($current_plan,$plan1)){ echo "disableCard"; } ?>">
                                             <input type="radio" name="plan" id="basicPlan" value="basic" <?php if($current_plan == "Free"){ echo "checked"; } ?>>
                                             <label for="basicPlan">
                                                 <div class="plan-title"> 
@@ -255,7 +259,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                             <?php
                                             if($current_plan == "Basic"){
                                                 echo "<p class='text-center form-text'>Current Plan</p>";
-                                                echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
+                                                echo "<p class='text-center form-text'>Purchased on : ".$plan_activate_date."</p>";
                                             }
                                             ?>
                                         </div>
@@ -278,7 +282,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                             <?php
                                             if($current_plan == "Premium"){
                                                 echo "<p class='text-center form-text'>Current Plan</p>";
-                                                echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
+                                                echo "<p class='text-center form-text'>Purchased on : ".$plan_activate_date."</p>";
                                             }
                                             ?>
                                         </div>
@@ -301,7 +305,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                             <?php
                                                 if($current_plan == "Pro"){
                                                     echo "<p class='text-center form-text'>Current Plan</p>";
-                                                    echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
+                                                    echo "<p class='text-center form-text'>Purchased on : ".$plan_activate_date."</p>";
                                                 }
                                             ?>
                                         </div>
@@ -314,7 +318,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                                     <?php
                                                     if($current_plan == "Pro Plus"){ echo '<i class="fa-solid fa-circle-check text-success"></i>';}
                                                     ?>
-                                                    Pro Plus Plan
+                                                    Pro+ Plan
                                                 </div>
                                                 <div class="plan-price">$499</div>
                                                 <p class="form-text">For Unlimited Products.</p>
@@ -324,7 +328,7 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                                             <?php
                                                 if($current_plan == "Pro Plus"){
                                                     echo "<p class='text-center form-text'>Current Plan</p>";
-                                                    echo "<p class='text-center form-text'>Activated on : ".$plan_activate_date."</p>";
+                                                    echo "<p class='text-center form-text'>Purchased on : ".$plan_activate_date."</p>";
                                                 }
                                             ?>
                                         </div>
@@ -375,19 +379,38 @@ $user_name = !empty($current_user->display_name) ? $current_user->display_name :
                         const selectedPlanText = document.getElementById('selectedPlan');
                         const totalPriceText = document.querySelector('.total-price');
                         const payAmount = document.getElementById('payAmount');
-                        
+
                         planCards.forEach((card) => {
                             card.addEventListener('change', (e) => {
+                                // Remove "active" class from all plan cards
+                                planCards.forEach((c) => {
+                                    c.parentElement.classList.remove("active");
+                                });
+
+                                // Add "active" class to the selected card
+                                var activeCard = card.parentElement;
+                                if (card.checked) {
+                                    activeCard.classList.add("active");
+                                }
+
+                                // Get the plan title and price
                                 const planLabel = e.target.nextElementSibling;
                                 const planTitle = planLabel.querySelector('.plan-title').textContent;
                                 const planPrice = planLabel.querySelector('.plan-price').textContent;
-                                
+
+                                // Update the selected plan text and total price
                                 selectedPlanText.textContent = planTitle;
                                 totalPriceText.textContent = planPrice;
-                                payAmount.value = planPrice;
+
+                                // Clean the plan price to remove any non-numeric characters (e.g., $)
+                                const cleanedPrice = planPrice.replace(/[^0-9.]/g, '');
+
+                                // Set the payAmount to the numeric value of the price
+                                payAmount.value = cleanedPrice;
                             });
                         });
                     </script>
+
 
                 <?php
             }

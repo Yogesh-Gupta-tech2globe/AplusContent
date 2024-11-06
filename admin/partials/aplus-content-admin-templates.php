@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <h5>Custom Template</h5>
             <div class="custom-screen template-option" data-id="custom">
-                <p>Custom Template Box</p>
+                <a href="<?= admin_url("admin.php?page=create-a-plus-content&template=custom") ?>"><p>Custom Template Box</p></a>
             </div>
             <a class="btn btn-warning my-2" href="<?= admin_url("admin.php?page=create-a-plus-content&template=custom") ?>"><i class="fa-regular fa-edit"></i> Customize</a>
         </div>

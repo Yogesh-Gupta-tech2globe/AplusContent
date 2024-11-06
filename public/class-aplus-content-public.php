@@ -117,6 +117,8 @@ class Aplus_Content_Public {
 				$module_id = $row['module_ids'];
 				$module_id = explode(",",$module_id);
 				$content_id = $row['id'];
+				$uploads = wp_upload_dir();
+				$upload_path = $uploads['baseurl'];
 				?>
 				<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
 				<div class="apluscontent-content-container">

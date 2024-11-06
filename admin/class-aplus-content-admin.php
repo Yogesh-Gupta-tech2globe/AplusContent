@@ -88,6 +88,7 @@ class Aplus_Content_Admin {
 		add_menu_page('A+ Content', 'A+ Content', 'edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'),'dashicons-images-alt2',6);
 		add_submenu_page('a-plus-content','Dashboard','Dashboard','edit_others_posts','a-plus-content', array($this, 'apluscontent_dashboard'));
 		add_submenu_page('a-plus-content','Create A+','Create A+','edit_others_posts','create-a-plus-content',array($this, 'apluscontent_create'));
+		add_submenu_page('a-plus-content','Archive A+','Archive A+','edit_others_posts','archive-a-plus-content',array($this, 'apluscontent_archive'));
 		add_submenu_page('a-plus-content','Upgrade Now','Upgrade Now','edit_others_posts','upgrade-a-plus-content',array($this, 'apluscontent_upgrade'));
 	}
 
@@ -121,7 +122,24 @@ class Aplus_Content_Admin {
 			}
 		}
 
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'aplus_logs';
+
+		$logs = $wpdb->get_results("SELECT * FROM $table_name ORDER BY log_time DESC");
+		
+		include('partials/aplus-content-admin-dashboard.php');
+	}
+
+	public function apluscontent_create(){
+		include('partials/aplus-content-admin-create.php');
+	}
+
+	public function apluscontent_archive(){
 		$api_url2 = $GLOBALS['authorSite'].'/getDelProducts';
+
+		$data = array(
+			'public_key' => get_option('aplus_plugin_public_key'),
+		);
 
 		$response2 = wp_remote_post($api_url2, array(
 			'method'    => 'POST',
@@ -149,12 +167,8 @@ class Aplus_Content_Admin {
 		$table_name = $wpdb->prefix . 'aplus_logs';
 
 		$logs = $wpdb->get_results("SELECT * FROM $table_name ORDER BY log_time DESC");
-		
-		include('partials/aplus-content-admin-dashboard.php');
-	}
 
-	public function apluscontent_create(){
-		include('partials/aplus-content-admin-create.php');
+		include('partials/aplus-content-admin-archive.php');
 	}
 
 	public function apluscontent_upgrade(){

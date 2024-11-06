@@ -30,6 +30,6 @@ $item = $result[$flag8];
 
 <div class="container my-4">
     <div class="logo-container mx-auto text-center">
-        <img src="<?php echo esc_url($item['module8logo']); ?>" alt="" class="w-100"/>
+        <img src="<?php echo esc_url($upload_path.$item['module8logo']); ?>" alt="" class="w-100"/>
     </div>
 </div>

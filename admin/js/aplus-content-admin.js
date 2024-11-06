@@ -7,7 +7,7 @@ jQuery(document).ready(function($){
     $(function () {
         // Initialize sortable functionality
         $("#moduleContent").sortable({
-            handle: ".card-header", // Only allow dragging by the card-header
+            handle: ".moveCardButton", // Only allow dragging by the card-header
             update: function (event, ui) {
                 // Update the order of module_id[] values based on new order
                 $('#moduleContent .appended-content').each(function (index) {
@@ -60,8 +60,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="1.${clickCount}" name="module_id[]">
@@ -83,8 +83,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Three Columns with Images, Heading, and Description <br> <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Three Columns with Images, Heading, and Description <br> <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="2.${clickCount}" name="module_id[]">
@@ -138,8 +138,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Single Right Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Single Right Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="3.${clickCount}" name="module_id[]">
@@ -169,8 +169,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Single Left Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Single Left Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="4.${clickCount}" name="module_id[]">
@@ -200,8 +200,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span> <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span> <span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="5.${clickCount}" name="module_id[]">
@@ -229,8 +229,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="6.${clickCount}" name="module_id[]">
@@ -264,8 +264,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="7.${clickCount}" name="module_id[]">
@@ -291,8 +291,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="8.${clickCount}" name="module_id[]">
@@ -314,8 +314,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="9.${clickCount}" name="module_id[]">
@@ -354,8 +354,8 @@ jQuery(document).ready(function($){
                 content += `
                 <div class="my-3 appended-content">
                     <div class="card">
-                        <div class="card-header" style="cursor: move;">
-                            <h6>Compare with similar items |
+                        <div class="card-header">
+                            <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Compare with similar items |
                             <label for="colSelect">Products:</label>
                             <select id="colSelect" class="form-control select-columns d-inline" style="width: 5%;">
                                 <option value="2" ${colNum === 2 ? 'selected' : ''}>2</option>
@@ -582,9 +582,12 @@ jQuery(document).ready(function($){
                 var selectedProduct = totalProducts.find(product => product.id == selectedProductId);
         
                 if (selectedProduct) {
+                    var uploadIndex = selectedProduct.image.indexOf('/uploads/');
+                    var relativePath = selectedProduct.image.substring(uploadIndex + 8);
+
                     // Populate product details in the corresponding fields
                     productImage.attr('src', selectedProduct.image).show(); // Show image
-                    productImageInput.val(selectedProduct.image); // Set hidden input for image URL
+                    productImageInput.val(relativePath); // Set hidden input for image URL
                     productNameInput.val(selectedProduct.name); // Set product name
                     productPriceInput.val(selectedProduct.price); // Set product price
                     productReviewInput.val(`${selectedProduct.reviews.rating}`); // Set product review
@@ -723,8 +726,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Standard Image <span class="text-secondary">(Image size: 1440 px wide, 900 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="1.${clickCount}" name="module_id[]">
@@ -746,8 +749,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Three Columns with Images, Heading, and Description <br> <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Three Columns with Images, Heading, and Description <br> <span class="text-secondary">(Image size: 365 px wide, 240 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="2.${clickCount}" name="module_id[]">
@@ -801,8 +804,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Single Right Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Single Right Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="3.${clickCount}" name="module_id[]">
@@ -832,8 +835,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Single Left Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Single Left Image <br> <span class="text-secondary">(Image size: 560 px wide, 420 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="4.${clickCount}" name="module_id[]">
@@ -863,8 +866,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Slider <span class="text-secondary">(Image size: 1320-1650 px wide, 550-700 px tall. Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="5.${clickCount}" name="module_id[]">
@@ -892,8 +895,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Video with Image <span class="text-secondary">(Image size: 555 px wide, 370 px tall. Image Formats: JPG, JPEG, PNG, WEBP. Video Formats: MP4, AVI, MKV.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="6.${clickCount}" name="module_id[]">
@@ -927,8 +930,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 460 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Hero Banner <span class="text-secondary">(Image size: 1320-1650 px wide, 385-700 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 460 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="7.${clickCount}" name="module_id[]">
@@ -954,8 +957,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Logo <span class="text-secondary">(Formats: JPG, JPEG, PNG, WEBP.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="8.${clickCount}" name="module_id[]">
@@ -977,8 +980,8 @@ jQuery(document).ready(function($){
                 content = `
                     <div class="my-3 appended-content">
                         <div class="card">
-                            <div class="card-header" style="cursor: move;">
-                                <h6>Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Chars. Description: 160 Chars.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
+                            <div class="card-header">
+                                <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Two Standard Cards <span class="text-secondary">(Image size: 550 px wide, 300 px tall. Formats: JPG, JPEG, PNG, WEBP. Heading: 60 Char. Description: 160 Char.)</span><span class="btn btn-danger float-end section-close-btn"><i class="fa-solid fa-xmark"></i></span></h6>
                             </div>
                             <div class="card-body">
                                 <input type="hidden" value="9.${clickCount}" name="module_id[]">
@@ -1017,8 +1020,8 @@ jQuery(document).ready(function($){
                 content += `
                 <div class="my-3 appended-content">
                     <div class="card">
-                        <div class="card-header" style="cursor: move;">
-                            <h6>Compare with similar items |
+                        <div class="card-header">
+                            <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Compare with similar items |
                             <label for="colSelect">Products:</label>
                             <select id="colSelect" class="form-control select-columns d-inline" style="width: 5%;">
                                 <option value="2" ${colNum === 2 ? 'selected' : ''}>2</option>
@@ -1245,9 +1248,12 @@ jQuery(document).ready(function($){
                 var selectedProduct = totalProducts.find(product => product.id == selectedProductId);
         
                 if (selectedProduct) {
+                    var uploadIndex = selectedProduct.image.indexOf('/uploads/');
+                    var relativePath = selectedProduct.image.substring(uploadIndex + 8);
+
                     // Populate product details in the corresponding fields
                     productImage.attr('src', selectedProduct.image).show(); // Show image
-                    productImageInput.val(selectedProduct.image); // Set hidden input for image URL
+                    productImageInput.val(relativePath); // Set hidden input for image URL
                     productNameInput.val(selectedProduct.name); // Set product name
                     productPriceInput.val(selectedProduct.price); // Set product price
                     productReviewInput.val(`${selectedProduct.reviews.rating}`); // Set product review
@@ -1305,7 +1311,6 @@ jQuery(document).ready(function($){
 
     $('#paymentFormSubmit').on('submit', function(e) {
         e.preventDefault();
-        
         var payAmount = $("#payAmount").val(); 
 
         if(payAmount == ''){
@@ -1316,86 +1321,74 @@ jQuery(document).ready(function($){
 
         var data = $(this).serialize();
 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Do you want to proceed payment?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Proceed!"
-            }).then((result) => {
-            if (result.isConfirmed) {
-                $("#planContainer").hide();
-                $("#aplusloader").show();
+        $("#planContainer").hide();
+        $("#aplusloader").show();
 
-                $.post(myAjax.ajaxurl, data + '&action=paymentFormSubmit_action', function(response) {
-                    $("#aplusloader").hide();
-                    if(response.success && response.data.res == "success") {
-                        var orderID = response.data.order_number;
-                        var options = {
-                            "key": response.data.razorpay_key, // Enter the Key ID generated from the Dashboard
-                            "amount": response.data.userData.amount, // Amount is in currency subunits
-                            "currency": "INR",
-                            "name": "A+ Content Plugin", // Your business name
-                            "description": response.data.userData.description,
-                            "image": "https://www.tech2globe.com/images/new-page-images/tech2globe-logo.png",
-                            "order_id": response.data.userData.rpay_order_id, // Pass the Razorpay order ID
-                            "handler": function (paymentResponse){
-                                $.post(myAjax.ajaxurl, "payment_status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id + "&action=paymentStatus_action",function(response){
-                                    if(response.success == true){
-                                        window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id);
-                                    }else{
-                                        alert("Something went wrong with payment");
-                                        window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=failed&oid=" + orderID + "&reason=Please contact our support team if amount is debited from you account." + "&paymentid=" + paymentResponse.razorpay_payment_id);
-                                    }
-                                }).fail(function(xhr, status, error) {
-                                    console.error('Error:', error); // Log any errors to the console
-                                });
-                            },
-                            "modal": {
-                                "ondismiss": function(){
-                                    window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=cancelled&oid=" + orderID);
-                                }
-                            },
-                            "prefill": {
-                                "name": response.data.userData.name,
-                                "email": response.data.userData.email,
-                                "contact": '' // Provide the customer's phone number for better conversion rates
-                            },
-                            "notes": {
-                                "address": "A+ Content"
-                            },
-                            "theme": {
-                                "color": "#3399cc"
+        $.post(myAjax.ajaxurl, data + '&action=paymentFormSubmit_action', function(response) {
+            $("#aplusloader").hide();
+            if(response.success && response.data.res == "success") {
+                var orderID = response.data.order_number;
+                var options = {
+                    "key": response.data.razorpay_key, // Enter the Key ID generated from the Dashboard
+                    "amount": response.data.userData.amount, // Amount is in currency subunits
+                    "currency": "INR",
+                    "name": "A+ Content Plugin", // Your business name
+                    "description": response.data.userData.description,
+                    "image": "https://www.tech2globe.com/images/new-page-images/tech2globe-logo.png",
+                    "order_id": response.data.userData.rpay_order_id, // Pass the Razorpay order ID
+                    "handler": function (paymentResponse){
+                        $.post(myAjax.ajaxurl, "payment_status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id + "&action=paymentStatus_action",function(response){
+                            if(response.success == true){
+                                window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=success&oid=" + orderID + "&rp_payment_id=" + paymentResponse.razorpay_payment_id);
+                            }else{
+                                alert("Something went wrong with payment");
+                                window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=failed&oid=" + orderID + "&reason=Please contact our support team if amount is debited from you account." + "&paymentid=" + paymentResponse.razorpay_payment_id);
                             }
-                        };
-                        var rzp1 = new Razorpay(options);
-                        rzp1.on('payment.failed', function (paymentErrorResponse){
-                            $.post(myAjax.ajaxurl, "payment_status=failed&oid=" + orderID + "&reason=" + paymentErrorResponse.error.description + "&paymentid=" + paymentErrorResponse.error.metadata.payment_id + "&action=paymentStatus_action",function(response){
-                                if(response.success == true){
-                                    window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=failed&oid=" + orderID + "&reason=" + paymentErrorResponse.error.description + "&paymentid=" + paymentErrorResponse.error.metadata.payment_id);
-                                }else{
-                                    alert("Something went wrong after failed payment");
-                                }
-                            }).fail(function(xhr, status, error) {
-                                console.error('Error:', error); // Log any errors to the console
-                            });
+                        }).fail(function(xhr, status, error) {
+                            console.error('Error:', error); // Log any errors to the console
                         });
-                        rzp1.open();
-                        e.preventDefault();
-                        
-                    } else {
-                        alert("Something went wrong");
+                    },
+                    "modal": {
+                        "ondismiss": function(){
+                            window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=cancelled&oid=" + orderID);
+                        }
+                    },
+                    "prefill": {
+                        "name": response.data.userData.name,
+                        "email": response.data.userData.email,
+                        "contact": '' // Provide the customer's phone number for better conversion rates
+                    },
+                    "notes": {
+                        "address": "A+ Content"
+                    },
+                    "theme": {
+                        "color": "#3399cc"
                     }
-                    
-                }).fail(function(xhr, status, error) {
-                    console.error('Error:', error); 
-                    alert("Something went wrong");
-                    $("#planContainer").show();
-                    $("#aplusloader").hide();
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (paymentErrorResponse){
+                    $.post(myAjax.ajaxurl, "payment_status=failed&oid=" + orderID + "&reason=" + paymentErrorResponse.error.description + "&paymentid=" + paymentErrorResponse.error.metadata.payment_id + "&action=paymentStatus_action",function(response){
+                        if(response.success == true){
+                            window.location.replace("admin.php?page=upgrade-a-plus-content&payment-status=failed&oid=" + orderID + "&reason=" + paymentErrorResponse.error.description + "&paymentid=" + paymentErrorResponse.error.metadata.payment_id);
+                        }else{
+                            alert("Something went wrong after failed payment");
+                        }
+                    }).fail(function(xhr, status, error) {
+                        console.error('Error:', error); // Log any errors to the console
+                    });
                 });
+                rzp1.open();
+                e.preventDefault();
+                
+            } else {
+                alert("Something went wrong");
             }
+            
+        }).fail(function(xhr, status, error) {
+            console.error('Error:', error); 
+            alert("Something went wrong");
+            $("#planContainer").show();
+            $("#aplusloader").hide();
         });
          
     });
@@ -1438,7 +1431,10 @@ jQuery(document).ready(function($) {
         // When an image is selected, handle the response
         file_frame.on('select', function() {
             var attachment = file_frame.state().get('selection').first().toJSON();
-            previewImageFromURL(attachment.url, clickCount, $inputField);
+            var uploadIndex = attachment.url.indexOf('/uploads/');
+            var relativePath = attachment.url.substring(uploadIndex + 8);
+        
+            previewImageFromURL(attachment.url, relativePath, clickCount, $inputField);
         });
 
         // Open the media library
@@ -1446,9 +1442,10 @@ jQuery(document).ready(function($) {
     });
 
     // Function to preview image from URL
-    function previewImageFromURL(url, clickCount, $inputField) {
+    function previewImageFromURL(url, filename, clickCount, $inputField) {
         const img = new Image();
         img.src = url;
+        img.filename = filename;
 
         img.onload = function() {
             const width = img.width;
@@ -1462,7 +1459,7 @@ jQuery(document).ready(function($) {
                 $inputField.closest('.apluscontent-upload-box').find('span').hide();
 
                 // Set the URL in the hidden input field
-                $('#imageUrl' + clickCount).val(url);
+                $('#imageUrl' + clickCount).val(filename);
             } else {
                 alert('Invalid dimensions. Only images with dimensions 1440x900 are allowed.');
             }
@@ -1529,7 +1526,9 @@ jQuery(document).ready(function($) {
             var fileExtension = attachment.url.split('.').pop().toLowerCase();
     
             if (allowedTypes.includes(fileExtension)) {
-                inputField.val(attachment.url); // Set the input value with the image URL
+                var uploadIndex = attachment.url.indexOf('/uploads/');
+                var relativePath = attachment.url.substring(uploadIndex + 8);
+                inputField.val(relativePath);
             } else {
                 alert('Only JPG, JPEG, PNG, and WEBP files are allowed.');
             }
@@ -1557,7 +1556,9 @@ jQuery(document).ready(function($) {
             var fileExtension = attachment.url.split('.').pop().toLowerCase();
     
             if (allowedTypes.includes(fileExtension)) {
-                inputField.val(attachment.url); // Set the input value with the image URL
+                var uploadIndex = attachment.url.indexOf('/uploads/');
+                var relativePath = attachment.url.substring(uploadIndex + 8);
+                inputField.val(relativePath);
             } else {
                 alert('Only MP4, AVI, and MKV files are allowed.');
             }
@@ -1591,7 +1592,9 @@ jQuery(document).ready(function($) {
     
                 img.onload = function() {
                     if (img.width >= 1320 && img.width <= 1650 && img.height >= 550 && img.height <= 700) {
-                        inputField.val(attachment.url); // Set the input value with the image URL
+                        var uploadIndex = attachment.url.indexOf('/uploads/');
+                        var relativePath = attachment.url.substring(uploadIndex + 8);
+                        inputField.val(relativePath);
                     } else {
                         alert('The image should have width between: 1320-1650 px and height between: 550-700 px.');
                     }
@@ -1628,7 +1631,9 @@ jQuery(document).ready(function($) {
     
                 img.onload = function() {
                     if (img.width >= 1320 && img.width <= 1650 && img.height >= 385 && img.height <= 700) {
-                        inputField.val(attachment.url); // Set the input value with the image URL
+                        var uploadIndex = attachment.url.indexOf('/uploads/');
+                        var relativePath = attachment.url.substring(uploadIndex + 8);
+                        inputField.val(relativePath);
                     } else {
                         alert('The image should have width between: 1320-1650 px and height between: 385-700 px.');
                     }
@@ -1658,14 +1663,16 @@ jQuery(document).ready(function($) {
             var attachment = frame.state().get('selection').first().toJSON();
             var allowedTypes = ['jpg', 'jpeg', 'png', 'webp'];
             var fileExtension = attachment.url.split('.').pop().toLowerCase();
-    
+        
             if (allowedTypes.includes(fileExtension)) {
                 var img = new Image();
                 img.src = attachment.url;
     
                 img.onload = function() {
                     if (img.width == 550 && img.height == 300) {
-                        inputField.val(attachment.url); // Set the input value with the image URL
+                        var uploadIndex = attachment.url.indexOf('/uploads/');
+                        var relativePath = attachment.url.substring(uploadIndex + 8);
+                        inputField.val(relativePath);
                     } else {
                         alert('The image should have width: 550 px and height: 300 px.');
                     }
@@ -1702,7 +1709,9 @@ jQuery(document).ready(function($) {
     
                 img.onload = function() {
                     if (img.width == 555 && img.height == 370) {
-                        inputField.val(attachment.url); // Set the input value with the image URL
+                        var uploadIndex = attachment.url.indexOf('/uploads/');
+                        var relativePath = attachment.url.substring(uploadIndex + 8);
+                        inputField.val(relativePath);
                     } else {
                         alert('The image should have width: 555 px and height: 370 px.');
                     }
@@ -1739,7 +1748,9 @@ jQuery(document).ready(function($) {
     
                 img.onload = function() {
                     if (img.width == 560 && img.height == 420) {
-                        inputField.val(attachment.url); // Set the input value with the image URL
+                        var uploadIndex = attachment.url.indexOf('/uploads/');
+                        var relativePath = attachment.url.substring(uploadIndex + 8);
+                        inputField.val(relativePath);
                     } else {
                         alert('The image should have width: 560 px and height: 420 px.');
                     }
@@ -1776,7 +1787,9 @@ jQuery(document).ready(function($) {
     
                 img.onload = function() {
                     if (img.width == 365 && img.height == 240) {
-                        inputField.val(attachment.url); // Set the input value with the image URL
+                        var uploadIndex = attachment.url.indexOf('/uploads/');
+                        var relativePath = attachment.url.substring(uploadIndex + 8);
+                        inputField.val(relativePath);
                     } else {
                         alert('The image should have width: 365 px and height: 240 px.');
                     }
@@ -1909,9 +1922,12 @@ jQuery(document).ready(function($) {
             var selectedProduct = totalProducts.find(product => product.id == selectedProductId);
     
             if (selectedProduct) {
+                var uploadIndex = selectedProduct.image.indexOf('/uploads/');
+                var relativePath = selectedProduct.image.substring(uploadIndex + 8);
+
                 // Populate product details in the corresponding fields
                 productImage.attr('src', selectedProduct.image).show(); // Show image
-                productImageInput.val(selectedProduct.image); // Set hidden input for image URL
+                productImageInput.val(relativePath); // Set hidden input for image URL
                 productNameInput.val(selectedProduct.name); // Set product name
                 productPriceInput.val(selectedProduct.price); // Set product price
                 productReviewInput.val(`${selectedProduct.reviews.rating}`); // Set product review
@@ -1926,6 +1942,7 @@ jQuery(document).ready(function($) {
         }
     }); 
 
+    $("#product-selection").select2();
 
 });
 

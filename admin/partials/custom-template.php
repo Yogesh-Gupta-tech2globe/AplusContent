@@ -5,7 +5,7 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
 <div class="row">
     <div class="col-md-12">
         <div class="card-header">
-            <p class="h6">A+ Content Custom Editor</p>
+            <p class="h6">A+ Content Manager</p>
         </div>
 
         <form id="customTemplateFormSubmit" method="post" enctype="multipart/form-data">
@@ -155,7 +155,7 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
                                     <div class="row align-items-center">
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="contant">
-                                                <h3>Dog at Work</h3>
+                                                <h3>Heading</h3>
                                                 <p>
                                                     Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry. Lorem Ipsum has been the industry's standard dummy text
@@ -189,7 +189,7 @@ list($products, $allowProduct, $productAttributes) = Aplus_Content_Admin::getPro
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="contant">
-                                                <h3>Cat at Work</h3>
+                                                <h3>Heading</h3>
                                                 <p>
                                                     Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry. Lorem Ipsum has been the industry's standard dummy text

@@ -30,7 +30,7 @@ $item = $result[$flag1];
 
 <div class="inner-apluscontent-content-container my-4">
     <div class="apluscontent-inner-card">
-        <img src="<?php echo esc_url($item['image']); ?>" class="img-fluid">
+        <img src="<?php echo esc_url($upload_path.$item['image']); ?>" class="img-fluid">
     </div>
 </div>
 

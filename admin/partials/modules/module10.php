@@ -45,8 +45,8 @@ for($b = 1; $b < 6; $b++){
 
 <div class="my-3 appended-content">
     <div class="card">
-        <div class="card-header" style="cursor: move;">
-            <h6>Compare with similar items | 
+        <div class="card-header">
+            <h6><span class="btn btn-warning moveCardButton"><i class="fa-solid fa-arrows-up-down-left-right"></i></span> Compare with similar items | 
             <label for="colSelect">Products:</label>
             <select id="colSelect" class="form-control select-columns d-inline" style="width: 5%;">
                 <option value="2" <?php echo ($colNum == 2) ? 'selected' : ''; ?>>2</option>
@@ -92,7 +92,7 @@ for($b = 1; $b < 6; $b++){
                                 <td>Image</td>
                                 <?php for ($i = 0; $i < $colNum; $i++) : ?>
                                     <td>
-                                        <img src="<?php echo esc_url( $item['module10product'.($i+1).'image'] ) ?>" class="product-image<?php echo $i+1; ?> img-fluid" alt="Product Image" style="width: 100%; height :150px;">
+                                        <img src="<?php echo esc_url( $upload_path.$item['module10product'.($i+1).'image'] ) ?>" class="product-image<?php echo $i+1; ?> img-fluid" alt="Product Image" style="width: 100%; height :150px;">
                                         <input type="hidden" name="module10product<?php echo $i+1; ?>image[]" class="form-control product-image" required value="<?php echo esc_url( $item['module10product'.($i+1).'image'] ) ?>">
                                     </td>
                                 <?php endfor; ?>
